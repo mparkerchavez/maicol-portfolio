@@ -1,0 +1,294 @@
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --bg-paper: #f9f8f4;
+    --ink-black: #111111;
+    --ink-subtle: rgba(17, 17, 17, 0.15);
+    --accent-blue: #2563eb;
+    --highlight-yellow: #fde047;
+    --grid-border: 1px solid var(--ink-subtle);
+}
+
+/* ===== BASE STYLES ===== */
+body {
+    font-family: "Inter Tight", sans-serif;
+    background-color: var(--bg-paper);
+    color: var(--ink-black);
+    overflow-x: hidden;
+}
+
+.serif-accent {
+    font-family: "Playfair Display", serif;
+}
+
+.mono {
+    font-family: "Space Mono", monospace;
+}
+
+/* ===== GRID SYSTEM ===== */
+.grid-master {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-left: var(--grid-border);
+    border-right: var(--grid-border);
+    max-width: 1800px;
+    margin: 0 auto;
+    background-color: var(--bg-paper);
+}
+
+/* Index page: 3-column grid */
+@media (min-width: 1024px) {
+    .grid-master.grid-3-col {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Case study pages: 12-column grid */
+@media (min-width: 1024px) {
+    .grid-master.grid-12-col {
+        grid-template-columns: repeat(12, 1fr);
+    }
+}
+
+/* Grid Items - Index Page */
+.grid-item {
+    border-bottom: var(--grid-border);
+    position: relative;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .grid-item {
+        padding: 3rem 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-item {
+        padding: 4rem 3rem;
+    }
+    .col-span-3 {
+        grid-column: span 3;
+    }
+    .border-r-desktop {
+        border-right: var(--grid-border);
+    }
+}
+
+/* Grid Items - Case Study Pages */
+@media (min-width: 1024px) {
+    .grid-12-col .grid-item {
+        border-right: var(--grid-border);
+        padding: 4rem;
+    }
+    .grid-12-col .grid-item:last-child {
+        border-right: none;
+    }
+}
+
+/* ===== COMPONENTS ===== */
+
+/* Hero Section */
+.hero-section {
+    min-height: 75vh;
+    justify-content: center;
+}
+
+/* Project Cards */
+.project-card {
+    min-height: 60vh;
+    justify-content: space-between;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.project-card:hover {
+    background-color: #ffffff;
+}
+
+/* Sticky Sidebar */
+.sticky-sidebar {
+    position: sticky;
+    top: 4rem;
+}
+
+/* ===== UTILITIES ===== */
+
+/* Highlighter Effect - Hover (Index Page) */
+.highlight-hover {
+    background: linear-gradient(120deg, transparent 0%, transparent 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 88%;
+    transition: background-size 0.4s ease-in;
+}
+
+.project-card:hover .highlight-hover,
+.hero-section:hover .highlight-hover {
+    background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 88%;
+}
+
+/* Highlighter Effect - Static (Case Study Pages) */
+.highlight {
+    background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 88%;
+}
+
+/* Arrow Interaction */
+.arrow-trigger:hover .arrow-icon {
+    transform: translateX(5px) translateY(-5px);
+    color: var(--accent-blue);
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Touch Targets - Minimum 44px */
+.touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Case study pages: all links/buttons get touch targets */
+.grid-12-col a,
+.grid-12-col button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* ===== TICKER ANIMATION ===== */
+@keyframes ticker {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-ticker {
+    animation: ticker 60s linear infinite; /* Speed: increase number = slower, decrease = faster */
+}
+
+.ticker-track:hover .animate-ticker {
+    animation-play-state: paused;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+/* Tablet and up (768px+) */
+@media (min-width: 768px) {
+    .grid-item {
+        padding: 3rem 2rem;
+    }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .grid-item {
+        padding: 4rem 3rem;
+    }
+}
+
+/* Mobile (max 767px) - Index Page */
+@media (max-width: 767px) {
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    p {
+        line-height: 1.6;
+    }
+    
+    .grid-item {
+        padding: 1.5rem 1rem;
+    }
+    
+    .hero-section {
+        min-height: 60vh;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+    
+    .project-card {
+        min-height: auto;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    .project-card h2 {
+        font-size: 1.75rem;
+        line-height: 1.15;
+    }
+    
+    /* Case study page headings */
+    .grid-item h1 {
+        font-size: 2rem;
+        line-height: 1.15;
+    }
+    
+    .grid-item h2 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+    
+    article p {
+        font-size: 1rem;
+    }
+    
+    /* Footer CTA */
+    .footer-cta h2 {
+        font-size: 2.5rem !important;
+    }
+    
+    /* Footer Nav */
+    .footer-nav {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-nav a {
+        font-size: 1rem;
+    }
+}
+
+/* Extra small mobile (390px and below) */
+@media (max-width: 390px) {
+    .hero-section h1 {
+        font-size: 1.75rem;
+    }
+    
+    .project-card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .grid-item h1 {
+        font-size: 1.75rem;
+    }
+    
+    .grid-item h2 {
+        font-size: 1.375rem;
+    }
+    
+    .footer-cta h2 {
+        font-size: 2rem !important;
+    }
+}

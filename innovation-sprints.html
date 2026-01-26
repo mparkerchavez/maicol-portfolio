@@ -9,120 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --bg-paper: #F9F8F4;
-            --ink-black: #111111;
-            --ink-subtle: rgba(17, 17, 17, 0.15);
-            --accent-blue: #2563EB;
-            --highlight-yellow: #FDE047;
-            --grid-border: 1px solid var(--ink-subtle);
-        }
-        body {
-            font-family: 'Inter Tight', sans-serif;
-            background-color: var(--bg-paper);
-            color: var(--ink-black);
-            overflow-x: hidden;
-        }
-        
-        .serif-accent { font-family: 'Playfair Display', serif; }
-        .mono { font-family: 'Space Mono', monospace; }
-
-        /* GRID SYSTEM */
-        .grid-master {
-            display: grid;
-            grid-template-columns: 1fr;
-            border-left: var(--grid-border);
-            border-right: var(--grid-border);
-            max-width: 1800px;
-            margin: 0 auto;
-            background-color: var(--bg-paper);
-        }
-        @media (min-width: 1024px) {
-            .grid-master { grid-template-columns: repeat(12, 1fr); }
-        }
-
-        /* Standard Grid Item */
-        .grid-item {
-            border-bottom: var(--grid-border);
-            padding: 2rem 1.5rem;
-        }
-        @media (min-width: 768px) {
-            .grid-item { padding: 3rem 2rem; }
-        }
-        @media (min-width: 1024px) {
-            .grid-item { border-right: var(--grid-border); padding: 4rem; }
-            .grid-item:last-child { border-right: none; }
-        }
-
-        /* Highlighter */
-        .highlight {
-            background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
-            background-repeat: no-repeat;
-            background-size: 100% 40%;
-            background-position: 0 88%;
-        }
-
-        /* Sticky Sidebar */
-        .sticky-sidebar {
-            position: sticky;
-            top: 4rem;
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 767px) {
-            .grid-item h1 {
-                font-size: 2rem;
-                line-height: 1.15;
-            }
-            .grid-item h2 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-            }
-            .grid-item {
-                padding: 1.5rem 1rem;
-            }
-            body {
-                font-size: 16px;
-                line-height: 1.6;
-            }
-            p {
-                line-height: 1.6;
-            }
-            article p {
-                font-size: 1rem;
-            }
-        }
-
-        /* Extra small mobile (375px and below) */
-        @media (max-width: 390px) {
-            .grid-item h1 {
-                font-size: 1.75rem;
-            }
-            .grid-item h2 {
-                font-size: 1.375rem;
-            }
-        }
-
-        /* Touch targets - minimum 44px */
-        a, button {
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        /* Mobile footer nav */
-        @media (max-width: 767px) {
-            .footer-nav {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
-            }
-            .footer-nav a {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="antialiased selection:bg-black selection:text-white">
 
@@ -135,7 +22,7 @@
         </div>
     </div>
 
-    <main class="grid-master">
+    <main class="grid-master grid-12-col">
 
         <!-- NAV -->
         <div class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]">
