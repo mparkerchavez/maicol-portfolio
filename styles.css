@@ -9,11 +9,25 @@
 }
 
 /* ===== BASE STYLES ===== */
+html {
+    overflow-x: hidden;
+}
+
 body {
     font-family: "Inter Tight", sans-serif;
     background-color: var(--bg-paper);
     color: var(--ink-black);
     overflow-x: hidden;
+    max-width: 100vw;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .serif-accent {
@@ -105,8 +119,10 @@ body {
     color: inherit;
 }
 
-.project-card:hover {
-    background-color: #ffffff;
+@media (hover: hover) {
+    .project-card:hover {
+        background-color: #ffffff;
+    }
 }
 
 /* Sticky Sidebar */
@@ -126,12 +142,14 @@ body {
     transition: background-size 0.4s ease-in;
 }
 
-.project-card:hover .highlight-hover,
-.hero-section:hover .highlight-hover {
-    background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 40%;
-    background-position: 0 88%;
+@media (hover: hover) {
+    .project-card:hover .highlight-hover,
+    .hero-section:hover .highlight-hover {
+        background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 40%;
+        background-position: 0 88%;
+    }
 }
 
 /* Highlighter Effect - Static (Case Study Pages) */
@@ -143,9 +161,11 @@ body {
 }
 
 /* Arrow Interaction */
-.arrow-trigger:hover .arrow-icon {
-    transform: translateX(5px) translateY(-5px);
-    color: var(--accent-blue);
+@media (hover: hover) {
+    .arrow-trigger:hover .arrow-icon {
+        transform: translateX(5px) translateY(-5px);
+        color: var(--accent-blue);
+    }
 }
 
 .arrow-icon {
@@ -183,16 +203,67 @@ body {
     animation: ticker 60s linear infinite; /* Speed: increase number = slower, decrease = faster */
 }
 
-.ticker-track:hover .animate-ticker {
-    animation-play-state: paused;
+@media (hover: hover) {
+    .ticker-track:hover .animate-ticker {
+        animation-play-state: paused;
+    }
 }
 
 /* ===== MOBILE RESPONSIVE ===== */
 
-/* Tablet and up (768px+) */
-@media (min-width: 768px) {
+/* Mobile and Tablet (under 1024px) - Project cards stack vertically */
+@media (max-width: 1023px) {
+    .grid-master.grid-3-col {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .grid-master.grid-12-col {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .border-r-desktop {
+        border-right: none;
+    }
+    
+    .col-span-3,
+    .col-span-12,
+    [class*="lg:col-span"] {
+        grid-column: span 1;
+    }
+    
+    .project-card {
+        min-height: auto;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .grid-12-col .grid-item {
+        border-right: none;
+    }
+}
+
+/* Tablet (640px - 1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
     .grid-item {
-        padding: 3rem 2rem;
+        padding: 2.5rem 2rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.75rem;
+        line-height: 1.1;
+        font-weight: 900;
+    }
+    
+    .project-card h2 {
+        font-size: 2rem;
+        line-height: 1.1;
+        font-weight: 700;
+    }
+    
+    h2.footer-cta {
+        font-size: 4.5rem !important;
     }
 }
 
@@ -203,8 +274,8 @@ body {
     }
 }
 
-/* Mobile (max 767px) - Index Page */
-@media (max-width: 767px) {
+/* Mobile (max 639px) */
+@media (max-width: 639px) {
     body {
         font-size: 16px;
         line-height: 1.6;
@@ -223,19 +294,15 @@ body {
     }
     
     .hero-section h1 {
-        font-size: 2rem;
-        line-height: 1.15;
-    }
-    
-    .project-card {
-        min-height: auto;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        font-size: 2.25rem;
+        line-height: 1.1;
+        font-weight: 900;
     }
     
     .project-card h2 {
-        font-size: 1.75rem;
-        line-height: 1.15;
+        font-size: 2rem;
+        line-height: 1.1;
+        font-weight: 700;
     }
     
     /* Case study page headings */
@@ -253,12 +320,12 @@ body {
         font-size: 1rem;
     }
     
-    /* Footer CTA */
-    .footer-cta h2 {
-        font-size: 2.5rem !important;
+    /* Footer CTA - "Let's Talk." should be prominently large */
+    h2.footer-cta {
+        font-size: 3.5rem !important;
     }
     
-    /* Footer Nav */
+    /* Footer Nav - stack vertically */
     .footer-nav {
         flex-direction: column;
         gap: 1.5rem;
@@ -267,28 +334,29 @@ body {
     
     .footer-nav a {
         font-size: 1rem;
+        min-height: 44px;
     }
 }
 
 /* Extra small mobile (390px and below) */
 @media (max-width: 390px) {
     .hero-section h1 {
-        font-size: 1.75rem;
+        font-size: 2.25rem;
     }
     
     .project-card h2 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
     
     .grid-item h1 {
-        font-size: 1.75rem;
+        font-size: 1.875rem;
     }
     
     .grid-item h2 {
-        font-size: 1.375rem;
+        font-size: 1.5rem;
     }
     
-    .footer-cta h2 {
-        font-size: 2rem !important;
+    h2.footer-cta {
+        font-size: 3.5rem !important;
     }
 }
