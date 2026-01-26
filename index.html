@@ -14,10 +14,20 @@
         <script src="https://unpkg.com/lucide@latest"></script>
         <link rel="stylesheet" href="styles.css" />
         <style>
+            /* CRITICAL MOBILE FIX - Highest specificity */
             @media (max-width: 1023px) {
-                main {
-                    display: grid !important;
+                main.grid-master.grid-3-col {
                     grid-template-columns: 1fr !important;
+                    display: grid !important;
+                }
+                
+                main.grid-master.grid-3-col > * {
+                    grid-column: 1 !important;
+                    border-right: none !important;
+                }
+                
+                .border-r-desktop {
+                    border-right: none !important;
                 }
             }
         </style>
