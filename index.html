@@ -1,395 +1,698 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maicol Parker-Chavez | Enterprise AI Strategist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --bg-paper: #F9F8F4;
-            --ink-black: #111111;
-            --ink-subtle: rgba(17, 17, 17, 0.15);
-            --accent-blue: #2563EB;
-            --highlight-yellow: #FDE047;
-            --grid-border: 1px solid var(--ink-subtle);
-        }
-        body {
-            font-family: 'Inter Tight', sans-serif;
-            background-color: var(--bg-paper);
-            color: var(--ink-black);
-            overflow-x: hidden;
-        }
-        
-        .serif-accent {
-            font-family: 'Playfair Display', serif;
-        }
-        .mono {
-            font-family: 'Space Mono', monospace;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Maicol Parker-Chavez | Enterprise AI Strategist</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <style>
+            :root {
+                --bg-paper: #f9f8f4;
+                --ink-black: #111111;
+                --ink-subtle: rgba(17, 17, 17, 0.15);
+                --accent-blue: #2563eb;
+                --highlight-yellow: #fde047;
+                --grid-border: 1px solid var(--ink-subtle);
+            }
+            body {
+                font-family: "Inter Tight", sans-serif;
+                background-color: var(--bg-paper);
+                color: var(--ink-black);
+                overflow-x: hidden;
+            }
 
-        /* GRID SYSTEM */
-        .grid-master {
-            display: grid;
-            grid-template-columns: 1fr;
-            border-left: var(--grid-border);
-            border-right: var(--grid-border);
-            max-width: 1800px;
-            margin: 0 auto;
-            background-color: var(--bg-paper);
-        }
-        @media (min-width: 1024px) {
+            .serif-accent {
+                font-family: "Playfair Display", serif;
+            }
+            .mono {
+                font-family: "Space Mono", monospace;
+            }
+
+            /* GRID SYSTEM */
             .grid-master {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Grid Items */
-        .grid-item {
-            border-bottom: var(--grid-border);
-            position: relative;
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            transition: background-color 0.3s ease;
-        }
-        @media (min-width: 768px) {
-            .grid-item {
-                padding: 3rem 2rem;
-            }
-        }
-        @media (min-width: 1024px) {
-            .grid-item {
-                padding: 4rem 3rem;
-            }
-            .col-span-3 {
-                grid-column: span 3;
-            }
-            .border-r-desktop {
+                display: grid;
+                grid-template-columns: 1fr;
+                border-left: var(--grid-border);
                 border-right: var(--grid-border);
+                max-width: 1800px;
+                margin: 0 auto;
+                background-color: var(--bg-paper);
             }
-        }
-
-        /* Hero Specifics */
-        .hero-section {
-            min-height: 75vh;
-            justify-content: center;
-        }
-
-        /* Project Card Specifics */
-        .project-card {
-            min-height: 60vh;
-            justify-content: space-between;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-        .project-card:hover {
-            background-color: #ffffff;
-        }
-
-        /* Highlighter Effect */
-        .highlight-hover {
-            background: linear-gradient(120deg, transparent 0%, transparent 100%);
-            background-repeat: no-repeat;
-            background-size: 100% 40%;
-            background-position: 0 88%;
-            transition: background-size 0.4s ease-in;
-        }
-        .project-card:hover .highlight-hover, 
-        .hero-section:hover .highlight-hover {
-            background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
-            background-repeat: no-repeat;
-            background-size: 100% 40%;
-            background-position: 0 88%;
-        }
-
-        /* Arrow Interaction */
-        .arrow-trigger:hover .arrow-icon {
-            transform: translateX(5px) translateY(-5px);
-            color: var(--accent-blue);
-        }
-        .arrow-icon {
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 767px) {
-            .hero-section h1 {
-                font-size: 2.5rem;
-                line-height: 1.1;
+            @media (min-width: 1024px) {
+                .grid-master {
+                    grid-template-columns: repeat(3, 1fr);
+                }
             }
-            .project-card h2 {
-                font-size: 2rem;
-            }
-        }
 
-        /* Infinite Ticker Animation */
-        @keyframes ticker {
-            0% {
-                transform: translateX(0);
+            /* Grid Items */
+            .grid-item {
+                border-bottom: var(--grid-border);
+                position: relative;
+                padding: 2rem 1.5rem;
+                display: flex;
+                flex-direction: column;
+                transition: background-color 0.3s ease;
             }
-            100% {
-                transform: translateX(-100%);
+            @media (min-width: 768px) {
+                .grid-item {
+                    padding: 3rem 2rem;
+                }
             }
-        }
-        .animate-ticker {
-            animation: ticker 30s linear infinite;
-        }
-        .ticker-track:hover .animate-ticker {
-            animation-play-state: paused;
-        }
-    </style>
-</head>
-<body class="antialiased selection:bg-black selection:text-white">
+            @media (min-width: 1024px) {
+                .grid-item {
+                    padding: 4rem 3rem;
+                }
+                .col-span-3 {
+                    grid-column: span 3;
+                }
+                .border-r-desktop {
+                    border-right: var(--grid-border);
+                }
+            }
 
-    <!-- SCROLLING TICKER BAR -->
-    <div class="bg-blue-600 py-3 sticky top-0 z-50 overflow-hidden">
-        <div class="ticker-track flex whitespace-nowrap">
-            <div class="ticker-content flex items-center gap-8 animate-ticker">
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-            </div>
-            <div class="ticker-content flex items-center gap-8 animate-ticker" aria-hidden="true">
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">● Enterprise AI Strategist</span>
-                <span class="text-white/50">///</span>
-                <span class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono">Consulting + Full-Time Opportunities</span>
-                <span class="text-white/50">///</span>
+            /* Hero Specifics */
+            .hero-section {
+                min-height: 75vh;
+                justify-content: center;
+            }
+
+            /* Project Card Specifics */
+            .project-card {
+                min-height: 60vh;
+                justify-content: space-between;
+                cursor: pointer;
+                text-decoration: none;
+                color: inherit;
+            }
+            .project-card:hover {
+                background-color: #ffffff;
+            }
+
+            /* Highlighter Effect */
+            .highlight-hover {
+                background: linear-gradient(
+                    120deg,
+                    transparent 0%,
+                    transparent 100%
+                );
+                background-repeat: no-repeat;
+                background-size: 100% 40%;
+                background-position: 0 88%;
+                transition: background-size 0.4s ease-in;
+            }
+            .project-card:hover .highlight-hover,
+            .hero-section:hover .highlight-hover {
+                background: linear-gradient(
+                    120deg,
+                    var(--highlight-yellow) 0%,
+                    var(--highlight-yellow) 100%
+                );
+                background-repeat: no-repeat;
+                background-size: 100% 40%;
+                background-position: 0 88%;
+            }
+
+            /* Arrow Interaction */
+            .arrow-trigger:hover .arrow-icon {
+                transform: translateX(5px) translateY(-5px);
+                color: var(--accent-blue);
+            }
+            .arrow-icon {
+                transition:
+                    transform 0.3s ease,
+                    color 0.3s ease;
+            }
+
+            /* Mobile optimizations */
+            @media (max-width: 767px) {
+                .hero-section {
+                    min-height: 60vh;
+                }
+                .hero-section h1 {
+                    font-size: 2rem;
+                    line-height: 1.15;
+                }
+                .project-card {
+                    min-height: auto;
+                    padding-top: 2rem;
+                    padding-bottom: 2rem;
+                }
+                .project-card h2 {
+                    font-size: 1.75rem;
+                    line-height: 1.15;
+                }
+                .grid-item {
+                    padding: 1.5rem 1rem;
+                }
+                body {
+                    font-size: 16px;
+                    line-height: 1.6;
+                }
+                p {
+                    line-height: 1.6;
+                }
+            }
+
+            /* Extra small mobile (375px and below) */
+            @media (max-width: 390px) {
+                .hero-section h1 {
+                    font-size: 1.75rem;
+                }
+                .project-card h2 {
+                    font-size: 1.5rem;
+                }
+            }
+
+            /* Touch targets - minimum 44px */
+            .touch-target {
+                min-height: 44px;
+                min-width: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Infinite Ticker Animation */
+            @keyframes ticker {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
+            .animate-ticker {
+                animation: ticker 30s linear infinite;
+            }
+            .ticker-track:hover .animate-ticker {
+                animation-play-state: paused;
+            }
+
+            /* Mobile footer fixes */
+            @media (max-width: 767px) {
+                .footer-cta h2 {
+                    font-size: 2.5rem !important;
+                }
+            }
+            @media (max-width: 390px) {
+                .footer-cta h2 {
+                    font-size: 2rem !important;
+                }
+            }
+        </style>
+    </head>
+    <body class="antialiased selection:bg-black selection:text-white">
+        <!-- SCROLLING TICKER BAR -->
+        <div class="bg-blue-600 py-3 sticky top-0 z-50 overflow-hidden">
+            <div class="ticker-track flex whitespace-nowrap">
+                <div
+                    class="ticker-content flex items-center gap-8 animate-ticker"
+                >
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                </div>
+                <div
+                    class="ticker-content flex items-center gap-8 animate-ticker"
+                    aria-hidden="true"
+                >
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Enterprise AI Strategist</span
+                    >
+                    <span class="text-white/50">///</span>
+                    <span
+                        class="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mono"
+                        >Consulting + Full-Time Opportunities</span
+                    >
+                    <span class="text-white/50">///</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- MAIN GRID CONTAINER -->
-    <main class="grid-master">
-
-        <!-- HEADER / NAV AREA -->
-        <div class="grid-item col-span-3 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between sticky top-[41px] z-40 border-b border-[rgba(0,0,0,0.1)]">
-            <a href="index.html" class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors">Maicol Parker-Chavez</a>
-            <div class="flex gap-4 md:gap-6 items-center">
-                <a href="#how-i-work" class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600 hidden md:block">How I Work</a>
-                <a href="mailto:mparkerchavez@gmail.com" class="bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-xs md:text-sm border border-black hover:bg-white hover:text-black transition-colors">
-                    Get in Touch
-                </a>
-            </div>
-        </div>
-
-        <!-- ROW 1: HERO STATEMENT -->
-        <section class="grid-item col-span-3 hero-section group">
-            <div class="max-w-6xl w-full mx-auto text-center lg:text-left">
-                <div class="mb-8 md:mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-end border-b border-[rgba(0,0,0,0.1)] pb-6">
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 lg:mb-0">01 /// Identity Protocol</span>
-                    <div class="inline-block border border-[rgba(0,0,0,0.1)] px-4 py-1 rounded-full bg-white shadow-sm">
-                        <span class="mono text-xs font-bold uppercase tracking-wider text-blue-600">Enterprise AI Product Strategist</span>
-                    </div>
-                </div>
-
-                <h1 class="text-4xl md:text-6xl lg:text-8xl font-black mb-8 md:mb-12 leading-[0.95] tracking-tight">
-                    I help enterprise leaders turn AI ambiguity into <span class="highlight-hover">executable roadmaps</span> and <span class="highlight-hover">adopted products.</span>
-                </h1>
-
-                <p class="text-lg md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-3xl mx-auto lg:mx-0">
-                    Product and innovation strategist focused on AI, bridging business goals, technical feasibility, human experience, and emerging AI capabilities.
-                </p>
-            </div>
-        </section>
-        
-        <!-- COL 1: Project 1 - Capital Group Sales Enablement -->
-        <a href="capital-group.html" class="grid-item project-card group arrow-trigger border-r-desktop">
-            <div>
-                <div class="flex flex-col justify-between items-start mb-8 md:mb-12 border-b border-[rgba(0,0,0,0.1)] pb-4 h-20 md:h-24">
-                    <div class="flex justify-between w-full">
-                        <span class="mono text-xs font-bold uppercase tracking-widest text-blue-600">02 /// Capital Group</span>
-                        <i data-lucide="arrow-up-right" class="w-5 h-5 md:w-6 md:h-6 arrow-icon text-gray-400"></i>
-                    </div>
-                    <span class="mono text-[10px] font-bold uppercase tracking-wider text-gray-400">Role: Venture Architect Lead</span>
-                </div>
-                
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.0] mb-4 md:mb-6">
-                    Scaling Sales Enablement <br><span class="highlight-hover">with AI Agents.</span>
-                </h2>
-                
-                <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 font-medium">
-                    Sales teams needed to prep for client meetings in minutes, not hours.
-                </p>
-                <p class="text-sm md:text-base text-gray-500 leading-relaxed serif-accent italic">
-                    I led a rapid validation sprint to map the context window to user workflow. Compressed a 3-month dev cycle into 3 weeks of validated learning.
-                </p>
-            </div>
-            
-            <div class="mt-8 md:mt-12">
-                <div class="flex flex-wrap gap-2">
-                    <span class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600">GenAI Adoption</span>
-                    <span class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-green-50 text-green-700 font-bold">300+ Users</span>
+        <!-- MAIN GRID CONTAINER -->
+        <main class="grid-master">
+            <!-- HEADER / NAV AREA -->
+            <div
+                class="grid-item col-span-3 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between sticky top-[41px] z-40 border-b border-[rgba(0,0,0,0.1)]"
+            >
+                <a
+                    href="index.html"
+                    class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors"
+                    >Maicol Parker-Chavez</a
+                >
+                <div class="flex gap-4 md:gap-6 items-center">
+                    <a
+                        href="#how-i-work"
+                        class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600 hidden md:block"
+                        >How I Work</a
+                    >
+                    <a
+                        href="mailto:mparkerchavez@gmail.com"
+                        class="bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-xs md:text-sm border border-black hover:bg-white hover:text-black transition-colors"
+                    >
+                        Get in Touch
+                    </a>
                 </div>
             </div>
-        </a>
 
-        <!-- COL 2: Project 2 - Strategy & Research -->
-        <a href="strategy-horizon.html" class="grid-item project-card group arrow-trigger border-r-desktop">
-            <div>
-                <div class="flex flex-col justify-between items-start mb-8 md:mb-12 border-b border-[rgba(0,0,0,0.1)] pb-4 h-20 md:h-24">
-                    <div class="flex justify-between w-full">
-                        <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">03 /// Strategy</span>
-                        <i data-lucide="arrow-up-right" class="w-5 h-5 md:w-6 md:h-6 arrow-icon text-gray-400"></i>
-                    </div>
-                    <span class="mono text-[10px] font-bold uppercase tracking-wider text-gray-400">Role: Lead Researcher</span>
-                </div>
-                
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.0] mb-4 md:mb-6">
-                    Tech Trends & <br><span class="highlight-hover">Horizon Planning.</span>
-                </h2>
-                
-                <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 font-medium">
-                    Co-authoring the 3-5 year roadmap for emerging tech.
-                </p>
-                <p class="text-sm md:text-base text-gray-500 leading-relaxed serif-accent italic">
-                    Translating raw AI capabilities into tangible business opportunities and implementation considerations.
-                </p>
-            </div>
-
-            <div class="mt-8 md:mt-12">
-                <div class="flex flex-wrap gap-2">
-                    <span class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600">Strategic Roadmap</span>
-                    <span class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600">Research</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- COL 3: Project 3 - Innovation Sprints -->
-        <a href="innovation-sprints.html" class="grid-item project-card group arrow-trigger">
-            <div>
-                <div class="flex flex-col justify-between items-start mb-8 md:mb-12 border-b border-[rgba(0,0,0,0.1)] pb-4 h-20 md:h-24">
-                    <div class="flex justify-between w-full">
-                        <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">04 /// Innovation Sprints</span>
-                        <i data-lucide="arrow-up-right" class="w-5 h-5 md:w-6 md:h-6 arrow-icon text-gray-400"></i>
-                    </div>
-                    <span class="mono text-[10px] font-bold uppercase tracking-wider text-gray-400">Role: Innovation Sprint Facilitator</span>
-                </div>
-                
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.0] mb-4 md:mb-6">
-                    Innovation Sprints & <br><span class="highlight-hover">AI Discovery.</span>
-                </h2>
-                
-                <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 font-medium">
-                    Helping teams identify where AI adds value.
-                </p>
-                <p class="text-sm md:text-base text-gray-500 leading-relaxed serif-accent italic">
-                    I led cross-functional workshops that moved teams from ambiguous problems to validated assumptions and clear next steps.
-                </p>
-            </div>
-
-            <div class="mt-8 md:mt-12">
-                <div class="flex flex-wrap gap-2">
-                    <span class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600">Design Thinking</span>
-                    <span class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600">Facilitation</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- ROW 3: HOW I WORK (OPERATING MANUAL) -->
-        <footer id="how-i-work" class="grid-item col-span-3 bg-[#111] text-white !border-b-0">
-            <div class="max-w-6xl w-full mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-32 mb-16 md:mb-24 pt-8 md:pt-12">
-                    
-                    <!-- Intro -->
-                    <div>
-                        <span class="mono text-xs font-bold uppercase tracking-widest text-gray-500 block mb-6">05 /// How I Work</span>
-                        <h2 class="text-4xl md:text-5xl lg:text-7xl font-black mb-6 md:mb-8 leading-none">What I Deliver.</h2>
-                        <p class="text-lg md:text-xl text-gray-400 mb-6 md:mb-8 max-w-sm font-medium">
-                            Three core value streams that drive enterprise AI adoption.
-                        </p>
-                        <div class="flex flex-col gap-4">
-                            <a href="Maicol_Parker-Chavez_Resume.pdf" download class="inline-flex items-center gap-2 border-b border-white pb-1 hover:text-blue-400 hover:border-blue-400 transition-colors mono text-sm uppercase tracking-widest w-fit">
-                                <i data-lucide="download" class="w-4 h-4"></i> Download Full Resume
-                            </a>
-                            <a href="https://linkedin.com/in/mparkerchavez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border-b border-white pb-1 hover:text-blue-400 hover:border-blue-400 transition-colors mono text-sm uppercase tracking-widest w-fit">
-                                <i data-lucide="external-link" class="w-4 h-4"></i> View LinkedIn Profile
-                            </a>
+            <!-- ROW 1: HERO STATEMENT -->
+            <section class="grid-item col-span-3 hero-section group">
+                <div class="max-w-6xl w-full mx-auto text-center lg:text-left">
+                    <div
+                        class="mb-8 md:mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-end border-b border-[rgba(0,0,0,0.1)] pb-6"
+                    >
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 lg:mb-0"
+                            >01 /// Identity Protocol</span
+                        >
+                        <div
+                            class="inline-block border border-[rgba(0,0,0,0.1)] px-4 py-1 rounded-full bg-white shadow-sm"
+                        >
+                            <span
+                                class="mono text-xs font-bold uppercase tracking-wider text-blue-600"
+                                >Enterprise AI Product Strategist</span
+                            >
                         </div>
                     </div>
 
-                    <!-- Outcomes -->
-                    <div class="space-y-8 md:space-y-12">
+                    <h1
+                        class="text-4xl md:text-6xl lg:text-8xl font-black mb-8 md:mb-12 leading-[0.95] tracking-tight"
+                    >
+                        I help enterprise leaders turn AI ambiguity into
+                        <span class="highlight-hover">executable roadmaps</span>
+                        and
+                        <span class="highlight-hover">adopted products.</span>
+                    </h1>
+
+                    <p
+                        class="text-lg md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-3xl mx-auto lg:mx-0"
+                    >
+                        Product and innovation strategist focused on AI,
+                        bridging business goals, technical feasibility, human
+                        experience, and emerging AI capabilities.
+                    </p>
+                </div>
+            </section>
+
+            <!-- COL 1: Project 1 - Capital Group Sales Enablement -->
+            <a
+                href="capital-group.html"
+                class="grid-item project-card group arrow-trigger border-r-desktop"
+            >
+                <div>
+                    <div
+                        class="flex flex-col justify-between items-start mb-8 md:mb-12 border-b border-[rgba(0,0,0,0.1)] pb-4 h-20 md:h-24"
+                    >
+                        <div class="flex justify-between w-full">
+                            <span
+                                class="mono text-xs font-bold uppercase tracking-widest text-blue-600"
+                                >02 /// Capital Group</span
+                            >
+                            <i
+                                data-lucide="arrow-up-right"
+                                class="w-5 h-5 md:w-6 md:h-6 arrow-icon text-gray-400"
+                            ></i>
+                        </div>
+                        <span
+                            class="mono text-[10px] font-bold uppercase tracking-wider text-gray-400"
+                            >Role: Venture Architect Lead</span
+                        >
+                    </div>
+
+                    <h2
+                        class="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.0] mb-4 md:mb-6"
+                    >
+                        Scaling Sales Enablement <br /><span
+                            class="highlight-hover"
+                            >with AI Agents.</span
+                        >
+                    </h2>
+
+                    <p
+                        class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 font-medium"
+                    >
+                        Sales teams needed to prep for client meetings in
+                        minutes, not hours.
+                    </p>
+                    <p
+                        class="text-sm md:text-base text-gray-500 leading-relaxed serif-accent italic"
+                    >
+                        I led a rapid validation sprint to map the context
+                        window to user workflow. Compressed a 3-month dev cycle
+                        into 3 weeks of validated learning.
+                    </p>
+                </div>
+
+                <div class="mt-8 md:mt-12">
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600"
+                            >GenAI Adoption</span
+                        >
+                        <span
+                            class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-green-50 text-green-700 font-bold"
+                            >300+ Users</span
+                        >
+                    </div>
+                </div>
+            </a>
+
+            <!-- COL 2: Project 2 - Strategy & Research -->
+            <a
+                href="strategy-horizon.html"
+                class="grid-item project-card group arrow-trigger border-r-desktop"
+            >
+                <div>
+                    <div
+                        class="flex flex-col justify-between items-start mb-8 md:mb-12 border-b border-[rgba(0,0,0,0.1)] pb-4 h-20 md:h-24"
+                    >
+                        <div class="flex justify-between w-full">
+                            <span
+                                class="mono text-xs font-bold uppercase tracking-widest text-gray-400"
+                                >03 /// Strategy</span
+                            >
+                            <i
+                                data-lucide="arrow-up-right"
+                                class="w-5 h-5 md:w-6 md:h-6 arrow-icon text-gray-400"
+                            ></i>
+                        </div>
+                        <span
+                            class="mono text-[10px] font-bold uppercase tracking-wider text-gray-400"
+                            >Role: Lead Researcher</span
+                        >
+                    </div>
+
+                    <h2
+                        class="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.0] mb-4 md:mb-6"
+                    >
+                        Tech Trends & <br /><span class="highlight-hover"
+                            >Horizon Planning.</span
+                        >
+                    </h2>
+
+                    <p
+                        class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 font-medium"
+                    >
+                        Co-authoring the 3-5 year roadmap for emerging tech.
+                    </p>
+                    <p
+                        class="text-sm md:text-base text-gray-500 leading-relaxed serif-accent italic"
+                    >
+                        Translating raw AI capabilities into tangible business
+                        opportunities and implementation considerations.
+                    </p>
+                </div>
+
+                <div class="mt-8 md:mt-12">
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600"
+                            >Strategic Roadmap</span
+                        >
+                        <span
+                            class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600"
+                            >Research</span
+                        >
+                    </div>
+                </div>
+            </a>
+
+            <!-- COL 3: Project 3 - Innovation Sprints -->
+            <a
+                href="innovation-sprints.html"
+                class="grid-item project-card group arrow-trigger"
+            >
+                <div>
+                    <div
+                        class="flex flex-col justify-between items-start mb-8 md:mb-12 border-b border-[rgba(0,0,0,0.1)] pb-4 h-20 md:h-24"
+                    >
+                        <div class="flex justify-between w-full">
+                            <span
+                                class="mono text-xs font-bold uppercase tracking-widest text-gray-400"
+                                >04 /// Innovation Sprints</span
+                            >
+                            <i
+                                data-lucide="arrow-up-right"
+                                class="w-5 h-5 md:w-6 md:h-6 arrow-icon text-gray-400"
+                            ></i>
+                        </div>
+                        <span
+                            class="mono text-[10px] font-bold uppercase tracking-wider text-gray-400"
+                            >Role: Innovation Sprint Facilitator</span
+                        >
+                    </div>
+
+                    <h2
+                        class="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.0] mb-4 md:mb-6"
+                    >
+                        Innovation Sprints & <br /><span class="highlight-hover"
+                            >AI Discovery.</span
+                        >
+                    </h2>
+
+                    <p
+                        class="text-base md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8 font-medium"
+                    >
+                        Helping teams identify where AI adds value.
+                    </p>
+                    <p
+                        class="text-sm md:text-base text-gray-500 leading-relaxed serif-accent italic"
+                    >
+                        I led cross-functional workshops that moved teams from
+                        ambiguous problems to validated assumptions and clear
+                        next steps.
+                    </p>
+                </div>
+
+                <div class="mt-8 md:mt-12">
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600"
+                            >Design Thinking</span
+                        >
+                        <span
+                            class="mono text-[10px] uppercase border border-[rgba(0,0,0,0.2)] px-2 py-1 bg-white text-gray-600"
+                            >Facilitation</span
+                        >
+                    </div>
+                </div>
+            </a>
+
+            <!-- ROW 3: HOW I WORK (OPERATING MANUAL) -->
+            <footer
+                id="how-i-work"
+                class="grid-item col-span-3 bg-[#111] text-white !border-b-0"
+            >
+                <div class="max-w-6xl w-full mx-auto">
+                    <div
+                        class="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-32 mb-16 md:mb-24 pt-8 md:pt-12"
+                    >
+                        <!-- Intro -->
                         <div>
-                            <h3 class="font-bold text-xl md:text-2xl mb-3 flex items-start gap-3">
-                                <span class="text-2xl flex-shrink-0">⚡</span>
-                                <span>Discovery to Roadmap</span>
-                            </h3>
-                            <p class="text-gray-400 serif-accent italic text-base md:text-lg">
-                                Turn 3-month assumption cycles into 3-week validated decisions through structured sprints and stakeholder alignment.
+                            <span
+                                class="mono text-xs font-bold uppercase tracking-widest text-gray-500 block mb-6"
+                                >05 /// How I Work</span
+                            >
+                            <h2
+                                class="text-4xl md:text-5xl lg:text-7xl font-black mb-6 md:mb-8 leading-none"
+                            >
+                                What I Deliver.
+                            </h2>
+                            <p
+                                class="text-lg md:text-xl text-gray-400 mb-6 md:mb-8 max-w-sm font-medium"
+                            >
+                                Three core value streams that drive enterprise
+                                AI adoption.
+                            </p>
+                            <div class="flex flex-col gap-4">
+                                <a
+                                    href="Maicol_Parker-Chavez_Resume.pdf"
+                                    download
+                                    class="inline-flex items-center gap-2 border-b border-white pb-1 hover:text-blue-400 hover:border-blue-400 transition-colors mono text-sm uppercase tracking-widest w-fit"
+                                >
+                                    <i
+                                        data-lucide="download"
+                                        class="w-4 h-4"
+                                    ></i>
+                                    Download Full Resume
+                                </a>
+                                <a
+                                    href="https://linkedin.com/in/mparkerchavez"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-2 border-b border-white pb-1 hover:text-blue-400 hover:border-blue-400 transition-colors mono text-sm uppercase tracking-widest w-fit"
+                                >
+                                    <i
+                                        data-lucide="external-link"
+                                        class="w-4 h-4"
+                                    ></i>
+                                    View LinkedIn Profile
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Outcomes -->
+                        <div class="space-y-8 md:space-y-12">
+                            <div>
+                                <h3
+                                    class="font-bold text-xl md:text-2xl mb-3 flex items-start gap-3"
+                                >
+                                    <span class="text-2xl flex-shrink-0"
+                                        >⚡</span
+                                    >
+                                    <span>Discovery to Roadmap</span>
+                                </h3>
+                                <p
+                                    class="text-gray-400 serif-accent italic text-base md:text-lg"
+                                >
+                                    Turn 3-month assumption cycles into 3-week
+                                    validated decisions through structured
+                                    sprints and stakeholder alignment.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3
+                                    class="font-bold text-xl md:text-2xl mb-3 flex items-start gap-3"
+                                >
+                                    <span class="text-2xl flex-shrink-0"
+                                        >🎯</span
+                                    >
+                                    <span>Pilot to Production</span>
+                                </h3>
+                                <p
+                                    class="text-gray-400 serif-accent italic text-base md:text-lg"
+                                >
+                                    Compress development waste by defining the
+                                    workflow before building the features.
+                                    Proven at scale (300+ users).
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3
+                                    class="font-bold text-xl md:text-2xl mb-3 flex items-start gap-3"
+                                >
+                                    <span class="text-2xl flex-shrink-0"
+                                        >🤝</span
+                                    >
+                                    <span>Cross-Functional Velocity</span>
+                                </h3>
+                                <p
+                                    class="text-gray-400 serif-accent italic text-base md:text-lg"
+                                >
+                                    Facilitate workshops that get engineering,
+                                    product, and executives aligned on
+                                    assumptions, tradeoffs, and next steps.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-start md:items-end border-t border-gray-800 pt-8 md:pt-12 pb-8 gap-8"
+                    >
+                        <div>
+                            <p
+                                class="mono text-xs text-gray-500 uppercase tracking-widest mb-4"
+                            >
+                                /// Initiate Handshake
+                            </p>
+                            <h2
+                                class="footer-cta text-5xl md:text-7xl lg:text-9xl font-black hover:text-blue-400 transition-colors cursor-pointer leading-none tracking-tighter"
+                            >
+                                <a href="mailto:mparkerchavez@gmail.com"
+                                    >Let's Talk.</a
+                                >
+                            </h2>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <p class="mono text-xs text-gray-600 uppercase">
+                                © 2026 Maicol Parker-Chavez
                             </p>
                         </div>
-                        
-                        <div>
-                            <h3 class="font-bold text-xl md:text-2xl mb-3 flex items-start gap-3">
-                                <span class="text-2xl flex-shrink-0">🎯</span>
-                                <span>Pilot to Production</span>
-                            </h3>
-                            <p class="text-gray-400 serif-accent italic text-base md:text-lg">
-                                Compress development waste by defining the workflow before building the features. Proven at scale (300+ users).
-                            </p>
-                        </div>
-                        
-                        <div>
-                            <h3 class="font-bold text-xl md:text-2xl mb-3 flex items-start gap-3">
-                                <span class="text-2xl flex-shrink-0">🤝</span>
-                                <span>Cross-Functional Velocity</span>
-                            </h3>
-                            <p class="text-gray-400 serif-accent italic text-base md:text-lg">
-                                Facilitate workshops that get engineering, product, and executives aligned on assumptions, tradeoffs, and next steps.
-                            </p>
-                        </div>
                     </div>
                 </div>
+            </footer>
+        </main>
 
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-t border-gray-800 pt-8 md:pt-12 pb-8 gap-8">
-                    <div>
-                        <p class="mono text-xs text-gray-500 uppercase tracking-widest mb-4">/// Initiate Handshake</p>
-                        <h2 class="text-5xl md:text-7xl lg:text-9xl font-black hover:text-blue-400 transition-colors cursor-pointer leading-none tracking-tighter">
-                            <a href="mailto:mparkerchavez@gmail.com">Let's Talk.</a>
-                        </h2>
-                    </div>
-                    <div class="text-left md:text-right">
-                        <p class="mono text-xs text-gray-600 uppercase">© 2026 Maicol Parker-Chavez</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-    </main>
-
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
+        <script>
+            lucide.createIcons();
+        </script>
+    </body>
 </html>
