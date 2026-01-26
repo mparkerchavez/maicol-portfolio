@@ -12,17 +12,12 @@
             rel="stylesheet"
         />
         <script src="https://unpkg.com/lucide@latest"></script>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css" />
         <style>
             @media (max-width: 1023px) {
-                .grid-master.grid-3-col {
+                main {
+                    display: grid !important;
                     grid-template-columns: 1fr !important;
-                }
-                .grid-item {
-                    border-right: none !important;
-                }
-                .border-r-desktop {
-                    border-right: none !important;
                 }
             }
         </style>
@@ -122,7 +117,7 @@
         </div>
 
         <!-- MAIN GRID CONTAINER -->
-        <main class="grid-master grid-3-col">
+        <main class="grid-master grid-3-col max-w-full">
             <!-- HEADER / NAV AREA -->
             <div
                 class="grid-item col-span-3 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between sticky top-[41px] z-40 border-b border-[rgba(0,0,0,0.1)]"
