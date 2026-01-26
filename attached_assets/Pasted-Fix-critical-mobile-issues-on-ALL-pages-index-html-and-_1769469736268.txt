@@ -1,0 +1,51 @@
+Fix critical mobile issues on ALL pages (index.html and all case study pages):
+
+1. HORIZONTAL OVERFLOW - CRITICAL:
+   - Text is going beyond screen width (horizontal scroll appearing)
+   - Add to body: overflow-x: hidden;
+   - Ensure grid-master max-width works properly
+   - Check all text elements have proper word-wrap
+   - No element should exceed viewport width on mobile
+
+2. PROJECT CARDS MUST STACK ON MOBILE:
+   - On screens under 1024px, the three project cards MUST be one per row (vertical stack)
+   - Current problem: cards are trying to fit horizontally
+   - Fix: On mobile, grid-master should be grid-template-columns: 1fr (not 3 columns)
+   - Each card should take full width
+   - Verify this in the CSS @media query for max-width: 1023px
+
+3. REMOVE HOVER EFFECTS ON MOBILE:
+   - On touch devices, there is no hover state
+   - Disable these on mobile screens (under 1024px):
+     * .highlight-hover background transition
+     * .project-card:hover background change
+     * Arrow icon movement on hover
+   - Keep the static .highlight class for case study headlines
+   - Use @media (hover: hover) to only apply hover effects on devices that support hover
+
+4. TYPOGRAPHY HIERARCHY IMPROVEMENTS:
+   - "Let's Talk." footer CTA is too small
+     * Mobile (under 640px): 3.5rem (56px)
+     * Tablet (640-1023px): 4.5rem (72px)  
+     * Desktop (1024px+): Keep current size
+   
+   - Hero headline on mobile should be bolder/larger:
+     * Mobile: 2.25rem (36px) minimum
+     * Ensure good contrast and weight
+   
+   - Project card headlines on mobile:
+     * Should be 2rem (32px) minimum
+     * Bold weight, tight line-height
+
+5. ENSURE PROPER MOBILE STACKING:
+   - Status bar items should wrap naturally
+   - Navigation items should be touch-friendly (44px min)
+   - Footer should stack vertically on mobile
+   - All grid layouts collapse to single column under 1024px
+
+Test at 390px width and confirm:
+- No horizontal scrolling
+- All three project cards stack vertically (one per row)
+- No hover effects trigger
+- "Let's Talk." is prominently large
+- Show me the specific CSS changes you made
