@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Capital Group | Maicol Parker-Chavez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-paper: #F9F8F4;
+            --ink-black: #111111;
+            --ink-subtle: rgba(17, 17, 17, 0.15);
+            --accent-blue: #2563EB;
+            --highlight-yellow: #FDE047;
+            --grid-border: 1px solid var(--ink-subtle);
+        }
+        body {
+            font-family: 'Inter Tight', sans-serif;
+            background-color: var(--bg-paper);
+            color: var(--ink-black);
+            overflow-x: hidden;
+        }
+        
+        .serif-accent { font-family: 'Playfair Display', serif; }
+        .mono { font-family: 'Space Mono', monospace; }
+
+        /* GRID SYSTEM */
+        .grid-master {
+            display: grid;
+            grid-template-columns: 1fr;
+            border-left: var(--grid-border);
+            border-right: var(--grid-border);
+            max-width: 1800px;
+            margin: 0 auto;
+            background-color: var(--bg-paper);
+        }
+        @media (min-width: 1024px) {
+            .grid-master { grid-template-columns: repeat(12, 1fr); }
+        }
+
+        /* Standard Grid Item */
+        .grid-item {
+            border-bottom: var(--grid-border);
+            padding: 2rem 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .grid-item { padding: 3rem 2rem; }
+        }
+        @media (min-width: 1024px) {
+            .grid-item { border-right: var(--grid-border); padding: 4rem; }
+            .grid-item:last-child { border-right: none; }
+        }
+
+        /* Highlighter */
+        .highlight {
+            background: linear-gradient(120deg, var(--highlight-yellow) 0%, var(--highlight-yellow) 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+        }
+
+        /* Sticky Sidebar */
+        .sticky-sidebar {
+            position: sticky;
+            top: 4rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 767px) {
+            .grid-item h1 {
+                font-size: 2.5rem;
+                line-height: 1.1;
+            }
+            .grid-item h2 {
+                font-size: 1.875rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-black selection:text-white">
+
+    <!-- STATIC STATUS BAR -->
+    <div class="bg-white border-b border-[rgba(0,0,0,0.1)] py-3 sticky top-0 z-50 flex justify-center px-4">
+        <div class="flex items-center gap-2 md:gap-4 text-[10px] md:text-xs font-bold tracking-widest uppercase mono text-gray-500 text-center">
+            <span class="text-blue-600">● Enterprise AI Strategist</span>
+            <span class="opacity-30 hidden sm:inline">///</span>
+            <span class="hidden sm:inline">Consulting + Full-Time Opportunities</span>
+        </div>
+    </div>
+
+    <main class="grid-master">
+
+        <!-- NAV -->
+        <div class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]">
+            <a href="index.html" class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors flex items-center gap-2">
+                <i data-lucide="arrow-left" class="w-5 h-5 md:w-6 md:h-6"></i> Maicol Parker-Chavez
+            </a>
+            <a href="mailto:mparkerchavez@gmail.com" class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600">
+                Get in Touch
+            </a>
+        </div>
+
+        <!-- HERO HEADER -->
+        <header class="grid-item col-span-12 bg-white">
+            <div class="max-w-4xl">
+                <div class="flex flex-wrap items-center gap-4 mb-8">
+                    <span class="mono text-xs font-bold uppercase tracking-widest text-blue-600">Capital Group</span>
+                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">///</span>
+                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">GenAI Adoption</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] mb-8">
+                    Scaling Sales Enablement <br><span class="highlight">with AI Agents.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-2xl">
+                    "I compressed a 3-month development cycle into 3 weeks of validated learning, scaling a meeting-prep workflow to 300+ sales associates."
+                </p>
+            </div>
+        </header>
+
+        <!-- CONTENT GRID -->
+        
+        <!-- SIDEBAR (Metadata) - Spans 4 cols -->
+        <div class="grid-item col-span-12 lg:col-span-4 bg-[#F9F8F4]">
+            <div class="sticky-sidebar space-y-12">
+                
+                <!-- Role -->
+                <div>
+                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">My Role</h3>
+                    <p class="text-lg font-bold">Venture Architect Lead</p>
+                </div>
+
+                <!-- Team -->
+                <div>
+                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Collaborators</h3>
+                    <p class="text-base leading-snug">
+                        Engineering Lead<br>
+                        Product Manager<br>
+                        Designer<br>
+                        Sales Stakeholders
+                    </p>
+                </div>
+
+                <!-- Stack -->
+                <div>
+                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">The Stack</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">RAG Architecture</span>
+                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Azure OpenAI</span>
+                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">React</span>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="p-6 bg-blue-50 border border-blue-100 rounded-sm">
+                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">Impact Metrics</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-2xl font-black block">300+</span>
+                            <span class="text-sm text-gray-600">Active Sales Users</span>
+                        </div>
+                        <div class="w-full h-px bg-blue-200"></div>
+                        <div>
+                            <span class="text-2xl font-black block">3 Weeks</span>
+                            <span class="text-sm text-gray-600">From Concept to Validated Design</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MAIN NARRATIVE - Spans 8 cols -->
+        <article class="grid-item col-span-12 lg:col-span-8 bg-white !p-6 md:!p-12 lg:!p-16">
+            
+            <!-- SECTION 1: THE CHALLENGE -->
+            <div class="mb-16 md:mb-20 max-w-3xl">
+                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">01 /// The Challenge</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">The "Blank Page" Problem.</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                    Capital Group's sales teams spend hours prepping for client meetings. They needed to digest complex portfolio data and client history in minutes.
+                </p>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Data Science had built a powerful backend, but the frontend was a generic "Chat with your Data" interface. Adoption was stalled because sales associates didn't know <em>what</em> to ask. They were staring at a blank cursor.
+                </p>
+            </div>
+
+            <!-- IMAGE PLACEHOLDER 1 -->
+            <div class="mb-16 md:mb-20 bg-gradient-to-br from-gray-100 to-gray-50 border border-gray-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center">
+                <i data-lucide="message-square" class="w-16 h-16 text-gray-300 mb-4"></i>
+                <p class="font-bold text-gray-400 mono text-sm">Project Visual</p>
+                <p class="text-xs text-gray-400 mt-2">(Add representative image here)</p>
+            </div>
+
+            <!-- SECTION 2: THE INTERVENTION -->
+            <div class="mb-16 md:mb-20 max-w-3xl">
+                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">02 /// The Strategy</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Validating the Workflow, Not Just the Tech.</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                    Instead of guessing features, I led a <strong>rapid validation sprint</strong>. We didn't write code initially. I sat with sales associates and manually mapped their "meeting prep" mental model.
+                </p>
+                <ul class="space-y-4 border-l-2 border-blue-600 pl-6 my-8">
+                    <li>
+                        <strong class="block text-gray-900">Insight 1:</strong> Sales reps don't want to "chat." They want a dossier.
+                    </li>
+                    <li>
+                        <strong class="block text-gray-900">Insight 2:</strong> Trust is fragile. One hallucination kills adoption.
+                    </li>
+                </ul>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    I pivoted the team from a "Chatbot" to a "Context-Aware Agent" that pre-emptively surfaces the 3 most likely questions a client will ask, sourced from valid RAG data.
+                </p>
+            </div>
+
+            <!-- IMAGE PLACEHOLDER 2 -->
+            <div class="mb-16 md:mb-20 bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center">
+                <i data-lucide="workflow" class="w-16 h-16 text-blue-300 mb-4"></i>
+                <p class="font-bold text-blue-400 mono text-sm">Workflow Design</p>
+                <p class="text-xs text-blue-300 mt-2">(Add representative image here)</p>
+            </div>
+
+            <!-- SECTION 3: THE OUTCOME -->
+            <div class="mb-16 md:mb-20 max-w-3xl">
+                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">03 /// The Outcome</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">From 3 Months to 3 Weeks.</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                    By defining the workflow <em>before</em> engineering built the full UI, I compressed the development cycle significantly.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-8">
+                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
+                        <h4 class="font-bold mb-2">Adoption</h4>
+                        <p class="text-sm text-gray-600">Expanded from a pilot of 10 to a full rollout of <strong>300+ associates</strong>.</p>
+                    </div>
+                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
+                        <h4 class="font-bold mb-2">Velocity</h4>
+                        <p class="text-sm text-gray-600">Reduced assumption-heavy development from months to weeks through validated learning sprints.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTHER PROJECTS SECTION -->
+            <div class="max-w-3xl pt-12 border-t border-gray-200">
+                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-6">04 /// Other AI Projects</span>
+                <h3 class="text-2xl md:text-3xl font-bold mb-8">Related Work</h3>
+                
+                <div class="space-y-6">
+                    <!-- Project 1 -->
+                    <div class="bg-white border border-gray-200 p-6 hover:border-blue-300 transition-colors">
+                        <div class="flex items-start justify-between mb-3">
+                            <h4 class="font-bold text-lg">Prompt Assistant Prototype</h4>
+                            <a href="#prompt-assistant" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Built a working prototype demonstrating AI-powered prompt optimization and context management for enterprise use cases.
+                        </p>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="bg-white border border-gray-200 p-6 hover:border-blue-300 transition-colors">
+                        <div class="flex items-start justify-between mb-3">
+                            <h4 class="font-bold text-lg">Level Up Matcher</h4>
+                            <a href="#level-up-matcher" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            AI-powered tool to help social workers find mentorship programs for foster youth. Demonstrates workflow design with low-code AI platforms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- FOOTER NAV -->
+        <div class="grid-item col-span-12 bg-[#111] text-white flex flex-col md:flex-row justify-between items-center !py-12 gap-8">
+            <a href="index.html" class="mono text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white">
+                <i data-lucide="arrow-left" class="inline w-4 h-4 mr-2"></i> Back to Index
+            </a>
+            
+            <div class="text-center md:text-right">
+                <span class="block mono text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Next Case Study</span>
+                <a href="strategy-horizon.html" class="text-xl md:text-2xl font-bold hover:text-blue-400 transition-colors">
+                    Tech Trends & Horizon Planning <i data-lucide="arrow-right" class="inline w-5 h-5 md:w-6 md:h-6 ml-2"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
