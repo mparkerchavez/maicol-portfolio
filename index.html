@@ -13,6 +13,19 @@
         />
         <script src="https://unpkg.com/lucide@latest"></script>
         <link rel="stylesheet" href="styles.css">
+        <style>
+            @media (max-width: 1023px) {
+                .grid-master.grid-3-col {
+                    grid-template-columns: 1fr !important;
+                }
+                .grid-item {
+                    border-right: none !important;
+                }
+                .border-r-desktop {
+                    border-right: none !important;
+                }
+            }
+        </style>
     </head>
     <body class="antialiased selection:bg-black selection:text-white">
         <!-- SCROLLING TICKER BAR -->
