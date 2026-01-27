@@ -416,7 +416,7 @@ p, h1, h2, h3, h4, h5, h6, span {
     z-index: 40;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 540px) {
     .site-header {
         flex-direction: row;
         align-items: center;
