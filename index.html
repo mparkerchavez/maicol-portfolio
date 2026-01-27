@@ -14,12 +14,43 @@
         <script src="https://unpkg.com/lucide@latest"></script>
         <link rel="stylesheet" href="styles.css" />
         <style>
-            @media (max-width: 1023px) {
-                main {
-                    display: grid !important;
-                    grid-template-columns: 1fr !important;
-                }
-            }
+/* Mobile Override - High Specificity */
+@media (max-width: 1023px) {
+    main.grid-master.grid-3-col {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+    }
+    
+    .grid-item.project-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-right: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    .grid-master {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+    
+    .project-card h2 {
+        font-size: 2rem !important;
+        line-height: 1.1 !important;
+    }
+    
+    .project-card p {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+}
         </style>
     </head>
     <body class="antialiased selection:bg-black selection:text-white">
@@ -496,7 +527,7 @@
                                 /// Initiate Handshake
                             </p>
                             <h2
-                                class="footer-cta text-5xl md:text-7xl lg:text-9xl font-black hover:text-blue-400 transition-colors cursor-pointer leading-none tracking-tighter"
+                                class="footer-cta text-5xl md:text-7xl lg:text-9xl font-black hover:text-blue-600 transition-colors cursor-pointer leading-none tracking-tighter"
                             >
                                 <a href="/cdn-cgi/l/email-protection#ff928f9e8d949a8d9c979e899a85bf98929e9693d19c9092">Let's Talk.</a
                                 >
@@ -510,10 +541,4 @@
                     </div>
                 </div>
             </footer>
-        </main>
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-        <script>
-            lucide.createIcons();
-        </script>
-    </body>
-</html>
+        </main
