@@ -13,50 +13,6 @@
         />
         <script src="https://unpkg.com/lucide@latest"></script>
         <link rel="stylesheet" href="styles.css" />
-        <style>
-    /* Homepage Mobile Fix */
-    @media (max-width: 1023px) {
-        main {
-            display: grid !important;
-            grid-template-columns: 1fr !important;
-        }
-        
-        main.grid-master.grid-3-col {
-            grid-template-columns: 1fr !important;
-        }
-        
-        .grid-item {
-            width: 100% !important;
-            border-right: none !important;
-        }
-        
-        .project-card {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
-        
-        .border-r-desktop {
-            border-right: none !important;
-        }
-    }
-    
-    @media (max-width: 767px) {
-        .hero-section h1 {
-            font-size: 2.25rem !important;
-            line-height: 1.2 !important;
-        }
-        
-        .project-card h2 {
-            font-size: 2rem !important;
-            line-height: 1.1 !important;
-        }
-        
-        .project-card p {
-            font-size: 1rem !important;
-            line-height: 1.6 !important;
-        }
-    }
-        </style>
     </head>
     <body class="antialiased selection:bg-black selection:text-white">
         <!-- SCROLLING TICKER BAR -->
@@ -155,25 +111,19 @@
         <!-- MAIN GRID CONTAINER -->
         <main class="grid-master grid-3-col max-w-full">
             <!-- HEADER / NAV AREA -->
-            <div
-                class="grid-item col-span-3 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between sticky top-[41px] z-40 border-b border-[rgba(0,0,0,0.1)]"
-            >
-                <a
-                    href="index.html"
-                    class="text-xl md:text-2xl font-black hover:text-blue-600 transition-colors"
-                    >Maicol Parker-Chavez</a
-                >
+            <header class="grid-item col-span-3 !min-h-0 site-header">
+                <a href="index.html" class="site-name">Maicol Parker-Chavez</a>
                 <div class="flex gap-4 md:gap-6 items-center">
                     <a
                         href="#outcomes"
                         class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600 hidden md:block"
                         >What I Deliver</a
                     >
-                    <a href="/cdn-cgi/l/email-protection#412c3120332a243322292037243b01262c20282d6f222e2c" class="bg-black text-white px-4 md:px-6 py-2 md:py-3 rounded-full font-bold text-xs md:text-sm border border-black hover:bg-white hover:text-black transition-colors">
+                    <a href="mailto:mparkerchavez@gmail.com" class="btn-contact">
                         Get in Touch
                     </a>
                 </div>
-            </div>
+            </header>
 
             <!-- ROW 1: HERO STATEMENT -->
             <section class="grid-item col-span-3 hero-section group">

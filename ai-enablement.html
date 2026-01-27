@@ -13,16 +13,6 @@
         />
         <script src="https://unpkg.com/lucide@latest"></script>
         <link rel="stylesheet" href="styles.css" />
-        <style>
-            @media (max-width: 1023px) {
-                .grid-master.grid-12-col {
-                    grid-template-columns: 1fr !important;
-                }
-                .grid-item {
-                    border-right: none !important;
-                }
-            }
-        </style>
     </head>
     <body class="antialiased selection:bg-black selection:text-white">
         <!-- SCROLLING TICKER BAR -->
@@ -69,26 +59,15 @@
 
         <main class="grid-master grid-12-col">
             <!-- NAV -->
-            <div
-                class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]"
-            >
-                <a
-                    href="index.html"
-                    class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors flex items-center gap-2"
-                >
-                    <i
-                        data-lucide="arrow-left"
-                        class="w-5 h-5 md:w-6 md:h-6"
-                    ></i>
+            <header class="grid-item col-span-12 !min-h-0 site-header">
+                <a href="index.html" class="site-name">
+                    <i data-lucide="arrow-left" class="w-5 h-5 md:w-6 md:h-6"></i>
                     Maicol Parker-Chavez
                 </a>
-                <a
-                    href="mailto:mparkerchavez@gmail.com"
-                    class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600"
-                >
+                <a href="mailto:mparkerchavez@gmail.com" class="btn-contact">
                     Get in Touch
                 </a>
-            </div>
+            </header>
 
             <!-- HERO HEADER -->
             <header class="grid-item col-span-12 bg-white">
