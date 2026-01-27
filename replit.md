@@ -61,6 +61,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+**January 27, 2026 - Code Cleanup & Consistency**
+- Removed duplicate inline styles from all HTML files and consolidated into styles.css
+- Created shared CSS classes for navigation: .site-header, .site-name, .btn-contact
+- Standardized header/navigation appearance across all 4 pages (sticky below ticker, consistent styling)
+- Standardized "Get in Touch" button styling (black button with hover effect) on all pages
+- Standardized email links to use mailto: format across all pages
+- Changed nav `<div>` to semantic `<header>` elements
+
 **January 26, 2026 - Mobile Responsiveness Fixes**
 - Added overflow-x: hidden to html/body to prevent horizontal scrolling
 - Implemented proper grid stacking for mobile (grid-template-columns: 1fr under 1024px)
