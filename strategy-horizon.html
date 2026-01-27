@@ -1,233 +1,419 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: Horizon Planning | Maicol Parker-Chavez</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        @media (max-width: 1023px) {
-            .grid-master.grid-12-col {
-                grid-template-columns: 1fr !important;
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Case Study: Tech Trends | Maicol Parker-Chavez</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            @media (max-width: 1023px) {
+                .grid-master.grid-12-col {
+                    grid-template-columns: 1fr !important;
+                }
+                .grid-item {
+                    border-right: none !important;
+                }
             }
-            .grid-item {
-                border-right: none !important;
-            }
-        }
-    </style>
-</head>
-<body class="antialiased selection:bg-black selection:text-white">
-
-    <!-- STATIC STATUS BAR -->
-    <div class="bg-white border-b border-[rgba(0,0,0,0.1)] py-3 sticky top-0 z-50 flex justify-center px-4">
-        <div class="flex items-center gap-2 md:gap-4 text-[10px] md:text-xs font-bold tracking-widest uppercase mono text-gray-500 text-center">
-            <span class="text-blue-600">● Enterprise AI Strategist</span>
-            <span class="opacity-30 hidden sm:inline">///</span>
-            <span class="hidden sm:inline">Consulting + Full-Time Opportunities</span>
-        </div>
-    </div>
-
-    <main class="grid-master grid-12-col">
-
-        <!-- NAV -->
-        <div class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]">
-            <a href="index.html" class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors flex items-center gap-2">
-                <i data-lucide="arrow-left" class="w-5 h-5 md:w-6 md:h-6"></i> Maicol Parker-Chavez
-            </a>
-            <a href="mailto:mparkerchavez@gmail.com" class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600">
-                Get in Touch
-            </a>
-        </div>
-
-        <!-- HERO HEADER -->
-        <header class="grid-item col-span-12 bg-white">
-            <div class="max-w-4xl">
-                <div class="flex flex-wrap items-center gap-4 mb-8">
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-blue-600">Strategic Roadmap</span>
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">///</span>
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">2023-2026</span>
-                </div>
-                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] mb-8">
-                    Tech Trends & <br><span class="highlight">Horizon Planning.</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-2xl">
-                    "Co-authoring the 3-5 year roadmap for emerging tech. Translating raw model capabilities into tangible business opportunities and implementation considerations."
-                </p>
+        </style>
+    </head>
+    <body class="antialiased selection:bg-black selection:text-white">
+        <!-- STATIC STATUS BAR -->
+        <div
+            class="bg-white border-b border-[rgba(0,0,0,0.1)] py-3 sticky top-0 z-50 flex justify-center px-4"
+        >
+            <div
+                class="flex items-center gap-2 md:gap-4 text-[10px] md:text-xs font-bold tracking-widest uppercase mono text-gray-500 text-center"
+            >
+                <span class="text-blue-600">● Enterprise AI Strategist</span>
+                <span class="opacity-30 hidden sm:inline">///</span>
+                <span class="hidden sm:inline"
+                    >Consulting + Full-Time Opportunities</span
+                >
             </div>
-        </header>
+        </div>
 
-        <!-- CONTENT GRID -->
-        
-        <!-- SIDEBAR (Metadata) - Spans 4 cols -->
-        <div class="grid-item col-span-12 lg:col-span-4 bg-[#F9F8F4]">
-            <div class="sticky-sidebar space-y-12">
-                
-                <!-- Role -->
-                <div>
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">My Role</h3>
-                    <p class="text-lg font-bold">Lead Researcher & Strategist</p>
+        <main class="grid-master grid-12-col">
+            <!-- NAV -->
+            <div
+                class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]"
+            >
+                <a
+                    href="index.html"
+                    class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors flex items-center gap-2"
+                >
+                    <i
+                        data-lucide="arrow-left"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    ></i>
+                    Maicol Parker-Chavez
+                </a>
+                <a
+                    href="mailto:mparkerchavez@gmail.com"
+                    class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600"
+                >
+                    Get in Touch
+                </a>
+            </div>
+
+            <!-- HERO HEADER -->
+            <header class="grid-item col-span-12 bg-white">
+                <div class="max-w-4xl">
+                    <div class="flex flex-wrap items-center gap-4 mb-8">
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-blue-600"
+                            >Tech Trends</span
+                        >
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400"
+                            >///</span
+                        >
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400"
+                            >Emerging AI Capabilities</span
+                        >
+                    </div>
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] mb-8"
+                    >
+                        Shaping an Enterprise
+                        <span class="highlight">AI Narrative</span>
+                    </h1>
+                    <p
+                        class="text-xl md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-2xl"
+                    >
+                        I authored AI-focused sections of an annual Tech Trends
+                        publication used by senior business and technology
+                        leaders and enterprise architects to understand emerging
+                        AI capabilities and make more responsible, effective
+                        decisions about how to apply AI across the organization,
+                        with a focus on how AI changes the way people work and
+                        how to evaluate applied capabilities and return on
+                        investment.
+                    </p>
                 </div>
+            </header>
 
-                <!-- Team -->
-                <div>
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Collaborators</h3>
-                    <p class="text-base leading-snug">
-                        Chief Strategy Officer<br>
-                        Enterprise Architecture<br>
-                        Investment Groups<br>
-                        Platform Owners
+            <!-- CONTENT GRID -->
+
+            <!-- SIDEBAR (Metadata) - Spans 4 cols -->
+            <div class="grid-item col-span-12 lg:col-span-4 bg-[#F9F8F4]">
+                <div class="sticky-sidebar space-y-12">
+                    <!-- Role -->
+                    <div>
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                        >
+                            My Role
+                        </h3>
+                        <p class="text-lg font-bold">
+                            Lead Researcher & Strategist
+                        </p>
+                    </div>
+
+                    <!-- Team -->
+                    <div>
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                        >
+                            Collaborators
+                        </h3>
+                        <p class="text-base leading-snug">
+                            Chief Strategy Officer<br />
+                            Enterprise Architecture<br />
+                            Investment Groups<br />
+                            Platform Owners
+                        </p>
+                    </div>
+
+                    <!-- Methods -->
+                    <div>
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                        >
+                            Methods
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >Signal Synthesis</span
+                            >
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >Enterprise Framing</span
+                            >
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >Executive Storytelling</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div
+                        class="p-6 bg-blue-50 border border-blue-100 rounded-sm"
+                    >
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-blue-600 mb-4"
+                        >
+                            Impact Metrics
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >2024 & 2025</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >Contributed to Tech Trends reports</span
+                                >
+                            </div>
+                            <div class="w-full h-px bg-blue-200"></div>
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >1–2 trends</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >Authored per year</span
+                                >
+                            </div>
+                            <div class="w-full h-px bg-blue-200"></div>
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >4–8 trends</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >Editorial lead per year (review, synthesis,
+                                    quality)</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN NARRATIVE - Spans 8 cols -->
+            <article
+                class="grid-item col-span-12 lg:col-span-8 bg-white !p-6 md:!p-12 lg:!p-16"
+            >
+                <!-- SECTION 1: THE CHALLENGE -->
+                <div class="mb-16 md:mb-20 max-w-3xl">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4"
+                        >01 /// The Challenge</span
+                    >
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Staying Ahead of AI's Acceleration
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        As AI capabilities advanced rapidly, it became harder
+                        for organizations to maintain a shared, realistic
+                        understanding of what was emerging, what was hype, and
+                        what would matter over the next 3–5 years. Without a
+                        clear narrative grounded in signals and data points,
+                        teams risked becoming reactive, chasing new developments
+                        like generative AI after they surfaced, instead of
+                        building informed readiness over time.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        The Tech Trends report was designed to help senior
+                        business and technology leaders and enterprise
+                        architects track where AI and other emerging
+                        technologies were heading, so the organization could
+                        make better long-range decisions about readiness,
+                        responsible adoption, and where to focus attention. Over
+                        time, AI increasingly touched almost every trend area,
+                        making it important to frame AI's evolution in a way
+                        that was actionable across business units, not just as a
+                        standalone topic.
                     </p>
                 </div>
 
-                <!-- Stack -->
-                <div>
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Methodologies</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Horizon Scanning</span>
-                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Scenario Planning</span>
-                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Tech Synthesis</span>
-                    </div>
+                <!-- IMAGE PLACEHOLDER 1 -->
+                <div
+                    class="mb-16 md:mb-20 bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center"
+                >
+                    <i
+                        data-lucide="radar"
+                        class="w-16 h-16 text-purple-300 mb-4"
+                    ></i>
+                    <p class="font-bold text-purple-400 mono text-sm">
+                        Research Framework
+                    </p>
+                    <p class="text-xs text-purple-300 mt-2">
+                        (Add representative image here)
+                    </p>
                 </div>
 
-                <!-- Key Metrics -->
-                <div class="p-6 bg-blue-50 border border-blue-100 rounded-sm">
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">Strategic Impact</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <span class="text-2xl font-black block">Annual Report</span>
-                            <span class="text-sm text-gray-600">Co-authored Tech Trends</span>
+                <!-- SECTION 2: THE STRATEGY -->
+                <div class="mb-16 md:mb-20 max-w-3xl">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4"
+                        >02 /// The Strategy</span
+                    >
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Turning Signals into an Enterprise Point of View
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        To help leaders stay ahead of rapid change, we treated
+                        the Tech Trends publication as an annual synthesis of
+                        signals, not a retrospective summary. I authored
+                        AI-focused sections by combining external research and
+                        industry reporting with perspectives from relationships
+                        across venture capital firms, startups, and financial
+                        services partners. The goal was to translate what we
+                        were seeing in the ecosystem into an enterprise lens:
+                        what was emerging, what was becoming practical, and what
+                        teams should pay attention to next.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        I focused on two themes: how AI is changing the way
+                        people work, and what signals leaders should pay
+                        attention to in order to judge whether investments were
+                        translating into meaningful value over time. Rather than
+                        presenting a single ROI formula, I framed directional
+                        guidance that helped teams ask better questions about
+                        impact and readiness in Capital Group's context, not
+                        just in the abstract.
+                    </p>
+                </div>
+
+                <!-- IMAGE PLACEHOLDER 2 -->
+                <div
+                    class="mb-16 md:mb-20 bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center"
+                >
+                    <i
+                        data-lucide="map"
+                        class="w-16 h-16 text-indigo-300 mb-4"
+                    ></i>
+                    <p class="font-bold text-indigo-400 mono text-sm">
+                        Strategic Roadmap
+                    </p>
+                    <p class="text-xs text-indigo-300 mt-2">
+                        (Add representative image here)
+                    </p>
+                </div>
+
+                <!-- SECTION 3: THE OUTCOME -->
+                <div class="mb-16 md:mb-20 max-w-3xl">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4"
+                        >03 /// The Outcome</span
+                    >
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Building Shared Context for Smarter Decisions
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The AI narrative work helped leaders and teams interpret
+                        rapid shifts in generative AI and emerging capabilities
+                        through an enterprise lens, so the organization could be
+                        less reactive and more deliberate about readiness and
+                        responsible use.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        I delivered a "State of AI" session to a business unit
+                        group to summarize where generative AI stood, what
+                        Capital Group had explored so far, and where
+                        capabilities were heading. Beyond that, I used the
+                        research and narrative assets in a more embedded way,
+                        working directly with teams on specific use cases and
+                        translating external signals into practical implications
+                        that informed decisions about what to explore next.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        This work also informed architecture conversations tied
+                        to enabling AI capabilities across the enterprise,
+                        including Microsoft Copilot Studio, helping teams align
+                        on capability direction, constraints, and what effective
+                        adoption could look like in practice.
+                    </p>
+                </div>
+
+                <!-- OTHER PROJECTS SECTION -->
+                <div class="max-w-3xl pt-12 border-t border-gray-200">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-6"
+                        >04 /// Other Strategic Work</span
+                    >
+                    <h3 class="text-2xl md:text-3xl font-bold mb-8">
+                        Related Initiatives
+                    </h3>
+
+                    <div class="space-y-6">
+                        <!-- Project 1 -->
+                        <div class="bg-white border border-gray-200 p-6">
+                            <h4 class="font-bold text-lg mb-3">
+                                AI Vendor Evaluation Framework
+                            </h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Evaluated AI vendor options for enterprise use
+                                cases by mapping capabilities to business needs
+                                and incorporating security/compliance
+                                requirements. Helped leadership make informed
+                                build-vs-buy decisions.
+                            </p>
                         </div>
-                        <div class="w-full h-px bg-blue-200"></div>
-                        <div>
-                            <span class="text-2xl font-black block">3-5 Year</span>
-                            <span class="text-sm text-gray-600">Horizon Roadmap Defined</span>
+
+                        <!-- Project 2 -->
+                        <div class="bg-white border border-gray-200 p-6">
+                            <h4 class="font-bold text-lg mb-3">
+                                Copilot Studio Architecture Strategy
+                            </h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Aligned enterprise architecture, information
+                                security, and platform owners to define
+                                environment separation strategy (dev, test,
+                                production) based on data sensitivity and
+                                intent. Enabled responsible scaling across the
+                                enterprise.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
+                <!-- FOOTER NAV -->
+                <div
+                    class="max-w-3xl pt-12 border-t border-gray-200 flex flex-col md:flex-row justify-between items-start gap-8 mt-12"
+                >
+                    <a
+                        href="index.html"
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-blue-600"
+                    >
+                        <i
+                            data-lucide="arrow-left"
+                            class="inline w-4 h-4 mr-2"
+                        ></i>
+                        Back to Index
+                    </a>
 
-        <!-- MAIN NARRATIVE - Spans 8 cols -->
-        <article class="grid-item col-span-12 lg:col-span-8 bg-white !p-6 md:!p-12 lg:!p-16">
-            
-            <!-- SECTION 1: THE CHALLENGE -->
-            <div class="mb-16 md:mb-20 max-w-3xl">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">01 /// The Challenge</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Separating Signal from Noise.</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    In the rapidly evolving landscape of Generative AI, enterprise leadership is often bombarded with hype. The challenge wasn't a lack of information, but a lack of <em>context</em>.
-                </p>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    How do we distinguish between a flashy demo and a technology that will fundamentally reshape our business model in 3 years? We needed a systematic way to evaluate emerging tech against our specific enterprise constraints.
-                </p>
-            </div>
-
-            <!-- IMAGE PLACEHOLDER 1 -->
-            <div class="mb-16 md:mb-20 bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center">
-                <i data-lucide="radar" class="w-16 h-16 text-purple-300 mb-4"></i>
-                <p class="font-bold text-purple-400 mono text-sm">Research Framework</p>
-                <p class="text-xs text-purple-300 mt-2">(Add representative image here)</p>
-            </div>
-
-            <!-- SECTION 2: THE INTERVENTION -->
-            <div class="mb-16 md:mb-20 max-w-3xl">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">02 /// The Strategy</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">A Repeatable Research System.</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    I developed a repeatable research system to accelerate synthesis. This wasn't just about reading news; it was about translating technical capabilities into business implications.
-                </p>
-                <ul class="space-y-4 border-l-2 border-blue-600 pl-6 my-8">
-                    <li>
-                        <strong class="block text-gray-900">Horizon 1 (Now):</strong> What can we deploy today to solve immediate friction?
-                    </li>
-                    <li>
-                        <strong class="block text-gray-900">Horizon 2 (Next):</strong> What pilots need to start now to scale in 18 months?
-                    </li>
-                    <li>
-                        <strong class="block text-gray-900">Horizon 3 (Future):</strong> What disruptive shifts must we prepare our infrastructure for?
-                    </li>
-                </ul>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    This framework allowed us to move from reactive panic to proactive planning.
-                </p>
-            </div>
-
-            <!-- IMAGE PLACEHOLDER 2 -->
-            <div class="mb-16 md:mb-20 bg-gradient-to-br from-indigo-50 to-indigo-100 border border-indigo-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center">
-                <i data-lucide="map" class="w-16 h-16 text-indigo-300 mb-4"></i>
-                <p class="font-bold text-indigo-400 mono text-sm">Strategic Roadmap</p>
-                <p class="text-xs text-indigo-300 mt-2">(Add representative image here)</p>
-            </div>
-
-            <!-- SECTION 3: THE OUTCOME -->
-            <div class="mb-16 md:mb-20 max-w-3xl">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">03 /// The Outcome</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Clarity & Executive Alignment.</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    The output wasn't just a report; it was alignment. By co-authoring the Annual Tech Trends Report, I provided a "North Star" for investment decisions across the organization.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-8">
-                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
-                        <h4 class="font-bold mb-2">Annual Report</h4>
-                        <p class="text-sm text-gray-600">Delivered comprehensive analysis of AI and emerging tech to inform strategic planning.</p>
-                    </div>
-                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
-                        <h4 class="font-bold mb-2">3-5 Year Plan</h4>
-                        <p class="text-sm text-gray-600">Defined the long-term adoption roadmap for Generative AI capabilities.</p>
+                    <div class="text-left md:text-right">
+                        <span
+                            class="block mono text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+                            >Next Case Study</span
+                        >
+                        <a
+                            href="innovation-sprints.html"
+                            class="text-xl md:text-2xl font-bold hover:text-blue-600 transition-colors"
+                        >
+                            Innovation Sprints & AI Discovery
+                            <i
+                                data-lucide="arrow-right"
+                                class="inline w-5 h-5 md:w-6 md:h-6 ml-2"
+                            ></i>
+                        </a>
                     </div>
                 </div>
-            </div>
+            </article>
+        </main>
 
-            <!-- OTHER PROJECTS SECTION -->
-            <div class="max-w-3xl pt-12 border-t border-gray-200">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-6">04 /// Other Strategic Work</span>
-                <h3 class="text-2xl md:text-3xl font-bold mb-8">Related Initiatives</h3>
-                
-                <div class="space-y-6">
-                    <!-- Project 1 -->
-                    <div class="bg-white border border-gray-200 p-6">
-                        <h4 class="font-bold text-lg mb-3">AI Vendor Evaluation Framework</h4>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            Evaluated AI vendor options for enterprise use cases by mapping capabilities to business needs and incorporating security/compliance requirements. Helped leadership make informed build-vs-buy decisions.
-                        </p>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="bg-white border border-gray-200 p-6">
-                        <h4 class="font-bold text-lg mb-3">Copilot Studio Architecture Strategy</h4>
-                        <p class="text-sm text-gray-600 leading-relaxed">
-                            Aligned enterprise architecture, information security, and platform owners to define environment separation strategy (dev, test, production) based on data sensitivity and intent. Enabled responsible scaling across the enterprise.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </article>
-
-        <!-- FOOTER NAV -->
-        <div class="grid-item col-span-12 bg-[#111] text-white flex flex-col md:flex-row justify-between items-center !py-12 gap-8 footer-nav">
-            <a href="index.html" class="mono text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white">
-                <i data-lucide="arrow-left" class="inline w-4 h-4 mr-2"></i> Back to Index
-            </a>
-            
-            <div class="text-center md:text-right">
-                <span class="block mono text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Next Case Study</span>
-                <a href="innovation-sprints.html" class="text-xl md:text-2xl font-bold hover:text-blue-400 transition-colors">
-                    Innovation Sprints & AI Discovery <i data-lucide="arrow-right" class="inline w-5 h-5 md:w-6 md:h-6 ml-2"></i>
-                </a>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
+        <script>
+            lucide.createIcons();
+        </script>
+    </body>
 </html>
