@@ -270,6 +270,17 @@ p, h1, h2, h3, h4, h5, h6, span {
         overflow-wrap: break-word;
         hyphens: auto;
     }
+    
+    .project-card h2 {
+        font-size: 2rem;
+        line-height: 1.1;
+        font-weight: 700;
+    }
+    
+    .project-card p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
 }
 
 /* Tablet (640px - 1023px) */
