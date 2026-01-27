@@ -1,252 +1,470 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: Innovation Sprints | Maicol Parker-Chavez</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        @media (max-width: 1023px) {
-            .grid-master.grid-12-col {
-                grid-template-columns: 1fr !important;
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Case Study: Innovation Sprints | Maicol Parker-Chavez</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=Playfair+Display:ital,wght@0,400;1,400;1,600&family=Space+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            @media (max-width: 1023px) {
+                .grid-master.grid-12-col {
+                    grid-template-columns: 1fr !important;
+                }
+                .grid-item {
+                    border-right: none !important;
+                }
             }
-            .grid-item {
-                border-right: none !important;
-            }
-        }
-    </style>
-</head>
-<body class="antialiased selection:bg-black selection:text-white">
-
-    <!-- STATIC STATUS BAR -->
-    <div class="bg-white border-b border-[rgba(0,0,0,0.1)] py-3 sticky top-0 z-50 flex justify-center px-4">
-        <div class="flex items-center gap-2 md:gap-4 text-[10px] md:text-xs font-bold tracking-widest uppercase mono text-gray-500 text-center">
-            <span class="text-blue-600">● Enterprise AI Strategist</span>
-            <span class="opacity-30 hidden sm:inline">///</span>
-            <span class="hidden sm:inline">Consulting + Full-Time Opportunities</span>
-        </div>
-    </div>
-
-    <main class="grid-master grid-12-col">
-
-        <!-- NAV -->
-        <div class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]">
-            <a href="index.html" class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors flex items-center gap-2">
-                <i data-lucide="arrow-left" class="w-5 h-5 md:w-6 md:h-6"></i> Maicol Parker-Chavez
-            </a>
-            <a href="mailto:mparkerchavez@gmail.com" class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600">
-                Get in Touch
-            </a>
-        </div>
-
-        <!-- HERO HEADER -->
-        <header class="grid-item col-span-12 bg-white">
-            <div class="max-w-4xl">
-                <div class="flex flex-wrap items-center gap-4 mb-8">
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-blue-600">Capital Group</span>
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">///</span>
-                    <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400">AI Enablement</span>
-                </div>
-                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] mb-8">
-                    Innovation Sprints & <br><span class="highlight">AI Discovery.</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-2xl">
-                    "I led cross-functional workshops that helped teams move from ambiguous AI opportunities to validated assumptions and clear next steps."
-                </p>
+        </style>
+    </head>
+    <body class="antialiased selection:bg-black selection:text-white">
+        <!-- STATIC STATUS BAR -->
+        <div
+            class="bg-white border-b border-[rgba(0,0,0,0.1)] py-3 sticky top-0 z-50 flex justify-center px-4"
+        >
+            <div
+                class="flex items-center gap-2 md:gap-4 text-[10px] md:text-xs font-bold tracking-widest uppercase mono text-gray-500 text-center"
+            >
+                <span class="text-blue-600">● Enterprise AI Strategist</span>
+                <span class="opacity-30 hidden sm:inline">///</span>
+                <span class="hidden sm:inline"
+                    >Consulting + Full-Time Opportunities</span
+                >
             </div>
-        </header>
+        </div>
 
-        <!-- CONTENT GRID -->
-        
-        <!-- SIDEBAR (Metadata) - Spans 4 cols -->
-        <div class="grid-item col-span-12 lg:col-span-4 bg-[#F9F8F4]">
-            <div class="sticky-sidebar space-y-12">
-                
-                <!-- Role -->
-                <div>
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">My Role</h3>
-                    <p class="text-lg font-bold">Innovation Sprint Facilitator</p>
+        <main class="grid-master grid-12-col">
+            <!-- NAV -->
+            <div
+                class="grid-item col-span-12 !py-6 !min-h-0 bg-[#F9F8F4] flex flex-row items-center justify-between border-b border-[rgba(0,0,0,0.1)]"
+            >
+                <a
+                    href="index.html"
+                    class="text-xl md:text-2xl font-black tracking-tighter hover:text-blue-600 transition-colors flex items-center gap-2"
+                >
+                    <i
+                        data-lucide="arrow-left"
+                        class="w-5 h-5 md:w-6 md:h-6"
+                    ></i>
+                    Maicol Parker-Chavez
+                </a>
+                <a
+                    href="mailto:mparkerchavez@gmail.com"
+                    class="mono text-xs font-bold uppercase tracking-widest hover:text-blue-600"
+                >
+                    Get in Touch
+                </a>
+            </div>
+
+            <!-- HERO HEADER -->
+            <header class="grid-item col-span-12 bg-white">
+                <div class="max-w-4xl">
+                    <div class="flex flex-wrap items-center gap-4 mb-8">
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-blue-600"
+                            >Innovation Sprints</span
+                        >
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400"
+                            >///</span
+                        >
+                        <span
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400"
+                            >AI Discovery</span
+                        >
+                    </div>
+                    <h1
+                        class="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] mb-8"
+                    >
+                        Scaling AI Discovery Through
+                        <span class="highlight">Innovation Sprints</span>
+                    </h1>
+                    <p
+                        class="text-xl md:text-2xl text-gray-600 leading-relaxed serif-accent italic max-w-2xl"
+                    >
+                        I led 20+ innovation sprints (including the company's
+                        first remote design sprints during the COVID-19
+                        pandemic) and designed AI-focused workshops for client
+                        experience leaders and teams, helping them identify
+                        high-priority opportunities, explore where AI could add
+                        value, and align AI initiatives to business outcomes.
+                    </p>
                 </div>
+            </header>
 
-                <!-- Team -->
-                <div>
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Participants</h3>
-                    <p class="text-base leading-snug">
-                        Investment Professionals<br>
-                        Client Group Teams<br>
-                        Product Managers<br>
-                        Engineers & Architects<br>
-                        Business Stakeholders
+            <!-- CONTENT GRID -->
+
+            <!-- SIDEBAR (Metadata) - Spans 4 cols -->
+            <div class="grid-item col-span-12 lg:col-span-4 bg-[#F9F8F4]">
+                <div class="sticky-sidebar space-y-12">
+                    <!-- Role -->
+                    <div>
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                        >
+                            My Role
+                        </h3>
+                        <p class="text-lg font-bold">
+                            Innovation Sprint Facilitator
+                        </p>
+                    </div>
+
+                    <!-- Team -->
+                    <div>
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                        >
+                            Participants
+                        </h3>
+                        <p class="text-base leading-snug">
+                            Investment Professionals<br />
+                            Client Group Teams<br />
+                            Product Managers<br />
+                            Engineers & Architects<br />
+                            Business Stakeholders
+                        </p>
+                    </div>
+
+                    <!-- Methods -->
+                    <div>
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2"
+                        >
+                            Methods
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >Workshop Design</span
+                            >
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >AI Use Case Framing</span
+                            >
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >Business Outcome Alignment</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div
+                        class="p-6 bg-blue-50 border border-blue-100 rounded-sm"
+                    >
+                        <h3
+                            class="mono text-xs font-bold uppercase tracking-widest text-blue-600 mb-4"
+                        >
+                            Impact Metrics
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >20+ sprints</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >innovation sprints facilitated</span
+                                >
+                            </div>
+                            <div class="w-full h-px bg-blue-200"></div>
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >30+</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >participants across Sales, Marketing, and
+                                    Client Experience</span
+                                >
+                            </div>
+                            <div class="w-full h-px bg-blue-200"></div>
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >First remote</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >Led company's first remote design sprints
+                                    during COVID-19</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN NARRATIVE - Spans 8 cols -->
+            <article
+                class="grid-item col-span-12 lg:col-span-8 bg-white !p-6 md:!p-12 lg:!p-16"
+            >
+                <!-- SECTION 1: THE CHALLENGE -->
+                <div class="mb-16 md:mb-20 max-w-3xl">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4"
+                        >01 /// The Challenge</span
+                    >
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        From AI Curiosity to Business-Ready Use Cases
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        As interest in AI accelerated, teams across the client
+                        experience space surfaced many ideas, but the hardest
+                        part was turning that enthusiasm into business-ready use
+                        cases. Opportunities were often framed as "can we use AI
+                        here?" rather than grounded in user needs, measurable
+                        outcomes, and clear constraints. Without a shared
+                        structure for prioritization and alignment, it was
+                        difficult for leaders and teams to decide what to
+                        pursue, what to defer, and how to connect initiatives to
+                        business outcomes.
                     </p>
                 </div>
 
-                <!-- Stack -->
-                <div>
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Methods</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Design Thinking</span>
-                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Innovation Sprints</span>
-                        <span class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono">Workshop Design</span>
+                <!-- IMAGE PLACEHOLDER 1 -->
+                <div
+                    class="mb-16 md:mb-20 bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center"
+                >
+                    <i
+                        data-lucide="users"
+                        class="w-16 h-16 text-green-300 mb-4"
+                    ></i>
+                    <p class="font-bold text-green-400 mono text-sm">
+                        Workshop Facilitation
+                    </p>
+                    <p class="text-xs text-green-300 mt-2">
+                        (Add representative image here)
+                    </p>
+                </div>
+
+                <!-- SECTION 2: THE STRATEGY -->
+                <div class="mb-16 md:mb-20 max-w-3xl">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4"
+                        >02 /// The Strategy</span
+                    >
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        A Repeatable Sprint System for AI Discovery and
+                        Alignment
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        I used innovation sprints as a repeatable way to move
+                        teams from AI ideas to decisions. Across 20+ sprints, my
+                        approach paired human-centered problem framing with an
+                        enterprise lens, helping teams define where AI could add
+                        value and what would matter for adoption.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        I designed two AI-focused workshops to scale that
+                        approach:
+                    </p>
+                    <ul class="space-y-4 border-l-2 border-blue-600 pl-6 my-8">
+                        <li class="text-lg text-gray-600 leading-relaxed">
+                            <strong class="block text-gray-900 mb-2"
+                                >Cross-functional AI discovery workshop (Sales,
+                                Marketing, Client Experience):</strong
+                            >
+                            brought together 30+ participants to empathize with
+                            users, identify high-priority opportunities, and
+                            produce a prioritized list of AI opportunities
+                            grounded in real customer and associate needs.
+                        </li>
+                        <li class="text-lg text-gray-600 leading-relaxed">
+                            <strong class="block text-gray-900 mb-2"
+                                >Senior leader alignment workshop:</strong
+                            >
+                            helped leaders build a cohesive AI strategy by
+                            mapping a lineage from AI initiatives to prioritized
+                            business outcomes, clarifying how use cases
+                            supported shared goals and where to focus
+                            investment.
+                        </li>
+                    </ul>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        These workshops created a shared language for AI use
+                        case framing and helped teams move forward with clearer
+                        priorities, alignment, and next steps.
+                    </p>
+                </div>
+
+                <!-- IMAGE PLACEHOLDER 2 -->
+                <div
+                    class="mb-16 md:mb-20 bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center"
+                >
+                    <i
+                        data-lucide="lightbulb"
+                        class="w-16 h-16 text-orange-300 mb-4"
+                    ></i>
+                    <p class="font-bold text-orange-400 mono text-sm">
+                        Sprint Methodology
+                    </p>
+                    <p class="text-xs text-orange-300 mt-2">
+                        (Add representative image here)
+                    </p>
+                </div>
+
+                <!-- SECTION 3: THE OUTCOME -->
+                <div class="mb-16 md:mb-20 max-w-3xl">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4"
+                        >03 /// The Outcome</span
+                    >
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        Faster Alignment, Faster Decisions
+                    </h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The sprint approach helped teams and leaders move faster
+                        from open questions to clear decisions. Instead of
+                        debating AI in the abstract, the workshops created
+                        shared context around user needs, priority
+                        opportunities, and what success should look like, which
+                        reduced stalled conversations and accelerated next-step
+                        planning.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        By combining cross-functional AI discovery with senior
+                        leader alignment to business outcomes, teams were able
+                        to converge on what to pursue, what to sequence later,
+                        and how initiatives connected to prioritized outcomes.
+                        This improved momentum and decision quality while
+                        maintaining an enterprise lens on responsible, adoptable
+                        AI.
+                    </p>
+                </div>
+
+                <!-- OTHER PROJECTS SECTION -->
+                <div class="max-w-3xl pt-12 border-t border-gray-200">
+                    <span
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-6"
+                        >04 /// Related Work</span
+                    >
+                    <h3 class="text-2xl md:text-3xl font-bold mb-8">
+                        Broader Facilitation Portfolio
+                    </h3>
+
+                    <div class="space-y-6">
+                        <!-- Project 1 -->
+                        <div class="bg-white border border-gray-200 p-6">
+                            <h4 class="font-bold text-lg mb-3">
+                                Enterprise-Wide Innovation Sprint Program
+                            </h4>
+                            <p
+                                class="text-sm text-gray-600 leading-relaxed mb-4"
+                            >
+                                Facilitated approximately
+                                <strong>24 Innovation Sprints</strong> across
+                                investment operations, client groups, and
+                                technology teams. Each sprint moved
+                                cross-functional groups from ambiguous
+                                challenges to validated learnings and
+                                prioritized next steps.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded"
+                                    >Investment Operations</span
+                                >
+                                <span
+                                    class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded"
+                                    >Client Group</span
+                                >
+                                <span
+                                    class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded"
+                                    >Technology Teams</span
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="bg-white border border-gray-200 p-6">
+                            <h4 class="font-bold text-lg mb-3">
+                                Design Thinking Workshops for Business Outcomes
+                            </h4>
+                            <p
+                                class="text-sm text-gray-600 leading-relaxed mb-4"
+                            >
+                                Created and facilitated custom Design Thinking
+                                workshops tailored to specific business
+                                challenges. Workshops ranged from 30-50 person
+                                sessions translating customer needs into AI use
+                                cases, to smaller team sessions defining
+                                opportunity areas and prioritized experiments.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded"
+                                    >Customer Empathy</span
+                                >
+                                <span
+                                    class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded"
+                                    >Use Case Prioritization</span
+                                >
+                                <span
+                                    class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded"
+                                    >Experiment Design</span
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="bg-white border border-gray-200 p-6">
+                            <h4 class="font-bold text-lg mb-3">
+                                Remote Workshop Innovation (COVID-19)
+                            </h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                During the COVID-19 pandemic, adapted and led
+                                the company's
+                                <strong>first remote Design Sprints</strong>
+                                using Miro and video conferencing. Maintained
+                                engagement and outcomes quality while pioneering
+                                virtual facilitation techniques that became
+                                standard practice.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Key Metrics -->
-                <div class="p-6 bg-blue-50 border border-blue-100 rounded-sm">
-                    <h3 class="mono text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">Impact Metrics</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <span class="text-2xl font-black block">~24</span>
-                            <span class="text-sm text-gray-600">Innovation Sprints Facilitated</span>
-                        </div>
-                        <div class="w-full h-px bg-blue-200"></div>
-                        <div>
-                            <span class="text-2xl font-black block">2 Weeks</span>
-                            <span class="text-sm text-gray-600">Ambiguity to Aligned Decision</span>
-                        </div>
+                <!-- FOOTER NAV -->
+                <div
+                    class="max-w-3xl pt-12 border-t border-gray-200 flex flex-col md:flex-row justify-between items-start gap-8 mt-12"
+                >
+                    <a
+                        href="index.html"
+                        class="mono text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-blue-600"
+                    >
+                        <i
+                            data-lucide="arrow-left"
+                            class="inline w-4 h-4 mr-2"
+                        ></i>
+                        Back to Index
+                    </a>
+
+                    <div class="text-left md:text-right">
+                        <span
+                            class="block mono text-xs font-bold uppercase tracking-widest text-gray-500 mb-2"
+                            >Next Case Study</span
+                        >
+                        <a
+                            href="ai-enablement.html"
+                            class="text-xl md:text-2xl font-bold hover:text-blue-600 transition-colors"
+                        >
+                            Scaling Sales Enablement with AI Agents
+                            <i
+                                data-lucide="arrow-right"
+                                class="inline w-5 h-5 md:w-6 md:h-6 ml-2"
+                            ></i>
+                        </a>
                     </div>
                 </div>
+            </article>
+        </main>
 
-            </div>
-        </div>
-
-        <!-- MAIN NARRATIVE - Spans 8 cols -->
-        <article class="grid-item col-span-12 lg:col-span-8 bg-white !p-6 md:!p-12 lg:!p-16">
-            
-            <!-- SECTION 1: THE CHALLENGE -->
-            <div class="mb-16 md:mb-20 max-w-3xl">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">01 /// The Challenge</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Where Should We Apply AI?</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    As Generative AI emerged, teams across the enterprise had the same question: "How do we identify where AI can actually add value to our workflows?"
-                </p>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    The challenge wasn't technical capability—it was <em>decision clarity</em>. Teams needed a structured way to move from broad AI enthusiasm to specific, validated use cases aligned with real business problems.
-                </p>
-            </div>
-
-            <!-- IMAGE PLACEHOLDER 1 -->
-            <div class="mb-16 md:mb-20 bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center">
-                <i data-lucide="users" class="w-16 h-16 text-green-300 mb-4"></i>
-                <p class="font-bold text-green-400 mono text-sm">Workshop Facilitation</p>
-                <p class="text-xs text-green-300 mt-2">(Add representative image here)</p>
-            </div>
-
-            <!-- SECTION 2: THE INTERVENTION -->
-            <div class="mb-16 md:mb-20 max-w-3xl">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">02 /// The Approach</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Structured Discovery Through Innovation Sprints.</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    I adapted the Design Sprint methodology into a repeatable <strong>2-week Innovation Sprint</strong> process optimized for enterprise scale and AI discovery.
-                </p>
-                <ul class="space-y-4 border-l-2 border-blue-600 pl-6 my-8">
-                    <li>
-                        <strong class="block text-gray-900">Week 1 - Problem Framing:</strong> Facilitated cross-functional workshops to identify friction points, map user workflows, and define success criteria.
-                    </li>
-                    <li>
-                        <strong class="block text-gray-900">Week 2 - Validation:</strong> Rapid prototyping and testing with real users to validate assumptions before committing resources.
-                    </li>
-                    <li>
-                        <strong class="block text-gray-900">Output:</strong> Executive-ready decision summaries making assumptions, tradeoffs, and next actions explicit.
-                    </li>
-                </ul>
-                <p class="text-lg text-gray-600 leading-relaxed">
-                    This wasn't just facilitation—it was <em>decision acceleration</em>. I enabled diverse stakeholders to align on problem statements, validate or invalidate concepts, and commit to clear next steps.
-                </p>
-            </div>
-
-            <!-- IMAGE PLACEHOLDER 2 -->
-            <div class="mb-16 md:mb-20 bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-sm p-12 flex flex-col items-center justify-center min-h-[300px] text-center">
-                <i data-lucide="lightbulb" class="w-16 h-16 text-orange-300 mb-4"></i>
-                <p class="font-bold text-orange-400 mono text-sm">Sprint Methodology</p>
-                <p class="text-xs text-orange-300 mt-2">(Add representative image here)</p>
-            </div>
-
-            <!-- SECTION 3: THE OUTCOME -->
-            <div class="mb-16 md:mb-20 max-w-3xl">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-4">03 /// The Outcome</span>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">Repeatable Process, Measurable Impact.</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    Over ~24 Innovation Sprints across multiple business units, I helped teams transform ambiguous AI opportunities into actionable roadmaps.
-                </p>
-                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-8">
-                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
-                        <h4 class="font-bold mb-2">Decision Velocity</h4>
-                        <p class="text-sm text-gray-600">Compressed months of ambiguity into <strong>2-week validated decisions</strong> with clear go/no-go criteria.</p>
-                    </div>
-                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
-                        <h4 class="font-bold mb-2">Stakeholder Alignment</h4>
-                        <p class="text-sm text-gray-600">Brought together investment professionals, product teams, and engineers to align on <strong>assumptions and tradeoffs</strong>.</p>
-                    </div>
-                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
-                        <h4 class="font-bold mb-2">Risk Reduction</h4>
-                        <p class="text-sm text-gray-600">Validated concepts <strong>before heavy investment</strong>, preventing wasted development cycles.</p>
-                    </div>
-                    <div class="bg-[#F9F8F4] p-6 border border-[rgba(0,0,0,0.1)]">
-                        <h4 class="font-bold mb-2">Capability Building</h4>
-                        <p class="text-sm text-gray-600">Created a <strong>repeatable methodology</strong> that teams could apply to future AI opportunities.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- OTHER PROJECTS SECTION -->
-            <div class="max-w-3xl pt-12 border-t border-gray-200">
-                <span class="mono text-xs font-bold uppercase tracking-widest text-gray-400 block mb-6">04 /// Related Work</span>
-                <h3 class="text-2xl md:text-3xl font-bold mb-8">Broader Facilitation Portfolio</h3>
-                
-                <div class="space-y-6">
-                    <!-- Project 1 -->
-                    <div class="bg-white border border-gray-200 p-6">
-                        <h4 class="font-bold text-lg mb-3">Enterprise-Wide Innovation Sprint Program</h4>
-                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
-                            Facilitated approximately <strong>24 Innovation Sprints</strong> across investment operations, client groups, and technology teams. Each sprint moved cross-functional groups from ambiguous challenges to validated learnings and prioritized next steps.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded">Investment Operations</span>
-                            <span class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded">Client Group</span>
-                            <span class="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded">Technology Teams</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="bg-white border border-gray-200 p-6">
-                        <h4 class="font-bold text-lg mb-3">Design Thinking Workshops for Business Outcomes</h4>
-                        <p class="text-sm text-gray-600 leading-relaxed mb-4">
-                            Created and facilitated custom Design Thinking workshops tailored to specific business challenges. Workshops ranged from 30-50 person sessions translating customer needs into AI use cases, to smaller team sessions defining opportunity areas and prioritized experiments.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded">AI Use Case Discovery</span>
-                            <span class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded">Stakeholder Alignment</span>
-                            <span class="text-xs px-2 py-1 bg-green-50 text-green-700 rounded">Human-Centered Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </article>
-
-        <!-- FOOTER NAV -->
-        <div class="grid-item col-span-12 bg-[#111] text-white flex flex-col md:flex-row justify-between items-center !py-12 gap-8 footer-nav">
-            <a href="index.html" class="mono text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white">
-                <i data-lucide="arrow-left" class="inline w-4 h-4 mr-2"></i> Back to Index
-            </a>
-            
-            <div class="text-center md:text-right">
-                <span class="block mono text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">Explore More Work</span>
-                <a href="index.html" class="text-xl md:text-2xl font-bold hover:text-blue-400 transition-colors">
-                    View All Case Studies <i data-lucide="arrow-right" class="inline w-5 h-5 md:w-6 md:h-6 ml-2"></i>
-                </a>
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        lucide.createIcons();
-    </script>
-</body>
+        <script>
+            lucide.createIcons();
+        </script>
+    </body>
 </html>
