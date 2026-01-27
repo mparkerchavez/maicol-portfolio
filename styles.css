@@ -466,6 +466,7 @@ p, h1, h2, h3, h4, h5, h6, span {
     align-items: center;
     gap: 0.5rem;
     transition: color 0.2s;
+    white-space: nowrap;
 }
 
 @media (min-width: 768px) {
