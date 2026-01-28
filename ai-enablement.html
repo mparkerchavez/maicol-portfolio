@@ -178,19 +178,32 @@
                                 >AI and Emerging Technology</span
                             >
                         </p>
-                        <ul class="space-y-2 text-sm text-gray-600">
+                        <ul class="list-disc space-y-3 text-sm text-gray-600">
                             <li>
                                 Led experience and workflow design for an
                                 AI-enabled meeting prep capability, from
                                 ambiguity to validated workflow requirements.
                             </li>
                             <li>
-                                Partnered with product and engineering to define
-                                requirements.
+                                Ran an innovation sprint to map the end-to-end
+                                prep journey, identify top friction points, and
+                                translate insights into build priorities.
                             </li>
                             <li>
-                                Validated prototypes with users and guided
-                                pivots and build priorities.
+                                Validated early concepts through 1:1 interviews
+                                with sales associates and managers, clarifying
+                                must-haves vs nice-to-haves to prevent scope
+                                creep.
+                            </li>
+                            <li>
+                                Produced a stakeholder readout deck that aligned
+                                user needs, feasibility constraints, and
+                                recommendations (including what not to build).
+                            </li>
+                            <li>
+                                Delivered a Figma prototype designers could
+                                continue iterating on to validate alternative
+                                ways of presenting data.
                             </li>
                         </ul>
                     </div>
@@ -224,7 +237,15 @@
                             >
                             <span
                                 class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >User Interviews</span
+                            >
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
                                 >Validation Sprint</span
+                            >
+                            <span
+                                class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
+                                >Rapid Prototyping</span
                             >
                             <span
                                 class="border border-black/20 px-2 py-1 bg-white text-xs font-bold mono"
@@ -248,7 +269,8 @@
                                     >300+</span
                                 >
                                 <span class="text-sm text-gray-600"
-                                    >active sales associates</span
+                                    >active sales associates within ~1
+                                    year</span
                                 >
                             </div>
                             <div class="w-full h-px bg-blue-200"></div>
@@ -257,7 +279,20 @@
                                     >3–4 weeks</span
                                 >
                                 <span class="text-sm text-gray-600"
-                                    >from idea to validated evidence</span
+                                    >from idea to validated evidence that
+                                    unlocked funding and engineering
+                                    capacity</span
+                                >
+                            </div>
+                            <div class="w-full h-px bg-blue-200"></div>
+                            <div>
+                                <span class="text-2xl font-black block"
+                                    >Time saved</span
+                                >
+                                <span class="text-sm text-gray-600"
+                                    >reduced weekly prep from ~2–3 hours for
+                                    ~6–8 client meetings to ~10–15 minutes per
+                                    client</span
                                 >
                             </div>
                         </div>
@@ -276,27 +311,25 @@
                         >01 /// The Challenge</span
                     >
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                        The 5-Minute Prep Problem
+                        The Weekly Prep Bottleneck and the Last-Minute Pivot
+                        Problem
                     </h2>
                     <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                        Capital Group's sales associates often have limited time
-                        to prepare for client meetings, sometimes just 5–10
-                        minutes between travel and back-to-back schedules. They
-                        needed a way to quickly understand who they were meeting
-                        with, what had happened in prior conversations, what
-                        mattered most right now, and what actions would make the
-                        meeting effective.
+                        Sales associates typically prepared at the start of the
+                        week, spending ~2–3 hours to get ready for ~6–8 client
+                        meetings. They also faced a second constraint: meetings
+                        could appear mid-week, or plans could change last
+                        minute, leaving minimal time to prepare.
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        A data science team supporting the Client Group had
+                        A data science team supporting the client group had
                         access to rich internal context across client databases,
-                        historical notes, sales activity, and relevant insights.
-                        But turning that raw context into a meeting-ready plan
-                        still took time, and the early experience patterns did
-                        not reliably guide associates to the most relevant
-                        information fast enough. The result: inconsistent
-                        preparation, uneven meeting quality, and missed
-                        opportunities to follow up on the right topics.
+                        prior meeting notes, sales activity, and internal
+                        research commentary. But that context lived in different
+                        places and did not reliably support fast,
+                        meeting-specific preparation. The result was
+                        inconsistent preparation, uneven meeting quality, and
+                        missed opportunities to follow up on the right topics.
                     </p>
                 </div>
 
@@ -321,48 +354,117 @@
                     <p class="text-lg text-gray-600 leading-relaxed mb-6">
                         Instead of starting with features, we ran an innovation
                         sprint to validate where AI could remove the most
-                        friction in the sales associate workflow. I led sessions
-                        with sales associates to map their end-to-end meeting
-                        preparation journey, identify the highest-impact
-                        breakdowns, and generate multiple solution directions.
-                        While we suspected a "meeting plan" would be the right
-                        output, we used the full workflow to confirm it was the
-                        highest-leverage opportunity.
+                        friction in meeting prep. I led sessions with sales
+                        associates, partners, and stakeholders to map their prep
+                        workflow, identify the highest-impact breakdowns, and
+                        generate multiple solution directions.
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed mb-6">
                         To ground decisions in real behavior, we had associates
-                        sketch what their ideal experience would look like.
-                        Those sketches, combined with the workflow mapping,
-                        informed what we prototyped and how the experience
-                        needed to fit inside an existing platform they used
-                        every day.
+                        sketch what their ideal prep experience would look like.
+                        Those sketches, combined with workflow mapping and
+                        targeted 1:1 conversations with associates and managers,
+                        helped define must-haves, nice-to-haves, and what not to
+                        build.
                     </p>
-                    <ul class="space-y-4 border-l-2 border-blue-600 pl-6 my-8">
+                    <ul class="space-y-3 border-l-2 border-blue-600 pl-6 my-8">
                         <li>
                             <strong class="block text-gray-900"
-                                >Insight 1:</strong
+                                >Key learnings that shaped the
+                                experience:</strong
                             >
-                            Sales associates did not want to "chat." They wanted
-                            a meeting-ready plan they could act on quickly.
+                            <ul class="list-disc space-y-3 pl-6 my-8">
+                                <li>
+                                    Sales associates did not want to “chat.”
+                                    They wanted an agenda-first output they
+                                    could send to clients, backed by specifics
+                                    when they needed to go deeper.
+                                </li>
+                                <li>
+                                    Trust is fragile, one incorrect or
+                                    low-quality output can stall adoption.
+                                </li>
+                                <li>
+                                    The experience needed to avoid information
+                                    overload, especially for the 5-minute prep
+                                    scenario.
+                                </li>
+                            </ul>
                         </li>
+                    </ul>
+                    <ul class="space-y-3 border-l-2 border-blue-600 pl-6 my-8">
                         <li>
                             <strong class="block text-gray-900"
-                                >Insight 2:</strong
+                                >We shifted from a prescriptive meeting plan to
+                                an agenda-first workflow:</strong
                             >
-                            Trust is fragile, one incorrect or low-quality
-                            output can stall adoption.
+                            <ul class="list-disc space-y-3 pl-6 my-8">
+                                <li>
+                                    Provide a high-level agenda outline that was
+                                    usually ready to send.
+                                </li>
+                                <li>
+                                    Support it with relevant details inside the
+                                    platform so associates could quickly verify
+                                    what to discuss.
+                                </li>
+                                <li>
+                                    Require editability to maintain a
+                                    human-in-the-loop and to handle last-minute
+                                    changes.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="space-y-3 border-l-2 border-blue-600 pl-6 my-8">
+                        <li>
+                            <strong class="block text-gray-900"
+                                >We also made deliberate scoping
+                                decisions:</strong
+                            >
+                            <ul class="list-disc space-y-3 pl-6 my-8">
+                                <li>
+                                    We did not build a social profile enrichment
+                                    feature due to privacy and PII concerns.
+                                    Instead, we surfaced personal context
+                                    already captured in prior meeting notes.
+                                </li>
+                                <li>
+                                    We avoided throwing too much information at
+                                    associates at once, using progressive
+                                    disclosure.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="space-y-3 border-l-2 border-blue-600 pl-6 my-8">
+                        <li>
+                            <strong class="block text-gray-900"
+                                >Fast view hierarchy (designed for minimal prep
+                                time):</strong
+                            >
+                            <ul class="list-disc space-y-3 pl-6 my-8">
+                                <li>
+                                    Agenda draft (short description plus 3–5
+                                    meeting topics)
+                                </li>
+                                <li>Open follow-ups from prior notes</li>
+                                <li>
+                                    Suggested talking points informed by
+                                    internal research and current market
+                                    dynamics
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        Based on what we learned, I guided a shift from
-                        open-ended exploration toward a structured meeting-prep
-                        workflow. We tested both a high-fidelity Figma prototype
-                        and a functional Streamlit prototype with real users to
-                        validate our hypotheses, assess the usefulness of the
-                        meeting plan with next-best actions, and identify where
-                        we needed to pivot. I translated those insights into
-                        workflow requirements and clear next-step build
-                        priorities for product and engineering.
+                        To validate direction and trust cues, we tested both a
+                        high-fidelity Figma prototype and a functional Streamlit
+                        prototype with real users. We structured the output into
+                        separate sections (follow-ups vs suggested talking
+                        points), added a visible generated-on timestamp, and
+                        ensured associates always reviewed and edited the agenda
+                        before sending.
                     </p>
                 </div>
 
@@ -382,24 +484,31 @@
                         >03 /// The Outcome</span
                     >
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                        From Months to 3–4 Weeks
+                        From Validated Evidence to Funded Integration
                     </h2>
                     <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                        By validating the workflow and outputs before full
-                        build, we accelerated the path from idea to evidence. In
-                        3–4 weeks, we produced validated learnings that
-                        stakeholders could use to make budgeting and investment
-                        decisions with confidence, and we translated those
-                        learnings into clear build priorities for product and
-                        engineering.
+                        By validating the workflow, output structure, and trust
+                        cues before full build, we accelerated the path from
+                        idea to evidence. In 3–4 weeks, we produced validated
+                        learnings that stakeholders used to commit additional
+                        funding and engineering capacity, and we translated
+                        those learnings into clear build priorities.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The sprint concluded with a stakeholder readout and
+                        handoff package (workflow map and friction points, plus
+                        a Figma prototype) so product and engineering teams
+                        could continue validation and implementation without
+                        restarting discovery.
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        That foundation enabled adoption to expand from a small
-                        pilot group to a broader rollout of 300+ sales
-                        associates in under a year. The result was faster
-                        decision-making, reduced assumption-heavy development,
-                        and a repeatable pattern for validating GenAI use cases
-                        inside an existing platform.
+                        That foundation enabled downstream teams to integrate
+                        the capability into the existing platform and expand
+                        adoption from ~12 pilot users to ~90 users, later
+                        scaling to 300+ active sales associates within a year.
+                        The result was reduced assumption-heavy development,
+                        faster decision-making, and a repeatable pattern for
+                        validating GenAI use cases inside an existing workflow.
                     </p>
                 </div>
 
@@ -415,7 +524,7 @@
                             data-lucide="arrow-left"
                             class="inline w-4 h-4 mr-2"
                         ></i>
-                        Back to Index
+                        Back Home
                     </a>
 
                     <div class="text-left md:text-right">
