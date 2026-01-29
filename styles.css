@@ -38,12 +38,14 @@ span {
 }
 
 .serif-accent {
-    font-family: "Playfair Display", serif;
+    font-family: "Nato Serif", serif;
+    font-style: italic;
+    font-weight: 600;
 }
 
 /* Intro paragraph styling - used on hero and case study pages */
 .intro-text {
-    font-family: "Playfair Display", serif;
+    font-family: "Nato Serif", serif;
     font-style: italic;
     font-weight: 500;
     color: #4b5563;
