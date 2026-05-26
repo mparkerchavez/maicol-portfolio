@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Tag, TagGroup, TagList } from "@/components/base/tags/tags";
 import type { CaseStudy } from "@/data/case-studies";
 import { useSignalStore } from "@/stores/signal-store";
 
@@ -26,13 +27,15 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
         <p className="mt-5 text-body italic text-muted">{caseStudy.approach}</p>
       </div>
       <div>
-        <div className="mt-10 flex flex-wrap gap-2">
-          {caseStudy.chips.map((chip) => (
-            <span key={chip} className="border border-hairline px-2 py-1 text-mono-sm text-muted">
-              {chip}
-            </span>
-          ))}
-        </div>
+        <TagGroup label={`${caseStudy.cardTitle} metrics`} size="sm">
+          <TagList className="mt-10 flex flex-wrap gap-2">
+            {caseStudy.chips.map((chip) => (
+              <Tag key={chip} id={chip} className="rounded-none bg-transparent text-mono-sm text-muted shadow-none ring-hairline">
+                {chip}
+              </Tag>
+            ))}
+          </TagList>
+        </TagGroup>
         <span className="mt-8 block text-mono transition group-hover:translate-x-1">OPEN →</span>
       </div>
     </Link>
