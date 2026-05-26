@@ -1,0 +1,18 @@
+entrypoint = "src/app/page.tsx"
+modules = ["nodejs-18"]
+run = "npm run dev -- --hostname 0.0.0.0"
+
+[nix]
+channel = "stable-23_11"
+
+[deployment]
+deploymentTarget = "cloudrun"
+build = "npm run build"
+run = "npm run start -- --hostname 0.0.0.0"
+
+[env]
+NEXT_TELEMETRY_DISABLED = "1"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
