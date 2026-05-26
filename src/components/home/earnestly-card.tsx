@@ -42,6 +42,7 @@ export function EarnestlyCard() {
             <span className="text-mono-sm text-muted">EMAIL</span>
             <Input
               isRequired
+              aria-label="Email"
               type="email"
               value={email}
               onChange={setEmail}
@@ -54,6 +55,7 @@ export function EarnestlyCard() {
           <label className="grid gap-2">
             <span className="text-mono-sm text-muted">WHAT WOULD YOU MOST WANT FROM THIS?</span>
             <TextArea
+              aria-label="What would you most want from this?"
               value={context}
               onChange={setContext}
               rows={4}
