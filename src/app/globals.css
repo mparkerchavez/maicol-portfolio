@@ -1,41 +1,49 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Playfair Display";
-  src: url("/assets/fonts/PlayfairDisplay-Light.woff2") format("woff2");
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Playfair Display";
-  src: url("/assets/fonts/PlayfairDisplay-Italic.woff2") format("woff2");
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-RegularItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/Inter-Light.woff2") format("woff2");
-  font-weight: 300;
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Bold.woff2") format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/Inter-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/Inter-Italic.woff2") format("woff2");
-  font-weight: 400;
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
@@ -49,29 +57,29 @@
 }
 
 @theme {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Uncut Sans", system-ui, sans-serif;
+  --font-display: "Uncut Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --text-display-1: clamp(80px, 14vw, 180px);
   --text-display-1--line-height: 0.9;
-  --text-display-1--letter-spacing: -0.03em;
-  --text-display-1--font-weight: 300;
+  --text-display-1--letter-spacing: -0.04em;
+  --text-display-1--font-weight: 700;
 
   --text-display-2: clamp(56px, 9vw, 120px);
-  --text-display-2--line-height: 0.95;
-  --text-display-2--letter-spacing: -0.02em;
-  --text-display-2--font-weight: 300;
+  --text-display-2--line-height: 0.92;
+  --text-display-2--letter-spacing: -0.03em;
+  --text-display-2--font-weight: 700;
 
   --text-h1: clamp(40px, 4vw, 56px);
   --text-h1--line-height: 1.05;
-  --text-h1--letter-spacing: -0.01em;
-  --text-h1--font-weight: 400;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
 
   --text-h2: clamp(28px, 2.8vw, 40px);
   --text-h2--line-height: 1.15;
-  --text-h2--letter-spacing: -0.005em;
-  --text-h2--font-weight: 400;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 700;
 
   --text-h3: clamp(20px, 1.8vw, 24px);
   --text-h3--line-height: 1.25;
@@ -83,7 +91,7 @@
 
   --text-body-lg: clamp(18px, 1.4vw, 20px);
   --text-body-lg--line-height: 1.7;
-  --text-body-lg--font-weight: 400;
+  --text-body-lg--font-weight: 300;
 
   --text-body: 16px;
   --text-body--line-height: 1.6;
@@ -175,34 +183,33 @@
   }
 
   h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: var(--text-h1);
     line-height: var(--text-h1--line-height);
     letter-spacing: var(--text-h1--letter-spacing);
-    font-weight: 400;
-  }
-
-  h2,
-  h3,
-  h4 {
-    font-family: var(--font-sans);
-    font-weight: 400;
+    font-weight: var(--text-h1--font-weight);
   }
 
   h2 {
+    font-family: var(--font-sans);
     font-size: var(--text-h2);
     line-height: var(--text-h2--line-height);
     letter-spacing: var(--text-h2--letter-spacing);
+    font-weight: var(--text-h2--font-weight);
   }
 
   h3 {
+    font-family: var(--font-sans);
     font-size: var(--text-h3);
     line-height: var(--text-h3--line-height);
+    font-weight: var(--text-h3--font-weight);
   }
 
   h4 {
+    font-family: var(--font-sans);
     font-size: var(--text-h4);
     line-height: var(--text-h4--line-height);
+    font-weight: var(--text-h4--font-weight);
   }
 
   p {
@@ -233,19 +240,19 @@
 }
 
 @utility text-display-1 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: var(--text-display-1);
   line-height: var(--text-display-1--line-height);
   letter-spacing: var(--text-display-1--letter-spacing);
-  font-weight: 300;
+  font-weight: var(--text-display-1--font-weight);
 }
 
 @utility text-display-2 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: var(--text-display-2);
   line-height: var(--text-display-2--line-height);
   letter-spacing: var(--text-display-2--letter-spacing);
-  font-weight: 300;
+  font-weight: var(--text-display-2--font-weight);
 }
 
 @utility text-mono {
