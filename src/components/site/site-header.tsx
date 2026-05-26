@@ -20,10 +20,10 @@ export function SiteHeader({ showBreadcrumb = false }: SiteHeaderProps) {
           </Link>
         </div>
         <nav aria-label="Primary" className="flex items-center gap-5 text-mono text-ink">
-          <SignalAnchor href="mailto:mparkerchavez@gmail.com" signalType="click" targetId="header-contact">
+          <SignalAnchor href="mailto:mparkerchavez@gmail.com" signalType="click" targetId="header-contact" className="text-mono text-ink">
             CONTACT
           </SignalAnchor>
-          <SignalAnchor href="/Maicol-Parker-Chavez-Resume.pdf" signalType="click" targetId="header-resume">
+          <SignalAnchor href="/Maicol-Parker-Chavez-Resume.pdf" signalType="click" targetId="header-resume" className="text-mono text-ink">
             RESUME
           </SignalAnchor>
         </nav>

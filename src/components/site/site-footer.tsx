@@ -7,21 +7,27 @@ export function SiteFooter() {
       <div className="site-container grid gap-16 lg:grid-cols-[1.3fr_0.7fr]">
         <div>
           <p className="text-mono text-inverse-ink/70">07 /// LET&apos;S TALK</p>
-          <a href="mailto:mparkerchavez@gmail.com" className="mt-6 block text-display-2 text-inverse-ink no-underline">
+          <SignalAnchor
+            href="mailto:mparkerchavez@gmail.com"
+            signalType="click"
+            targetId="footer-talk"
+            className="mt-6 block text-display-2 text-inverse-ink no-underline"
+            uiSize="xl"
+          >
             Let&apos;s talk.
-          </a>
+          </SignalAnchor>
           <div className="mt-10 flex flex-wrap gap-5 text-mono-lg">
-            <SignalAnchor href="mailto:mparkerchavez@gmail.com" signalType="click" targetId="footer-email" className="text-inverse-ink">
+            <SignalAnchor href="mailto:mparkerchavez@gmail.com" signalType="click" targetId="footer-email" className="text-mono-lg text-inverse-ink">
               EMAIL MPARKERCHAVEZ@GMAIL.COM
             </SignalAnchor>
-            <SignalAnchor href="/Maicol-Parker-Chavez-Resume.pdf" signalType="click" targetId="footer-resume" className="text-inverse-ink">
+            <SignalAnchor href="/Maicol-Parker-Chavez-Resume.pdf" signalType="click" targetId="footer-resume" className="text-mono-lg text-inverse-ink">
               RESUME DOWNLOAD PDF
             </SignalAnchor>
             <SignalAnchor
               href="https://www.linkedin.com/in/mparkerchavez"
               signalType="click"
               targetId="footer-linkedin"
-              className="text-inverse-ink"
+              className="text-mono-lg text-inverse-ink"
               target="_blank"
               rel="noreferrer"
             >
