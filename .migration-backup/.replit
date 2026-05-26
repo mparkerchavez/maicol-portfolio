@@ -1,9 +1,0 @@
-run = "npm run dev -- --hostname 0.0.0.0"
-entrypoint = "src/app/page.tsx"
-
-[deployment]
-run = ["sh", "-c", "npm run build && npm run start -- --hostname 0.0.0.0"]
-deploymentTarget = "cloudrun"
-
-[env]
-NEXT_TELEMETRY_DISABLED = "1"
