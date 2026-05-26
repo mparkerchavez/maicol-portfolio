@@ -1,5 +1,5 @@
 entrypoint = "src/app/page.tsx"
-modules = ["nodejs-20"]
+modules = ["nodejs-18"]
 run = "npm run dev -- --hostname 0.0.0.0"
 
 [nix]
