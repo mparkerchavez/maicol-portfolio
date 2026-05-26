@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { curateTraces } from "@/data/curate-traces";
 import { SignalAnchor } from "@/components/signals/signal-anchor";
 import { OpenChatButton } from "@/components/site/open-chat-button";
+import { AppButton, AppCard } from "@/components/ui";
+import { curateTraces } from "@/data/curate-traces";
 import { useSignalStore } from "@/stores/signal-store";
 
 export function CurateMiniApp() {
@@ -17,9 +18,10 @@ export function CurateMiniApp() {
           const expanded = expandedIndex === index;
 
           return (
-            <div
+            <AppCard
               key={trace.position}
-              className="hairline-card interactive-card min-h-[420px] p-6 text-left"
+              interactive
+              className="min-h-[420px] text-left"
             >
               <p className="text-mono-sm text-muted">THEME</p>
               <p className="mt-2">{trace.theme}</p>
@@ -40,8 +42,9 @@ export function CurateMiniApp() {
               ) : (
                 <p className="mt-8 text-body-sm text-muted">Expand to see the source placeholder and chat handoff.</p>
               )}
-              <button
+              <AppButton
                 type="button"
+                intent="plain"
                 className="mt-8 text-mono"
                 onClick={() => {
                   setExpandedIndex(expanded ? null : index);
@@ -49,8 +52,8 @@ export function CurateMiniApp() {
                 }}
               >
                 {expanded ? "COLLAPSE ↑" : "EXPAND ↓"}
-              </button>
-            </div>
+              </AppButton>
+            </AppCard>
           );
         })}
       </div>

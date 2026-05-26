@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
+import { AppTabButton } from "@/components/ui";
 import type { ThroughLine } from "@/stores/signal-store";
 import { useSignalStore } from "@/stores/signal-store";
 
@@ -56,7 +57,7 @@ export function ThroughLineToggle() {
           const isActive = value === active;
 
           return (
-            <button
+            <AppTabButton
               key={value}
               type="button"
               role="tab"
@@ -77,7 +78,7 @@ export function ThroughLineToggle() {
               onClick={() => commit(value)}
             >
               {framings[value].label}
-            </button>
+            </AppTabButton>
           );
         })}
       </div>

@@ -1,9 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Button } from "@/components/base/buttons/button";
-import { Input } from "@/components/base/input/input";
-import { TextArea } from "@/components/base/textarea/textarea";
+import { AppButton, AppCard, AppInput, AppTextArea } from "@/components/ui";
 import { useSignalStore } from "@/stores/signal-store";
 
 export function EarnestlyCard() {
@@ -25,7 +23,7 @@ export function EarnestlyCard() {
   };
 
   return (
-    <div className="hairline-card max-w-5xl p-8 md:p-10">
+    <AppCard padding="lg" className="max-w-5xl">
       <h2>Earnestly.</h2>
       <p className="mt-6 text-body-lg">
         UX coaching for builders shipping web apps with AI tools. The product is still forming, so this card only captures early interest.
@@ -40,38 +38,34 @@ export function EarnestlyCard() {
         <form className="mt-8 grid gap-4" onSubmit={submit}>
           <label className="grid gap-2">
             <span className="text-mono-sm text-muted">EMAIL</span>
-            <Input
+            <AppInput
               isRequired
               aria-label="Email"
               type="email"
               value={email}
               onChange={setEmail}
-              size="lg"
-              wrapperClassName="rounded-none bg-surface shadow-none ring-hairline focus-within:ring-ink"
-              inputClassName="text-body text-ink placeholder:text-muted"
               placeholder="you@example.com"
             />
           </label>
           <label className="grid gap-2">
             <span className="text-mono-sm text-muted">WHAT WOULD YOU MOST WANT FROM THIS?</span>
-            <TextArea
+            <AppTextArea
               aria-label="What would you most want from this?"
               value={context}
               onChange={setContext}
               rows={4}
-              textAreaClassName="min-h-28 rounded-none bg-surface text-body text-ink shadow-none ring-hairline focus:ring-ink"
             />
           </label>
-          <Button
+          <AppButton
             type="submit"
-            color="primary"
+            intent="primary"
             size="md"
-            className="w-fit rounded-none border border-ink bg-ink px-5 py-3 text-mono text-paper shadow-none hover:bg-paper hover:text-ink"
+            className="w-fit px-5 py-3"
           >
             BE THE FIRST TO TRY IT
-          </Button>
+          </AppButton>
         </form>
       )}
-    </div>
+    </AppCard>
   );
 }

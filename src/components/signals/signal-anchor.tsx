@@ -1,24 +1,27 @@
 "use client";
 
-import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
-import { Button, type CommonProps } from "@/components/base/buttons/button";
+import type { AnchorHTMLAttributes, ComponentProps, MouseEvent, ReactNode } from "react";
+import { AppButton, AppLink } from "@/components/ui";
 import { useSignalStore } from "@/stores/signal-store";
 
-type SignalAnchorProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+type AppLinkProps = ComponentProps<typeof AppButton>;
+
+type SignalAnchorProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "color" | "href"> & {
+  href: string;
   signalType: "click";
   targetId: string;
   children: ReactNode;
-  uiColor?: CommonProps["color"];
-  uiSize?: CommonProps["size"];
+  uiIntent?: AppLinkProps["intent"];
+  uiSize?: AppLinkProps["size"];
 };
 
-export function SignalAnchor({ signalType, targetId, children, onClick, className = "", uiColor = "link-gray", uiSize = "sm", ...props }: SignalAnchorProps) {
+export function SignalAnchor({ signalType, targetId, children, onClick, className = "", uiIntent = "link", uiSize = "sm", ...props }: SignalAnchorProps) {
   const recordEvent = useSignalStore((state) => state.recordEvent);
 
   return (
-    <Button
+    <AppLink
       {...props}
-      color={uiColor}
+      intent={uiIntent}
       size={uiSize}
       className={className}
       onClick={(event: MouseEvent<HTMLAnchorElement>) => {
@@ -27,6 +30,6 @@ export function SignalAnchor({ signalType, targetId, children, onClick, classNam
       }}
     >
       {children}
-    </Button>
+    </AppLink>
   );
 }
