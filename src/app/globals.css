@@ -55,22 +55,22 @@
 
   --text-display-1: clamp(80px, 14vw, 180px);
   --text-display-1--line-height: 0.9;
-  --text-display-1--letter-spacing: 0;
+  --text-display-1--letter-spacing: -0.03em;
   --text-display-1--font-weight: 300;
 
   --text-display-2: clamp(56px, 9vw, 120px);
   --text-display-2--line-height: 0.95;
-  --text-display-2--letter-spacing: 0;
+  --text-display-2--letter-spacing: -0.02em;
   --text-display-2--font-weight: 300;
 
   --text-h1: clamp(40px, 4vw, 56px);
   --text-h1--line-height: 1.05;
-  --text-h1--letter-spacing: 0;
+  --text-h1--letter-spacing: -0.01em;
   --text-h1--font-weight: 400;
 
   --text-h2: clamp(28px, 2.8vw, 40px);
   --text-h2--line-height: 1.15;
-  --text-h2--letter-spacing: 0;
+  --text-h2--letter-spacing: -0.005em;
   --text-h2--font-weight: 400;
 
   --text-h3: clamp(20px, 1.8vw, 24px);
