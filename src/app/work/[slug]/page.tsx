@@ -109,12 +109,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
       <nav className="site-container mt-24 flex items-end justify-between gap-8 border-t border-hairline pt-10">
         <Link href="/" className="text-mono">
-          {"<-"} BACK TO INDEX
+          ← BACK TO INDEX
         </Link>
         {next ? (
           <Link href={`/work/${next.slug}`} className="max-w-sm text-right no-underline">
             <p className="text-mono-sm text-muted">NEXT CASE STUDY</p>
-            <h3 className="mt-2">{next.cardTitle} -&gt;</h3>
+            <h3 className="mt-2">{next.cardTitle} →</h3>
           </Link>
         ) : null}
       </nav>

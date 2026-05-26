@@ -33,7 +33,7 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
             </span>
           ))}
         </div>
-        <span className="mt-8 block text-mono transition group-hover:translate-x-1">OPEN -&gt;</span>
+        <span className="mt-8 block text-mono transition group-hover:translate-x-1">OPEN →</span>
       </div>
     </Link>
   );

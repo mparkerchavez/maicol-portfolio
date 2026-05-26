@@ -20,7 +20,7 @@ export default function Home() {
           <ThroughLineToggle />
         </div>
         <OpenChatButton prompt="tell me about Maicol" className="mt-10 text-mono text-muted hover:text-ink">
-          TO LEARN ABOUT MAICOL -&gt; ASK LLAMITA
+          TO LEARN ABOUT MAICOL → ASK LLAMITA
         </OpenChatButton>
       </TrackedSection>
 
