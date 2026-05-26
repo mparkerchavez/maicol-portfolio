@@ -15,7 +15,7 @@ export function SiteHeader({ showBreadcrumb = false }: SiteHeaderProps) {
               ← BACK
             </Link>
           ) : null}
-          <Link href="/" className="text-[22px] leading-none text-ink">
+          <Link href="/" className="text-h3 leading-none text-ink">
             Maicol Parker-Chavez
           </Link>
         </div>
