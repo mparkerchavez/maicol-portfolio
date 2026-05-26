@@ -1,9 +1,9 @@
 entrypoint = "src/app/page.tsx"
-modules = ["nodejs-18"]
+modules = ["nodejs-22"]
 run = "npm run dev -- --hostname 0.0.0.0"
 
 [nix]
-channel = "stable-23_11"
+channel = "stable-24_05"
 
 [deployment]
 deploymentTarget = "cloudrun"
