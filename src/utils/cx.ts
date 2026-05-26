@@ -3,7 +3,28 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
     extend: {
         theme: {
-            text: ["display-xs", "display-sm", "display-md", "display-lg", "display-xl", "display-2xl"],
+            text: [
+                "display-xs",
+                "display-sm",
+                "display-md",
+                "display-lg",
+                "display-xl",
+                "display-2xl",
+                "display-1",
+                "display-2",
+                "h1",
+                "h2",
+                "h3",
+                "h4",
+                "body-lg",
+                "body",
+                "body-sm",
+                "mono-lg",
+                "mono",
+                "mono-sm",
+                "llamita-body",
+                "llamita-meta",
+            ],
         },
     },
 });

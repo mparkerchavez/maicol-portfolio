@@ -1,10 +1,10 @@
 "use client";
 
 import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
-import { Button } from "@/components/base/buttons/button";
+import { AppButton } from "@/components/ui";
 import { useSignalStore } from "@/stores/signal-store";
 
-type OpenChatButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type OpenChatButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> & {
   prompt?: string;
   children: ReactNode;
 };
@@ -13,10 +13,10 @@ export function OpenChatButton({ prompt, children, onClick, className = "", ...p
   const recordEvent = useSignalStore((state) => state.recordEvent);
 
   return (
-    <Button
+    <AppButton
       {...props}
       type="button"
-      color="link-gray"
+      intent="link"
       size="sm"
       className={className}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {
@@ -26,6 +26,6 @@ export function OpenChatButton({ prompt, children, onClick, className = "", ...p
       }}
     >
       {children}
-    </Button>
+    </AppButton>
   );
 }

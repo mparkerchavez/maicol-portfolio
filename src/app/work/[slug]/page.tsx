@@ -5,6 +5,7 @@ import { PageSignal } from "@/components/signals/page-signal";
 import { SignalPhrase } from "@/components/signals/signal-phrase";
 import { TrackedSection } from "@/components/signals/tracked-section";
 import { PageFrame } from "@/components/site/page-frame";
+import { AppCard, AppTag, AppTagGroup, AppTagList } from "@/components/ui";
 import { caseStudies, getCaseStudy, getNextCaseStudy } from "@/data/case-studies";
 
 type CaseStudyPageProps = {
@@ -51,7 +52,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         <div className="mt-20 grid gap-12 lg:grid-cols-12">
           <aside className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
-            <div className="hairline-card p-6">
+            <AppCard>
               <SidebarBlock label="MY ROLE" value={caseStudy.role} />
               <SidebarList label="COLLABORATORS" values={caseStudy.collaborators} />
               <SidebarList label="METHODS" values={caseStudy.methods} chips />
@@ -63,7 +64,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   ))}
                 </ul>
               </div>
-            </div>
+            </AppCard>
           </aside>
 
           <div className="lg:col-span-8">
@@ -95,10 +96,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   const related = getCaseStudy(relatedSlug);
 
                   return related ? (
-                    <Link key={related.slug} href={`/work/${related.slug}`} className="hairline-card interactive-card p-4 no-underline">
+                    <AppCard key={related.slug} href={`/work/${related.slug}`} interactive padding="sm" className="no-underline">
                       <p className="text-mono-sm text-muted">{related.focus}</p>
                       <h3 className="mt-3">{related.cardTitle}</h3>
-                    </Link>
+                    </AppCard>
                   ) : null;
                 })}
               </div>
@@ -135,13 +136,23 @@ function SidebarList({ label, values, chips = false }: { label: string; values: 
   return (
     <div className="mt-8">
       <p className="text-mono-sm text-muted">{label}</p>
-      <ul className={chips ? "mt-3 flex flex-wrap gap-2" : "mt-3 grid gap-2 text-body-sm"}>
-        {values.map((value) => (
-          <li key={value} className={chips ? "border border-hairline px-2 py-1 text-mono-sm text-muted" : undefined}>
-            {value}
-          </li>
-        ))}
-      </ul>
+      {chips ? (
+        <AppTagGroup label={label} size="sm">
+          <AppTagList className="mt-3 flex flex-wrap gap-2">
+            {values.map((value) => (
+              <AppTag key={value} id={value}>
+                {value}
+              </AppTag>
+            ))}
+          </AppTagList>
+        </AppTagGroup>
+      ) : (
+        <ul className="mt-3 grid gap-2 text-body-sm">
+          {values.map((value) => (
+            <li key={value}>{value}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

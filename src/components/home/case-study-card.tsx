@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Tag, TagGroup, TagList } from "@/components/base/tags/tags";
+import { AppCard, AppTag, AppTagGroup, AppTagList } from "@/components/ui";
 import type { CaseStudy } from "@/data/case-studies";
 import { useSignalStore } from "@/stores/signal-store";
 
@@ -13,9 +12,10 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const recordEvent = useSignalStore((state) => state.recordEvent);
 
   return (
-    <Link
+    <AppCard
       href={`/work/${caseStudy.slug}`}
-      className="interactive-card hairline-card group flex min-h-[430px] flex-col justify-between p-6 no-underline"
+      interactive
+      className="group flex min-h-[430px] flex-col justify-between no-underline"
       onMouseEnter={() => recordEvent({ type: "hover", target: `case-card:${caseStudy.slug}` })}
       onClick={() => recordEvent({ type: "click", target: `case-card:${caseStudy.slug}` })}
     >
@@ -27,17 +27,17 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
         <p className="mt-5 text-body italic text-muted">{caseStudy.approach}</p>
       </div>
       <div>
-        <TagGroup label={`${caseStudy.cardTitle} metrics`} size="sm">
-          <TagList className="mt-10 flex flex-wrap gap-2">
+        <AppTagGroup label={`${caseStudy.cardTitle} metrics`} size="sm">
+          <AppTagList className="mt-10 flex flex-wrap gap-2">
             {caseStudy.chips.map((chip) => (
-              <Tag key={chip} id={chip} className="rounded-none bg-transparent text-mono-sm text-muted shadow-none ring-hairline">
+              <AppTag key={chip} id={chip}>
                 {chip}
-              </Tag>
+              </AppTag>
             ))}
-          </TagList>
-        </TagGroup>
+          </AppTagList>
+        </AppTagGroup>
         <span className="mt-8 block text-mono transition group-hover:translate-x-1">OPEN →</span>
       </div>
-    </Link>
+    </AppCard>
   );
 }
