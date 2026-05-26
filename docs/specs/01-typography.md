@@ -3,38 +3,40 @@
 **Purpose:** Define the typographic system, font choices, and base design tokens (color and spacing) for the site.
 **Owner:** Claude
 **Status:** Active
-**Last updated:** 2026-05-25
-**Related ADRs:** 0002 (Untitled UI Pro), 0003 (B&W first)
+**Last updated:** 2026-05-26
+**Related ADRs:** 0002 (Untitled UI Pro), 0003 (B&W first), 0008 (Typography pivot to Uncut Sans)
 
 ---
 
 ## Why this spec exists
 
-A site this text-heavy lives or dies on typography. Without a single source of truth, every component starts inventing sizes, weights, and spacings. The result is a portfolio that looks like every other AI portfolio. This spec is the source of truth. Codex reads it once, implements it once, and every component on the site inherits from it forever.
+A site this text-heavy lives or dies on typography. Without a single source of truth, every component invents its own sizes, weights, and spacings. The result is a portfolio that looks like every other AI portfolio. This spec is the source of truth. Codex reads it once, implements it once, and every component on the site inherits from it forever.
 
 For a citizen developer: this is the file that decides what every word on the site looks like. It is also the file that, if we get it right, does most of the design work without us needing to make decisions on a per-page basis.
 
 ---
 
-## The design philosophy: Refined Editorial
+## The design philosophy: Bold Editorial
 
-The site bridges two registers.
+The site speaks in **one distinctive voice** and complements it with a **machine voice** for utility moments. Two faces, three roles.
 
-**The Human / Strategic register.** High-contrast serif type. Old-fashioned in the best way. Carries the long-form thinking, the headlines, the pull quotes. Says "a real person made decisions here."
+**The Primary voice.** A bold, contemporary sans-serif (Uncut Sans). It carries the entire reading load: display headlines, standard headings, body copy, navigation, buttons, form labels. Distinctive enough at large sizes to be the visual identity. Readable enough at body sizes to disappear into the reading experience.
 
-**The Machine / Analytical register.** Sterile geometric sans and a monospace utility. Used for body, navigation, metadata, intent labels, and Llamita's chat surface. Says "this is precise."
+**The Machine voice.** A monospaced face (JetBrains Mono). Used only for metadata, intent labels, the `01 ///` numbered section marks, tech-stack chips, and Llamita's chat. Marks anything that should read as "data" or "system" rather than as content.
 
-The contrast between these two registers is the design. We do not lean on color. We do not lean on heavy weights. We do not lean on illustration to do the heavy lifting. The shape of the type itself argues for what Maicol does: strategic thinking meeting analytical structure.
+The contrast between these two voices is the design. Not color. Not heavy decoration. The visual identity comes from **scale and weight**, applied within Uncut Sans's range, with the mono face as a deliberate third voice.
 
-**What this means in practice:** look at any page and you should be able to tell at a glance whether you are reading "the human voice" (serif, large, italic-capable) or "the machine voice" (sans or mono, smaller, gridded). Confusing the two is a bug.
+**What this means in practice:** look at any moment on the site and you should be able to tell at a glance whether you are reading "Maicol's voice" (Uncut Sans, varied scale and weight) or "the system's voice" (Mono, smaller, tracked, often uppercase). Confusing the two is a bug.
+
+This direction is "Bold Editorial." Per ADR 0008, this supersedes the previous "Refined Editorial" direction. The classification-contrast philosophy (serif vs sans vs mono) is retired. Scale and weight do the work now.
 
 ---
 
 ## Scope
 
 ### In scope
-- Three font families and their roles
-- Weight rules (the "Weight Skip" rule)
+- Two font families and their roles
+- Weight rules (the revised "Weight Skip" rule)
 - Type scale (macro, standard, micro)
 - Italic rules
 - Llamita's voice register
@@ -55,37 +57,32 @@ The contrast between these two registers is the design. We do not lean on color.
 
 ## 1. Font families
 
-Three fonts. Each one has one job. Mixing roles is a bug.
+Two fonts. Each one has its own register. Mixing roles is a bug.
 
-### Display Serif: Playfair Display
+### Primary: Uncut Sans
 
-**Role:** Display sizes only (the macro register). Hero text. Massive headlines. Pull quotes. Section-opener accent moments. The "voice of the human."
+**Role:** The voice of the site. Display sizes, standard headings, body copy, buttons, form labels, navigation, everything that reads as content.
 
-**Why this font:** High stroke contrast (thick where it should be thick, thin where it should be thin). Carries weight at very large sizes. Distinguished italic. Free via Google Fonts. Already in the current site's stack, so the visual lineage is preserved.
+**Why this font:** Contemporary geometric sans with significant weight variation. Distinctive enough at large sizes to carry the visual identity. Clean enough at body sizes to disappear into reading. Rarely seen in the wild, so it does not collapse into the generic SaaS aesthetic.
 
-**Weights used:** 300 (Light), 400 Italic only. No regular roman at standard sizes. Italic is the accent register.
+**Weights used (subject to availability in Maicol's font files):**
+- Light (300) for body and secondary text
+- Regular (400) for default body and small headings
+- Bold (700) for display headlines and h1/h2
+- Black (800 or 900) for macro display, used sparingly
+- Italic (300 and 400 only) for pull quotes and in-body emphasis
 
-**License:** SIL Open Font License. Free for commercial use.
+**Weights explicitly NOT used:** Medium (500), Semibold (600). These middle weights collapse the macro/micro contrast and read as "tech company."
 
-**Future upgrade path:** PP Editorial New (Pangram Pangram, paid) or GT Sectra (Grilli Type, paid) can swap in later as a one-line `@theme` change if Maicol wants the higher-fashion register.
+**Source:** [uncut.wtf/sans-serif/uncut-sans/](https://uncut.wtf/sans-serif/uncut-sans/). Files are provided by Maicol and live in `public/assets/fonts/`.
 
-### Body and UI Sans: Inter
+### Machine voice: JetBrains Mono
 
-**Role:** Standard headings (h2, h3, h4), body copy, navigation, buttons, form labels, anywhere reading happens at standard sizes. The "voice of the machine, but readable."
+**Role:** Metadata. Intent labels (the `01 ///` numbered section marks). Tech stack chips. Captions. **Llamita's chat bubble.** The "data index" register.
 
-**Why this font:** Inter is the most-tested editorial-readable sans on the web. Weight 300 (Light) sits beautifully against Playfair Display Italic. Weight 400 (Regular) is the body workhorse. Italic 400 is the in-body emphasis register. Free via Google Fonts.
+**Why this font:** Sterile, precise, refined. The mono register marks anything that should read as "data" or "system" rather than as content. Llamita's chat lives in Mono so her voice visually marks as the machine voice, distinct from the site copy.
 
-**Weights used:** 300 (Light), 400 (Regular), 400 Italic. No medium, no semibold, no bold.
-
-**License:** SIL Open Font License. Free for commercial use.
-
-### Utility Mono: JetBrains Mono
-
-**Role:** Metadata. Intent labels (the `01 ///` numbered section marks). Tech stack chips. Caption text. **Llamita's chat bubble.** The "data index" register.
-
-**Why this font:** Sterile, precise, refined. Better weight stability at small sizes than Space Mono. Free. The fact that Llamita's chat lives in Mono is a deliberate design choice: it visually marks her voice as the machine voice, distinct from the editorial site copy.
-
-**Weights used:** 400 (Regular) only.
+**Weights used:** Regular (400) only.
 
 **License:** SIL Open Font License. Free for commercial use.
 
@@ -93,36 +90,38 @@ Three fonts. Each one has one job. Mixing roles is a bug.
 
 If you are wondering which font to use for a given piece of text:
 
-- Is it large display headline text? → Playfair Display
-- Is it a pull quote or italic accent? → Playfair Display Italic
-- Is it normal reading text or a standard heading? → Inter
-- Is it metadata, a chip, a label, or Llamita talking? → JetBrains Mono
+- Is it content the visitor reads? → Uncut Sans (pick a weight)
+- Is it metadata, a label, a chip, the `01 ///` section marker, or Llamita talking? → JetBrains Mono
 
-If none of those fit, you are probably trying to invent a new role. Don't.
+If neither fits, you are probably trying to invent a new role. Don't.
 
 ---
 
-## 2. The "Weight Skip" rule
+## 2. The revised "Weight Skip" rule
 
-The system uses two weights and one italic per font. That is it.
+The original rule (Spec 01 v1) prohibited weights 500, 600, 700, 800, 900 on the grounds that mid-weights read as "tech company." That rule was tied to the Inter + Playfair classification-contrast philosophy.
 
-| Font | Allowed weights |
-|---|---|
-| Playfair Display | 300 (Light) for macro display, 400 Italic for accent |
-| Inter | 300 (Light) for select display, 400 (Regular) for body, 400 Italic for in-body emphasis |
-| JetBrains Mono | 400 (Regular) |
+Under Bold Editorial (ADR 0008), the rule is **revised, not abandoned**:
 
-**Never used:** 500 (Medium), 600 (SemiBold), 700 (Bold), 800, 900.
+| Weight | Status | Use |
+|---|---|---|
+| Light (300) | Allowed | Body, captions, secondary text |
+| Regular (400) | Allowed | Default body, small headings |
+| Medium (500) | **Prohibited** | Reads as tech company |
+| Semibold (600) | **Prohibited** | Same |
+| Bold (700) | Allowed | Display, h1, h2, emphasis |
+| Black (800-900) | Allowed | Macro display only, used sparingly |
+| Italic (300 / 400) | Allowed | Pull quotes, in-body emphasis |
 
-The reason: medium and semibold weights read as "tech company." Bold reads as "I am yelling." Editorial type achieves contrast through *scale* and *classification* (serif vs sans vs mono), not through weight. This is the move that separates the site from the AI-generated portfolio aesthetic.
+The macro/micro extreme is still the philosophy. The contrast pair is now **Light (300) ↔ Bold (700)**, with Black (if available) reserved for the most dramatic display moments.
 
 ### What this means in practice
 
-When you need to emphasize a word inside a paragraph, use Inter Italic. Not bold. Not a different color. Not underline.
+When you need to emphasize a word inside a paragraph, use Uncut Sans Italic at the same weight.
 
-When you need a heading to feel important, use *bigger size* and *Playfair Display*. Not heavier weight.
+When you need a heading to feel important, use **bigger size + Bold**. Both scale and weight do work.
 
-When you need a CTA button to feel actionable, use the button structure (background, border, hover state) to do that work. The text inside stays at 400.
+When you need a CTA button to feel actionable, the button structure (background, border, hover state) does the lifting. Button text is typically Regular or Bold.
 
 ---
 
@@ -130,7 +129,7 @@ When you need a CTA button to feel actionable, use the button structure (backgro
 
 Three registers. Macro (display), standard (body and headings), micro (metadata).
 
-Sizes use CSS `clamp()` so they scale smoothly between desktop sizes. The `clamp()` function takes three arguments: the smallest size, a preferred fluid size, and the largest size. Browsers pick the right value based on the current viewport.
+Sizes use CSS `clamp()` so they scale smoothly between desktop sizes.
 
 ### 3.1 Macro register (display)
 
@@ -138,10 +137,10 @@ The visual hook. Used sparingly. One or two display moments per page.
 
 | Token | Size (clamp) | Line height | Letter spacing | Weight | Font |
 |---|---|---|---|---|---|
-| `display-1` | `clamp(80px, 14vw, 180px)` | 0.9 | -0.03em | 300 | Playfair Display |
-| `display-2` | `clamp(56px, 9vw, 120px)` | 0.95 | -0.02em | 300 | Playfair Display |
+| `display-1` | `clamp(80px, 14vw, 180px)` | 0.9 | -0.04em | 700 (Bold) or 800/900 (Black) | Uncut Sans |
+| `display-2` | `clamp(56px, 9vw, 120px)` | 0.92 | -0.03em | 700 (Bold) | Uncut Sans |
 
-Display tokens are dense blocks. The very tight line-height (0.9) makes multi-line display text feel like a single solid shape. Negative letter-spacing tightens the word shapes so the block reads as one composition.
+Display tokens are dense blocks. Tight line-height (0.9) makes multi-line display text feel like a single solid shape. Aggressive negative letter-spacing (-0.04em and -0.03em) tightens the word shapes. Bold-or-Black weight at huge size is the macro register's defining trait.
 
 **What this means in practice:** display-1 is the home page hero. display-2 is a section opener or a case study title. Anything bigger or smaller is not display.
 
@@ -151,19 +150,22 @@ The everyday workhorses.
 
 | Token | Size (clamp) | Line height | Letter spacing | Weight | Font |
 |---|---|---|---|---|---|
-| `h1` | `clamp(40px, 4vw, 56px)` | 1.05 | -0.01em | 400 | Playfair Display |
-| `h2` | `clamp(28px, 2.8vw, 40px)` | 1.15 | -0.005em | 400 | Inter |
-| `h3` | `clamp(20px, 1.8vw, 24px)` | 1.25 | 0 | 400 | Inter |
-| `h4` | `18px` (fixed) | 1.3 | 0 | 400 | Inter |
-| `body-lg` | `clamp(18px, 1.4vw, 20px)` | 1.7 | 0 | 400 | Inter |
-| `body` | `16px` (fixed) | 1.6 | 0 | 400 | Inter |
-| `body-sm` | `14px` (fixed) | 1.5 | 0 | 400 | Inter |
+| `h1` | `clamp(40px, 4vw, 56px)` | 1.05 | -0.02em | 700 (Bold) | Uncut Sans |
+| `h2` | `clamp(28px, 2.8vw, 40px)` | 1.15 | -0.01em | 700 (Bold) | Uncut Sans |
+| `h3` | `clamp(20px, 1.8vw, 24px)` | 1.25 | 0 | 400 (Regular) | Uncut Sans |
+| `h4` | `18px` (fixed) | 1.3 | 0 | 400 (Regular) | Uncut Sans |
+| `body-lg` | `clamp(18px, 1.4vw, 20px)` | 1.7 | 0 | 300 (Light) | Uncut Sans |
+| `body` | `16px` (fixed) | 1.6 | 0 | 400 (Regular) | Uncut Sans |
+| `body-sm` | `14px` (fixed) | 1.5 | 0 | 400 (Regular) | Uncut Sans |
 
-Note that `h1` uses Playfair Display, while `h2` and below use Inter. The reason: `h1` is the largest standard heading and still wants the editorial serif voice. `h2` and below are functional section dividers and want the analytical sans.
+Note the weight progression: display is Bold/Black, h1/h2 are Bold, h3/h4 are Regular, body is Regular, body-lg is Light (lighter at larger size for editorial elegance), body-sm is Regular.
 
-`display-1` and `display-2` are not in the standard heading hierarchy. They are independent display moments, used when a page wants a dramatic typographic gesture.
+This creates a clear visual hierarchy through weight alone:
+- **Dense and heavy** at the top (display, h1, h2)
+- **Calm and balanced** in the middle (h3, h4, body)
+- **Refined and airy** at body-lg (Light weight at large size, an editorial flourish)
 
-**What this means in practice:** body copy is 16px Inter at 1.6 line-height. body-lg is for hero subheads and lead paragraphs. Headings step down through the scale. Do not pick "kind of between an h2 and an h3" sizes. Use the tokens.
+**What this means in practice:** body copy is 16px Uncut Sans Regular at 1.6 line-height. body-lg is for hero subheads and lead paragraphs and uses Light weight for editorial elegance. Headings step down through the scale.
 
 ### 3.3 Micro register (data index)
 
@@ -175,9 +177,9 @@ Metadata, labels, intent markers, captions.
 | `mono` | `12px` | 1.4 | 0.1em | UPPERCASE | 400 | JetBrains Mono |
 | `mono-sm` | `10px` | 1.4 | 0.15em | UPPERCASE | 400 | JetBrains Mono |
 
-Micro tokens are always uppercase, always tracked open, always Mono. The aggressive letter-spacing is part of the register. Without it, mono small caps read as code, not metadata.
+Micro tokens are always uppercase, always tracked open, always Mono. Aggressive letter-spacing is part of the register.
 
-**What this means in practice:** the `01 /// Positioning` marks on the current site are `mono` (12px, uppercase, tracked). Intent labels are `mono`. Tech stack chips are `mono-sm`. Captions under images are `mono-sm`.
+**What this means in practice:** the `01 /// POSITIONING` marks are `mono` (12px, uppercase, tracked). Intent labels are `mono`. Tech stack chips are `mono-sm`. Captions are `mono-sm`.
 
 ### 3.4 Llamita's chat register
 
@@ -188,41 +190,39 @@ A special register, separate from the standard scale.
 | `llamita-body` | `15px` | 1.6 | 0 | Normal (mixed case) | 400 | JetBrains Mono |
 | `llamita-meta` | `11px` | 1.4 | 0.1em | UPPERCASE | 400 | JetBrains Mono |
 
-Llamita speaks in JetBrains Mono at standard mixed case. The mono register marks her voice as the "machine voice." The normal case (not uppercase like the micro register) makes the chat readable rather than indexical.
+Llamita speaks in JetBrains Mono at mixed case. The mono register marks her as the "machine voice." Mixed case (not uppercase like the micro register) makes the chat readable rather than indexical.
 
 `llamita-meta` is for timestamps, tool-call indicators ("Querying Curate Mind..."), and citation chips inside the chat.
 
-**What this means in practice:** if Llamita is talking, the text is mono. If site copy is talking, the text is Inter (or Playfair for display). The reader can tell at a glance who is speaking.
+**What this means in practice:** if Llamita is talking, the text is mono. If site copy is talking, the text is Uncut Sans. The reader can tell at a glance who is speaking.
 
 ---
 
 ## 4. Italic rules
 
-Two italics exist in the system. They have different jobs.
+Italic is used sparingly. Two contexts.
 
-### Playfair Display Italic
+### Pull quotes and display accents
 
-Used for: pull quotes, display accents, voice-shift callouts (a sentence pulled out of a paragraph to highlight a key insight in a case study). Always at h1 size or larger. Always Playfair.
+Uncut Sans Italic at h1 size or larger. Used for one-sentence pull quotes inside case studies, or display callouts that break a paragraph rhythm.
 
-Example: a case study might have a one-sentence pull quote in `h1` Playfair Italic between two body paragraphs.
+### In-body emphasis
 
-### Inter Italic
-
-Used for: in-body emphasis on a word or short phrase. Sparingly. Replaces the role bold would play in a tech-company aesthetic.
+Uncut Sans Italic at body weight (300 or 400), used for emphasizing a single word or short phrase. Sparingly. Replaces what bold would do in a tech-company aesthetic.
 
 Example: "He decided *not* to build the social profile enrichment feature."
 
 ### Never
 
 - No italic on JetBrains Mono.
-- No italic on Inter for entire paragraphs or headings.
-- No bold (the Weight Skip rule still applies).
+- No italic on Uncut Sans for entire paragraphs or headings.
+- No bold for emphasis inside a body paragraph (use italic instead).
 
 ---
 
 ## 5. Line length and reading width
 
-The eye reads paragraphs better when lines are not too wide. Wide lines force the eye to track back to the start of the next line, which fatigues the reader. The editorial standard is 50-65 characters per line.
+Body paragraphs constrain to 50-65 characters per line. Editorial standard for readability.
 
 | Container | Max width |
 |---|---|
@@ -230,10 +230,6 @@ The eye reads paragraphs better when lines are not too wide. Wide lines force th
 | Body paragraph (case study sidebar context) | `48ch` |
 | Heading | No max-width (heading fills its container) |
 | Display | No max-width (display fills its container) |
-
-`ch` is a CSS unit that measures characters of the current font. Sixty `ch` means sixty characters wide. The browser handles the math.
-
-**What this means in practice:** body paragraphs always live inside a `max-width: 60ch` container. Even on a wide desktop screen, body text does not stretch to the full window. The negative space around the paragraph is part of the design.
 
 ---
 
@@ -243,92 +239,111 @@ V1 uses a neutral B&W system. Color enters as a deliberate later decision via a 
 
 | Token | Value | Use |
 |---|---|---|
-| `--color-paper` | `#F9F8F4` | The page background. A warm off-white. |
-| `--color-ink` | `#111111` | The primary text color and the primary fill. |
-| `--color-hairline` | `rgba(17, 17, 17, 0.1)` | Borders, dividers, separators between grid cells. |
-| `--color-surface` | `#FFFFFF` | Cards, panels, the chat surface background. |
-| `--color-muted` | `#666666` | Secondary text, captions, less important metadata. |
-| `--color-inverse-paper` | `#111111` | Dark sections (e.g., the footer on the current site). |
+| `--color-paper` | `#F9F8F4` | Page background. Warm off-white. |
+| `--color-ink` | `#111111` | Primary text and fill. |
+| `--color-hairline` | `rgba(17, 17, 17, 0.1)` | Borders, dividers. |
+| `--color-surface` | `#FFFFFF` | Cards, panels, chat surface. |
+| `--color-muted` | `#666666` | Secondary text, captions. |
+| `--color-inverse-paper` | `#111111` | Dark sections (footer). |
 | `--color-inverse-ink` | `#F9F8F4` | Text on dark surfaces. |
-
-No accent color in v1. Selection states use the inverse pair (paper text on ink background, or vice versa). Hover states use opacity or weight changes, not color.
 
 ---
 
 ## 7. Spacing scale
 
-Tailwind v4 ships a default spacing scale (every multiple of 4px). We use the default plus three editorial-scale additions for hero whitespace.
+Tailwind v4's default scale plus two editorial-scale additions.
 
 | Token | Value | Common use |
 |---|---|---|
-| `space-1` | 4px | Tight gaps between related elements |
+| `space-1` | 4px | Tight gaps |
 | `space-2` | 8px | Default small gap |
-| `space-3` | 12px | Gap between a label and its value |
+| `space-3` | 12px | Label-value gap |
 | `space-4` | 16px | Default paragraph spacing |
 | `space-6` | 24px | Section internal padding |
-| `space-8` | 32px | Between sections inside a card |
+| `space-8` | 32px | Between sections in a card |
 | `space-12` | 48px | Between cards |
 | `space-16` | 64px | Between case study sections |
 | `space-24` | 96px | Hero internal padding |
 | `space-32` | 128px | Between page sections |
-| `space-40` | 160px | Hero vertical breathing room (added) |
-| `space-60` | 240px | Editorial-scale top-of-page whitespace (added) |
-
-**What this means in practice:** when picking a gap or padding value, pick from this list. Do not invent values like 18px or 22px. The scale gives the site rhythm.
+| `space-40` | 160px | Hero vertical breathing room |
+| `space-60` | 240px | Editorial-scale top-of-page whitespace |
 
 ---
 
 ## 8. Implementation: Tailwind v4 with CSS-first theming
 
-Tailwind v4 lets us define tokens directly in CSS using the `@theme` directive. This is the file Codex creates first. UUI v8 components inherit from these tokens automatically.
+Tailwind v4 lets us define tokens directly in CSS using the `@theme` directive. UUI v8 components inherit from these tokens automatically.
 
 ### File location
 
-`src/styles/globals.css`
+`src/app/globals.css`
+
+### Font files
+
+The font files for Uncut Sans should live in `public/assets/fonts/`. Maicol provides them. Expected files (subject to what weights Maicol downloaded):
+
+- `UncutSans-Light.woff2`
+- `UncutSans-LightItalic.woff2` (if available)
+- `UncutSans-Regular.woff2`
+- `UncutSans-RegularItalic.woff2`
+- `UncutSans-Bold.woff2`
+- `UncutSans-Black.woff2` (if available)
+- `JetBrainsMono-Regular.woff2` (already present)
+
+If Maicol's downloaded weights differ, Codex maps to what's available. Light + Regular + Bold is the minimum. Black is a bonus for the most extreme display moments.
+
+The existing `Inter-*.woff2` and `PlayfairDisplay-*.woff2` files are removed from `public/assets/fonts/`.
 
 ### Token definitions
 
 ```css
 @import "tailwindcss";
 
-/* Self-host Google Fonts for performance and offline */
 @font-face {
-  font-family: "Playfair Display";
-  src: url("/assets/fonts/PlayfairDisplay-Light.woff2") format("woff2");
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Playfair Display";
-  src: url("/assets/fonts/PlayfairDisplay-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/Inter-Light.woff2") format("woff2");
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-LightItalic.woff2") format("woff2");
   font-weight: 300;
-  font-style: normal;
+  font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/Inter-Regular.woff2") format("woff2");
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/Inter-Italic.woff2") format("woff2");
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-RegularItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/assets/fonts/UncutSans-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -342,31 +357,31 @@ Tailwind v4 lets us define tokens directly in CSS using the `@theme` directive. 
 
 @theme {
   /* Font families */
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Uncut Sans", system-ui, sans-serif;
+  --font-display: "Uncut Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Macro register */
   --text-display-1: clamp(80px, 14vw, 180px);
   --text-display-1--line-height: 0.9;
-  --text-display-1--letter-spacing: -0.03em;
-  --text-display-1--font-weight: 300;
+  --text-display-1--letter-spacing: -0.04em;
+  --text-display-1--font-weight: 700;
 
   --text-display-2: clamp(56px, 9vw, 120px);
-  --text-display-2--line-height: 0.95;
-  --text-display-2--letter-spacing: -0.02em;
-  --text-display-2--font-weight: 300;
+  --text-display-2--line-height: 0.92;
+  --text-display-2--letter-spacing: -0.03em;
+  --text-display-2--font-weight: 700;
 
   /* Standard register */
   --text-h1: clamp(40px, 4vw, 56px);
   --text-h1--line-height: 1.05;
-  --text-h1--letter-spacing: -0.01em;
-  --text-h1--font-weight: 400;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
 
   --text-h2: clamp(28px, 2.8vw, 40px);
   --text-h2--line-height: 1.15;
-  --text-h2--letter-spacing: -0.005em;
-  --text-h2--font-weight: 400;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h2--font-weight: 700;
 
   --text-h3: clamp(20px, 1.8vw, 24px);
   --text-h3--line-height: 1.25;
@@ -378,7 +393,7 @@ Tailwind v4 lets us define tokens directly in CSS using the `@theme` directive. 
 
   --text-body-lg: clamp(18px, 1.4vw, 20px);
   --text-body-lg--line-height: 1.7;
-  --text-body-lg--font-weight: 400;
+  --text-body-lg--font-weight: 300;
 
   --text-body: 16px;
   --text-body--line-height: 1.6;
@@ -445,32 +460,33 @@ Codex configures `globals.css` so HTML heading elements automatically use the ri
   }
 
   h1 {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: var(--text-h1);
     line-height: var(--text-h1--line-height);
     letter-spacing: var(--text-h1--letter-spacing);
-    font-weight: 400;
-  }
-
-  h2, h3, h4 {
-    font-family: var(--font-sans);
-    font-weight: 400;
+    font-weight: 700;
   }
 
   h2 {
+    font-family: var(--font-sans);
     font-size: var(--text-h2);
     line-height: var(--text-h2--line-height);
     letter-spacing: var(--text-h2--letter-spacing);
+    font-weight: 700;
   }
 
   h3 {
+    font-family: var(--font-sans);
     font-size: var(--text-h3);
     line-height: var(--text-h3--line-height);
+    font-weight: 400;
   }
 
   h4 {
+    font-family: var(--font-sans);
     font-size: var(--text-h4);
     line-height: var(--text-h4--line-height);
+    font-weight: 400;
   }
 
   p {
@@ -485,23 +501,23 @@ Codex configures `globals.css` so HTML heading elements automatically use the ri
 
 ### Utility class additions
 
-For the macro display and the micro register, Codex adds two custom Tailwind utilities:
+For the macro display and the mono registers, custom Tailwind utilities:
 
 ```css
 @utility text-display-1 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: var(--text-display-1);
   line-height: var(--text-display-1--line-height);
   letter-spacing: var(--text-display-1--letter-spacing);
-  font-weight: 300;
+  font-weight: 700;
 }
 
 @utility text-display-2 {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: var(--text-display-2);
   line-height: var(--text-display-2--line-height);
   letter-spacing: var(--text-display-2--letter-spacing);
-  font-weight: 300;
+  font-weight: 700;
 }
 
 @utility text-mono {
@@ -518,93 +534,75 @@ For the macro display and the micro register, Codex adds two custom Tailwind uti
 
 ### How UUI v8 inherits these tokens
 
-UUI v8 Pro components use Tailwind classes internally. When we override the underlying tokens in `@theme`, every UUI component automatically picks up our values. We do not need to fork UUI or patch components. The override happens at the source.
-
-Example: UUI's `<Button>` uses `font-family: var(--font-sans)` internally. Because we have set `--font-sans` to Inter, every UUI button renders in Inter without us doing anything component-by-component.
-
-The only time we override a UUI component directly is if its internal typography needs to break the default rules (rare; document the exception in a learning note if it comes up).
+UUI v8 Pro components use Tailwind classes internally. Overriding the underlying tokens in `@theme` propagates to every UUI component automatically. We do not need to fork UUI or patch individual components.
 
 ---
 
 ## 9. Pairing examples
 
-Real combinations showing how the three faces and the registers combine.
+Real combinations showing how the two faces and the registers combine.
 
 ### Example 1: Home page hero
 
 ```
-[mono: "01 /// POSITIONING"]                                              [mono: "ENTERPRISE AI PRODUCT STRATEGIST"]
+[mono: "01 /// POSITIONING"]                              [mono: "ENTERPRISE AI PRODUCT STRATEGIST"]
 
-[display-1: "I help enterprise leaders turn AI ambiguity into executable
-roadmaps and adopted products."]
+[display-1 (Uncut Sans Bold at 180px): "I work in the gap between AI capability and human adoption."]
 
-[body-lg italic Playfair Display: "I work at the intersection of people,
-systems, and emerging AI capabilities."]
+[body-lg (Uncut Sans Light at 20px): "Discovery, validation, prototyping, alignment. All in one person."]
 ```
 
-Three voices stacked. Micro mono frames the section. Display Playfair carries the strategic claim. Italic Playfair at body-lg size carries the subhead with editorial flair.
+Three voices stacked. Mono frames the section. Bold display carries the strategic claim. Light body-lg carries the subhead with editorial elegance from the lighter weight at the larger size.
 
 ### Example 2: Case study opener
 
 ```
 [mono: "AI ENABLEMENT  ///  MEETING PREP AGENT"]
 
-[h1: "Scaling sales enablement with AI agents."]
+[h1 (Uncut Sans Bold): "Scaling sales enablement with AI agents."]
 
-[body-lg: "I moved a GenAI use case from idea to validated evidence in
-3-4 weeks, accelerating investment decisions and scaling an AI meeting-
-prep agent to 300+ sales associates in under a year."]
+[body-lg (Uncut Sans Light): "I moved a GenAI use case from idea to validated evidence in 3-4 weeks..."]
 ```
-
-Mono frames the category. Playfair h1 carries the title. Inter body-lg carries the lead paragraph.
 
 ### Example 3: Inside a case study paragraph with emphasis
 
 ```
-[h3: "Validating the workflow, not just the tech."]
+[h3 (Uncut Sans Regular): "Validating the workflow, not just the tech."]
 
-[body: "Instead of guessing features, I led a rapid validation sprint.
-We did *not* write code initially. I sat with sales associates and
-manually mapped their meeting prep mental model."]
+[body (Uncut Sans Regular): "Instead of guessing features, I led a rapid validation sprint. We did *not* write code initially..."]
 ```
 
-Inter h3 for the section subhead. Inter body for the paragraph. Inter Italic for the in-body emphasis on "not."
+The "not" is Uncut Sans Italic at 400 weight.
 
 ### Example 4: A pull quote inside a case study
 
 ```
-[body: "...the team chose to build a custom orchestration layer rather
-than continue with LangChain in production."]
+[body]: paragraph ending...
 
-[h1 Playfair italic: "The abstraction was right for prototyping. It
-became the wrong choice for production."]
+[h1 italic (Uncut Sans Bold Italic): "The abstraction was right for prototyping. It became the wrong choice for production."]
 
-[body: "That decision shaped the next two quarters of architecture work."]
+[body]: paragraph continuing...
 ```
-
-Playfair Italic at h1 size as a voice-shift pull quote between two body paragraphs.
 
 ### Example 5: Llamita's chat surface
 
 ```
 [llamita-meta: "LLAMITA  ///  10:47 AM"]
 
-[llamita-body: "Ah, reading the LangChain decision. The headline is
-that Maicol recommended LangChain for prototyping. The better story is
-why he recommended *against* it in production. Want me to expand?"]
+[llamita-body (JetBrains Mono): "Ah, reading the LangChain decision. The headline is that Maicol recommended LangChain for prototyping. The better story is why he recommended *against* it in production. Want me to expand?"]
 
 [llamita-meta: "QUERYING CURATE MIND..."]
 ```
 
-JetBrains Mono throughout. Mono-meta in uppercase for timestamps and tool indicators. Mono-body in mixed case for Llamita's actual speech. The whole bubble reads as a different voice from the site copy.
+JetBrains Mono throughout. The chat reads as a different voice from the site copy.
 
 ### Example 6: A small metadata chip
 
 ```
-[mono-sm: "RAG ARCHITECTURE"] [mono-sm: "AZURE OPENAI"] [mono-sm: "REACT"]
+[mono-sm: "RAG ARCHITECTURE"]  [mono-sm: "AZURE OPENAI"]  [mono-sm: "REACT"]
 ```
 
-Three tech-stack chips, all `mono-sm` (10px JetBrains Mono uppercase tracked).
+Three tech-stack chips, all `mono-sm`.
 
 ---
 
@@ -613,18 +611,18 @@ Three tech-stack chips, all `mono-sm` (10px JetBrains Mono uppercase tracked).
 A short practical guide for adding new content.
 
 1. **What kind of content is it?**
-   - Display moment (hero, big section opener) → use `text-display-1` or `text-display-2` utility class
+   - Display moment (hero, big section opener) → use `text-display-1` or `text-display-2`
    - Standard heading → use `<h1>`, `<h2>`, `<h3>`, `<h4>` HTML elements (auto-styled per Section 8)
    - Body paragraph → use `<p>` (auto-styled, max-width 60ch)
-   - Lead paragraph or hero subhead → wrap in a class that applies `text-body-lg`
-   - Metadata, label, intent marker → use `text-mono`, `text-mono-lg`, or `text-mono-sm` utility class
-   - Llamita's speech → use `text-llamita-body` utility class
+   - Lead paragraph or hero subhead → apply `text-body-lg`
+   - Metadata, label, intent marker → `text-mono`, `text-mono-lg`, or `text-mono-sm`
+   - Llamita's speech → `text-llamita-body`
 
-2. **Need emphasis?** Use `<em>` (renders as Inter Italic).
+2. **Need emphasis?** Use `<em>` (renders as Uncut Sans Italic).
 
-3. **Need a pull quote?** Use `<blockquote>` with `text-h1` and `italic` and `font-display` classes. (Codex can define a `<PullQuote>` component for this.)
+3. **Need a pull quote?** Use `<blockquote>` with `text-h1`, `italic`, and Uncut Sans Bold weight.
 
-4. **Need a different color?** You can't. V1 is B&W. If a component genuinely needs contrast, use the inverse pair (paper-on-ink). Color decisions land in a later ADR.
+4. **Need a different color?** You can't. V1 is B&W. If a component genuinely needs contrast, use the inverse pair (paper-on-ink). Color enters via a later ADR.
 
 5. **Need a different spacing?** Pick from the scale in Section 7. Do not invent.
 
@@ -634,9 +632,8 @@ A short practical guide for adding new content.
 
 ## 11. Open questions
 
-- **Font self-hosting vs CDN.** I have specified self-hosting via `/assets/fonts/`. The alternative is Google Fonts CDN. Self-hosting is faster after first load, more reliable, and works offline (relevant for Replit local dev). Cost: a one-time download and conversion to woff2. Recommend self-hosting; final call lives with Codex.
-- **Should body italic ever appear in headings?** Current spec says no. Worth confirming as we write copy.
-- **Pull quote component design.** This spec defines the typography of a pull quote but not its container styling (borders, indentation, etc.). Belongs in a component spec when written.
+- **Exact Uncut Sans weights available.** Maicol's download might include Thin, Light, Regular, Medium, Semibold, Bold, Black. We use Light, Regular, Bold, and Black (if shipped). Medium and Semibold remain prohibited per Section 2.
+- **Italic weights available.** Uncut Sans italics may not ship in all weights. Light Italic and Regular Italic are the minimum; if only Regular Italic ships, that becomes the in-body emphasis register and pull quotes use Bold (non-italic) for emphasis instead.
 
 ---
 
@@ -644,15 +641,14 @@ A short practical guide for adding new content.
 
 When color enters, the following decisions need to be made together:
 
-- One accent color, or multiple? (Current site has blue accent + yellow highlight.)
-- Does color carry semantic meaning? (Intent = blue? Success = green?)
+- One accent color, or multiple?
+- Does color carry semantic meaning?
 - Does Llamita's chat get a color identity? (Recommend keeping Llamita B&W to preserve the "machine voice" distinction.)
-- Do citation chips get a color signal? (Recommend yes; would help them stand out.)
-
-Capturing these here so the future color ADR has a starting checklist.
+- Do citation chips get a color signal?
 
 ---
 
 ## Change log
 
-- 2026-05-25: Initial draft. Incorporates the Refined Editorial direction from Maicol. Fonts locked to Playfair Display, Inter, JetBrains Mono. Weight Skip rule established. Token system defined.
+- 2026-05-25: Initial draft. Refined Editorial direction. Playfair Display + Inter + JetBrains Mono. Original Weight Skip rule (no 500-900).
+- 2026-05-26: Revised for Bold Editorial direction per ADR 0008. Dropped Playfair Display and Inter. Adopted Uncut Sans as primary face. Revised Weight Skip rule to allow Light, Regular, Bold, Black (Medium and Semibold remain prohibited). Updated type scale, font-face declarations, tokens, and pairing examples.
