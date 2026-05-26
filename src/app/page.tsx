@@ -10,6 +10,8 @@ import { PageFrame } from "@/components/site/page-frame";
 import { caseStudies } from "@/data/case-studies";
 
 export default function Home() {
+  const showSignalHelper = process.env.NODE_ENV !== "production";
+
   return (
     <PageFrame>
       <PageSignal slug="home" title="Home" />
@@ -56,12 +58,14 @@ export default function Home() {
         </div>
       </TrackedSection>
 
-      <div className="site-container pt-24">
-        <p className="text-body-sm text-muted">
-          Signal examples are live: hover on <SignalPhrase phrase="Curate Mind" tag="builder" /> or{" "}
-          <SignalPhrase phrase="trust architecture" tag="trust" /> for two seconds, then inspect the signal store behavior in devtools.
-        </p>
-      </div>
+      {showSignalHelper ? (
+        <div className="site-container pt-24">
+          <p className="text-body-sm text-muted">
+            Signal examples are live: hover on <SignalPhrase phrase="Curate Mind" tag="builder" /> or{" "}
+            <SignalPhrase phrase="trust architecture" tag="trust" /> for two seconds, then inspect the signal store behavior in devtools.
+          </p>
+        </div>
+      ) : null}
     </PageFrame>
   );
 }
