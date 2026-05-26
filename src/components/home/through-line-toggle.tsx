@@ -61,7 +61,7 @@ export function ThroughLineToggle() {
               type="button"
               role="tab"
               aria-selected={isActive}
-              className={`text-left text-h3 transition ${isActive ? "font-display italic text-ink" : "text-muted hover:text-ink"}`}
+              className={`text-left text-h3 transition ${isActive ? "font-bold italic text-ink" : "text-muted hover:text-ink"}`}
               onMouseEnter={() => {
                 if (!isActive) {
                   setPreview(value);
@@ -92,7 +92,7 @@ export function ThroughLineToggle() {
             transition={{ duration: 0.2 }}
           >
             <h1 className="max-w-[11ch] text-display-1">{current.display}</h1>
-            <p className="mt-8 max-w-[42ch] font-display text-body-lg italic">{current.subhead}</p>
+            <p className="mt-8 max-w-[42ch] text-body-lg italic">{current.subhead}</p>
           </motion.div>
         </AnimatePresence>
       </div>
