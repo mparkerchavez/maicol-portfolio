@@ -1,6 +1,9 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { Button } from "@/components/base/buttons/button";
+import { Input } from "@/components/base/input/input";
+import { TextArea } from "@/components/base/textarea/textarea";
 import { useSignalStore } from "@/stores/signal-store";
 
 export function EarnestlyCard() {
@@ -37,26 +40,34 @@ export function EarnestlyCard() {
         <form className="mt-8 grid gap-4" onSubmit={submit}>
           <label className="grid gap-2">
             <span className="text-mono-sm text-muted">EMAIL</span>
-            <input
-              required
+            <Input
+              isRequired
               type="email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="border border-hairline bg-surface px-4 py-3 text-body outline-none focus:border-ink"
+              onChange={setEmail}
+              size="lg"
+              wrapperClassName="rounded-none bg-surface shadow-none ring-hairline focus-within:ring-ink"
+              inputClassName="text-body text-ink placeholder:text-muted"
               placeholder="you@example.com"
             />
           </label>
           <label className="grid gap-2">
             <span className="text-mono-sm text-muted">WHAT WOULD YOU MOST WANT FROM THIS?</span>
-            <textarea
+            <TextArea
               value={context}
-              onChange={(event) => setContext(event.target.value)}
-              className="min-h-28 resize-y border border-hairline bg-surface px-4 py-3 text-body outline-none focus:border-ink"
+              onChange={setContext}
+              rows={4}
+              textAreaClassName="min-h-28 rounded-none bg-surface text-body text-ink shadow-none ring-hairline focus:ring-ink"
             />
           </label>
-          <button type="submit" className="w-fit border border-ink bg-ink px-5 py-3 text-mono text-paper transition hover:bg-paper hover:text-ink">
+          <Button
+            type="submit"
+            color="primary"
+            size="md"
+            className="w-fit rounded-none border border-ink bg-ink px-5 py-3 text-mono text-paper shadow-none hover:bg-paper hover:text-ink"
+          >
             BE THE FIRST TO TRY IT
-          </button>
+          </Button>
         </form>
       )}
     </div>
