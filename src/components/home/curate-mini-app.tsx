@@ -23,10 +23,10 @@ export function CurateMiniApp() {
             >
               <p className="text-mono-sm text-muted">THEME</p>
               <p className="mt-2">{trace.theme}</p>
-              <p className="my-6 text-mono-sm text-muted">DOWN</p>
+              <p className="my-6 text-mono-sm text-muted">↓</p>
               <p className="text-mono-sm text-muted">POSITION</p>
               <p className="mt-2">{trace.position}</p>
-              <p className="my-6 text-mono-sm text-muted">DOWN</p>
+              <p className="my-6 text-mono-sm text-muted">↓</p>
               <p className="text-mono-sm text-muted">EVIDENCE</p>
               <p className="mt-2 text-body-sm text-muted">{expanded ? trace.evidence : "Click to expand this trace."}</p>
               {expanded ? (
@@ -34,7 +34,7 @@ export function CurateMiniApp() {
                   <p className="text-mono-sm text-muted">SOURCE</p>
                   <p className="mt-2 text-body-sm">{trace.source}</p>
                   <OpenChatButton prompt={`explain this Curate Mind trace: ${trace.position}`} className="mt-6 text-mono">
-                    ASK LLAMITA TO EXPLAIN -&gt;
+                    ASK LLAMITA TO EXPLAIN →
                   </OpenChatButton>
                 </div>
               ) : (
@@ -48,7 +48,7 @@ export function CurateMiniApp() {
                   recordEvent({ type: "click", target: `curate-trace:${index + 1}` });
                 }}
               >
-                {expanded ? "COLLAPSE UP" : "EXPAND DOWN"}
+                {expanded ? "COLLAPSE ↑" : "EXPAND ↓"}
               </button>
             </div>
           );
@@ -63,7 +63,7 @@ export function CurateMiniApp() {
         rel="noreferrer"
         className="mt-8 inline-block text-mono text-ink"
       >
-        EXPLORE THE FULL EXPERIENCE -&gt; CURATEMIND.IO
+        EXPLORE THE FULL EXPERIENCE → CURATEMIND.IO
       </SignalAnchor>
     </div>
   );

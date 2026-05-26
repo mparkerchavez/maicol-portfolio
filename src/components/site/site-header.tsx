@@ -12,10 +12,10 @@ export function SiteHeader({ showBreadcrumb = false }: SiteHeaderProps) {
         <div className="flex items-center gap-4">
           {showBreadcrumb ? (
             <Link href="/" className="text-mono text-muted transition hover:text-ink">
-              {"<-"} BACK
+              ← BACK
             </Link>
           ) : null}
-          <Link href="/" className="text-[22px] leading-none text-ink">
+          <Link href="/" className="text-h3 leading-none text-ink">
             Maicol Parker-Chavez
           </Link>
         </div>

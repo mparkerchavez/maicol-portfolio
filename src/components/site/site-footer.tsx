@@ -31,7 +31,7 @@ export function SiteFooter() {
         </div>
         <div className="flex flex-col justify-between gap-12">
           <OpenChatButton prompt="what should I ask next?" className="text-left text-mono text-inverse-ink/80 hover:text-inverse-ink">
-            OR -&gt; ASK LLAMITA WHAT TO ASK NEXT
+            OR → ASK LLAMITA WHAT TO ASK NEXT
           </OpenChatButton>
           <p className="text-mono-sm text-inverse-ink/55">© 2026 MAICOL PARKER-CHAVEZ</p>
         </div>

@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+
 export type CaseStudySlug = "capital-group" | "tech-trends" | "innovation-sprints";
 
 export type CaseStudy = {
@@ -24,6 +27,47 @@ export type CaseStudy = {
   related: CaseStudySlug[];
 };
 
+const sectionChips: Partial<Record<CaseStudySlug, Record<string, string[]>>> = {
+  "capital-group": {
+    "01 /// THE CHALLENGE": ["Why didn't they just ask sales associates what they wanted?"],
+    "02 /// THE STRATEGY": ["What was the decision not to build?", "How did this scale from 12 to 300+ users?"],
+    "03 /// THE OUTCOME": ["How does this translate to a Senior PM role?"],
+  },
+  "tech-trends": {
+    "01 /// THE CHALLENGE": ["What made this different from trend reporting?"],
+    "02 /// THE STRATEGY": ["Where did AI help the research process?", "Why was LangChain useful for prototyping?"],
+    "03 /// THE OUTCOME": ["What was the production tradeoff with LangChain?"],
+  },
+  "innovation-sprints": {
+    "01 /// THE CHALLENGE": ["How did the sprint avoid generic AI ideation?"],
+    "02 /// THE STRATEGY": ["What did the prioritization framework measure?", "Where did data readiness change the decision?"],
+    "03 /// THE OUTCOME": ["How does this connect to AI Product Lead work?"],
+  },
+};
+
+function loadCaseStudySections(slug: CaseStudySlug): CaseStudy["sections"] {
+  const filePath = path.join(process.cwd(), "content", "case-studies", `${slug}.md`);
+  const markdown = readFileSync(filePath, "utf8");
+  const sections = Array.from(markdown.matchAll(/^## (\d{2} \/\/\/ .+)\n\n### (.+)\n\n([\s\S]*?)(?=\n## \d{2} \/\/\/ |(?![\s\S]))/gm));
+
+  return sections.map((section) => {
+    const eyebrow = section[1] ?? "";
+    const title = section[2] ?? "";
+    const body = (section[3] ?? "")
+      .trim()
+      .split(/\n{2,}/)
+      .map((paragraph) => paragraph.replace(/\n/g, " ").trim())
+      .filter(Boolean);
+
+    return {
+      eyebrow,
+      title,
+      body,
+      chips: sectionChips[slug]?.[eyebrow],
+    };
+  });
+}
+
 export const caseStudies: CaseStudy[] = [
   {
     slug: "capital-group",
@@ -45,36 +89,7 @@ export const caseStudies: CaseStudy[] = [
       "Weekly prep reduced from 2 to 3 hours to 10 to 15 minutes per client",
     ],
     chips: ["300+ USERS", "GENAI ADOPTION", "AGENDA-FIRST"],
-    sections: [
-      {
-        eyebrow: "01 /// THE CHALLENGE",
-        title: "The weekly prep bottleneck.",
-        body: [
-          "Sales associates typically prepared at the start of the week, spending 2 to 3 hours to get ready for 6 to 8 client meetings.",
-          "A data science team had access to client databases, prior meeting notes, sales activity, and internal research commentary. The context lived in different places and did not reliably support fast, meeting-specific preparation.",
-        ],
-        chips: ["Why didn't they just ask sales associates what they wanted?"],
-      },
-      {
-        eyebrow: "02 /// THE STRATEGY",
-        title: "Validating the workflow, not just the tech.",
-        body: [
-          "Instead of starting with features, we ran an innovation sprint to validate where AI could remove the most friction in meeting prep.",
-          "Sales associates did not want to chat. They wanted an agenda-first output they could send to clients, backed by specifics when they needed to go deeper.",
-          "We did not build social profile enrichment because of privacy and PII concerns. Instead, we surfaced personal context already captured in prior meeting notes.",
-        ],
-        chips: ["What was the decision not to build?", "How did this scale from 12 to 300+ users?"],
-      },
-      {
-        eyebrow: "03 /// THE OUTCOME",
-        title: "From validated evidence to funded integration.",
-        body: [
-          "In 3 to 4 weeks, we produced validated learnings that stakeholders used to commit additional funding and engineering capacity.",
-          "Downstream teams integrated the capability into the existing platform and expanded adoption from a 12-person pilot to roughly 90 users, later scaling to 300+ active sales associates within a year.",
-        ],
-        chips: ["How does this translate to a Senior PM role?"],
-      },
-    ],
+    sections: loadCaseStudySections("capital-group"),
     related: ["tech-trends", "innovation-sprints"],
   },
   {
@@ -97,36 +112,7 @@ export const caseStudies: CaseStudy[] = [
       "4 to 6 trends served as editorial lead per year",
     ],
     chips: ["1,300+ VISITORS", "AI NARRATIVE", "LANGCHAIN"],
-    sections: [
-      {
-        eyebrow: "01 /// THE CHALLENGE",
-        title: "Staying ahead of AI acceleration.",
-        body: [
-          "As AI capabilities advanced rapidly, it became harder for organizations to maintain a shared understanding of what was emerging, what was hype, and what would matter over the next 3 to 5 years.",
-          "Without a clear narrative grounded in evidence, teams risked becoming reactive instead of building readiness over time.",
-        ],
-        chips: ["What made this different from trend reporting?"],
-      },
-      {
-        eyebrow: "02 /// THE STRATEGY",
-        title: "Turning signals into an enterprise point of view.",
-        body: [
-          "We treated Tech Trends as an annual synthesis of signals, not a retrospective summary.",
-          "I authored AI-focused sections by combining external research and industry reporting with perspectives from ecosystem partners, then translating what we observed into an enterprise lens.",
-          "I also designed lightweight Copilot workflows to tag documents, surface cross-document signals, and provide writing feedback. Human editorial judgment remained the final gate.",
-        ],
-        chips: ["Where did AI help the research process?", "Why was LangChain useful for prototyping?"],
-      },
-      {
-        eyebrow: "03 /// THE OUTCOME",
-        title: "Shared context for smarter decisions.",
-        body: [
-          "The AI narrative work helped leaders interpret rapid shifts in generative AI and emerging capabilities through an enterprise lens.",
-          "The research later informed downstream work, including an AI vendor evaluation framework and Copilot Studio scale readiness alignment.",
-        ],
-        chips: ["What was the production tradeoff with LangChain?"],
-      },
-    ],
+    sections: loadCaseStudySections("tech-trends"),
     related: ["capital-group", "innovation-sprints"],
   },
   {
@@ -149,36 +135,7 @@ export const caseStudies: CaseStudy[] = [
       "Workshop design reused by another business unit",
     ],
     chips: ["20+ SPRINTS", "30+ PARTICIPANTS", "AI DISCOVERY"],
-    sections: [
-      {
-        eyebrow: "01 /// THE CHALLENGE",
-        title: "From AI curiosity to business-ready use cases.",
-        body: [
-          "Teams surfaced many ideas, but the hard part was turning interest in AI into opportunities rooted in user needs, measurable outcomes, and clear constraints.",
-          "Without a shared structure, leaders struggled to decide what to pursue, what to defer, and how to connect initiatives to business outcomes.",
-        ],
-        chips: ["How did the sprint avoid generic AI ideation?"],
-      },
-      {
-        eyebrow: "02 /// THE STRATEGY",
-        title: "A repeatable framework for AI discovery.",
-        body: [
-          "The workshop system paired human-centered problem framing with an enterprise lens.",
-          "Each pillar evaluated opportunities across customer needs, fit with AI capabilities, and implementation considerations. Data readiness was consistently the primary constraint.",
-          "Outputs included empathy maps, value maps, prioritized opportunity lists, and an executive capability lineage view.",
-        ],
-        chips: ["What did the prioritization framework measure?", "Where did data readiness change the decision?"],
-      },
-      {
-        eyebrow: "03 /// THE OUTCOME",
-        title: "Clearer priorities and better decision quality.",
-        body: [
-          "The sprint approach helped teams move from open questions to clearer decisions.",
-          "At the leadership level, capability lineage and value chain mapping made alignment gaps visible before deeper investment.",
-        ],
-        chips: ["How does this connect to AI Product Lead work?"],
-      },
-    ],
+    sections: loadCaseStudySections("innovation-sprints"),
     related: ["capital-group", "tech-trends"],
   },
 ];
