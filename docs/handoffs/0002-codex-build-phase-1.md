@@ -170,4 +170,28 @@ If any of the following come up, write a note to `docs/handoffs/` and tag Maicol
 
 ## Resolution
 
-[To be filled in when Codex completes Phase 1. Include: the PR URL, the deployed Replit URL, any open issues for follow-up, any spec drift discovered during implementation that needs to be reflected back into the spec docs.]
+**Date:** 2026-05-25
+**Status:** Phase 1 complete with follow-up punch list captured in Handoff 0003.
+
+Codex shipped Phase 1 on branch `chore/phase-1-foundation`, including:
+
+- Next.js 15 bootstrap with React 19, Tailwind v4, TypeScript, ESLint
+- Full typography token system per Spec 01 (with one drift, see Handoff 0003)
+- Self-hosted fonts (Playfair Display, Inter, JetBrains Mono) in `public/assets/fonts/`
+- Color tokens for B&W neutrals plus a full set of mapped tokens for Untitled UI compatibility
+- Global elements: status strip, header, footer, Llamita placeholder, page frame
+- Home page with hero/through-line toggle, case study triptych, Curate Mind mini-app shell, Earnestly signup card UI, signal-anchored footer
+- Dynamic case study routes at `src/app/work/[slug]/page.tsx`
+- Signal tracking infrastructure: Zustand store, tagged-phrase listener, scroll-section tracking, page-context assembly per Spec 03 Section 7
+- Replit deployment configuration (`.replit`, `replit.nix`)
+- A small set of Codex-authored Llamita-style copy moments (Earnestly confirmation, etc.) that will be revisited when Spec 04 lands
+
+**Open follow-up work captured in Handoff 0003 (Phase 1 punch list).**
+
+Items deferred to subsequent phases per scope:
+- Llamita character visual (Phase 2)
+- Llamita behavior animations (Phase 2)
+- Chat surface and chat backend (Phase 3)
+- Intent inference scoring logic (Phase 4)
+- Curate Mind data integration (Phase 3 or 4 depending on Spec 09 timing)
+- Earnestly signup backend (Phase 3 or 4 depending on Spec 10 timing)
