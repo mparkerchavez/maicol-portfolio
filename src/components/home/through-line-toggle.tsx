@@ -84,7 +84,7 @@ export function ThroughLineToggle() {
       </div>
 
       <div className="mt-12 min-h-[420px] md:min-h-[500px]">
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={preview ?? active}
             initial={{ opacity: 0, y: 8 }}
