@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LlamitaPlaceholder } from "@/components/site/llamita-placeholder";
+import { getIdleObservationContent } from "@/lib/llamita-observations";
 
 export const metadata: Metadata = {
   title: "Maicol Parker-Chavez",
@@ -12,11 +13,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const idleObservations = getIdleObservationContent();
+
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         {children}
-        <LlamitaPlaceholder />
+        <LlamitaPlaceholder idleObservations={idleObservations} />
       </body>
     </html>
   );
