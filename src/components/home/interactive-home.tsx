@@ -1,15 +1,18 @@
 "use client";
 
 // First-pass interactive home prototype. The page becomes a product surface before case-study pages inherit the direction.
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, Download, FileText, Mail, MessageSquare, PanelRightOpen, type LucideIcon } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SignalAnchor } from "@/components/signals/signal-anchor";
 import { TrackedSection } from "@/components/signals/tracked-section";
 import { OpenChatButton } from "@/components/site/open-chat-button";
 import { AppButton, AppCard, AppTabButton, AppTag, AppTagGroup, AppTagList } from "@/components/ui";
 import { curateTraces } from "@/data/curate-traces";
 import type { CaseStudy, CaseStudySlug } from "@/data/case-studies";
+import { LLAMITA_STATE_LABELS } from "@/lib/llamita-behavior";
+import { useLlamitaBehaviorStore } from "@/stores/llamita-behavior-store";
 import type { ThroughLine } from "@/stores/signal-store";
 import { useSignalStore } from "@/stores/signal-store";
 
@@ -68,8 +71,10 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
   const [expandedTraceIndex, setExpandedTraceIndex] = useState(0);
   const setThroughLine = useSignalStore((state) => state.setThroughLine);
   const recordEvent = useSignalStore((state) => state.recordEvent);
+  const llamitaState = useLlamitaBehaviorStore((state) => state.state);
 
   const currentFraming = framings[previewThroughLine ?? activeThroughLine];
+  const currentFramingKey = previewThroughLine ?? activeThroughLine;
   const activeCase = useMemo(
     () => caseStudies.find((caseStudy) => caseStudy.slug === activeCaseSlug) ?? caseStudies[0]!,
     [activeCaseSlug, caseStudies],
@@ -161,10 +166,8 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
             <p className="hidden text-mono-sm text-muted xl:block">SIGNAL STATE: SESSION ONLY</p>
           </div>
 
-          <div className="relative z-10 mt-7">
-            <h1 className="max-w-none text-h1">{currentFraming.display}</h1>
-            <p className="mt-6 max-w-[48ch] text-body-lg">{currentFraming.subhead}</p>
-          </div>
+          <ThroughLineCopy frameKey={currentFramingKey} framing={currentFraming} />
+          <AboutAffordance />
 
           <div className="relative mt-8 min-h-[220px] overflow-hidden border border-hairline bg-paper">
             <Image
@@ -186,7 +189,7 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
           <div className="border border-ink bg-surface p-4 shadow-[6px_6px_0_0_var(--color-ink)]">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-llamita-meta text-muted">LLAMITA /// OBSERVING</p>
+                <p className="text-llamita-meta text-muted">{LLAMITA_STATE_LABELS[llamitaState]}</p>
                 <p className="mt-4 text-llamita-body">{currentFraming.llamaNote}</p>
               </div>
             </div>
@@ -235,6 +238,85 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
       <TraceLab expandedTraceIndex={expandedTraceIndex} setExpandedTraceIndex={setExpandedTraceIndex} expandedTrace={expandedTrace} />
       <EarnestlyPreview />
     </>
+  );
+}
+
+function ThroughLineCopy({
+  frameKey,
+  framing,
+}: {
+  frameKey: ThroughLine;
+  framing: (typeof framings)[ThroughLine];
+}) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return (
+      <div className="relative z-10 mt-7 min-h-[450px]">
+        <h1 className="max-w-none text-h1">{framing.display}</h1>
+        <p className="mt-6 max-w-[48ch] text-body-lg italic">{framing.subhead}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative z-10 mt-7 min-h-[450px]">
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={frameKey}
+          className="absolute inset-x-0 top-0"
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 0 }}
+          transition={{ duration: 0.2, ease: [0, 0, 0.2, 1] }}
+        >
+          <h1 className="max-w-none text-h1">{framing.display}</h1>
+          <p className="mt-6 max-w-[48ch] text-body-lg italic">{framing.subhead}</p>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function AboutAffordance() {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const setHoverLookTarget = useLlamitaBehaviorStore((state) => state.setHoverLookTarget);
+  const clearHoverLookTarget = useLlamitaBehaviorStore((state) => state.clearHoverLookTarget);
+
+  const beginLook = () => {
+    if (shouldReduceMotion || !ref.current) {
+      return;
+    }
+
+    const rect = ref.current.getBoundingClientRect();
+    setHoverLookTarget({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    });
+  };
+
+  const endLook = () => {
+    clearHoverLookTarget();
+  };
+
+  return (
+    <span
+      ref={ref}
+      className="relative z-10 mt-6 inline-flex"
+      onPointerEnter={beginLook}
+      onPointerLeave={endLook}
+      onMouseEnter={beginLook}
+      onMouseLeave={endLook}
+      onFocus={beginLook}
+      onBlur={endLook}
+    >
+      <OpenChatButton prompt="tell me about Maicol" className="inline-flex items-center gap-2 text-mono">
+        TO LEARN ABOUT MAICOL
+        <ArrowUpRight aria-hidden="true" className="size-4" strokeWidth={1.5} />
+        ASK LLAMITA
+      </OpenChatButton>
+    </span>
   );
 }
 

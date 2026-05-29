@@ -35,6 +35,10 @@ type SignalState = {
     confidence: number;
   };
   recentBehavior: SignalEvent[];
+  lastEvent: SignalEvent | null;
+  lastEngagementAtMs: number | null;
+  lastSectionEnteredAtMs: number | null;
+  lastThroughLineChangedAtMs: number | null;
   setPage: (page: SignalState["page"]) => void;
   setInView: (inView: NonNullable<SignalState["inView"]>) => void;
   setThroughLine: (throughLine: ThroughLine) => void;
@@ -51,6 +55,7 @@ const withTimestamp = (event: Omit<SignalEvent, "timestampMs">): SignalEvent => 
 });
 
 const keepRecent = (events: SignalEvent[]) => events.slice(-5);
+const isEngagementEvent = (event: SignalEvent) => event.type === "click" || event.type === "chip-click";
 
 export const useSignalStore = create<SignalState>((set, get) => ({
   page: {
@@ -65,29 +70,61 @@ export const useSignalStore = create<SignalState>((set, get) => ({
     confidence: 0,
   },
   recentBehavior: [],
+  lastEvent: null,
+  lastEngagementAtMs: null,
+  lastSectionEnteredAtMs: null,
+  lastThroughLineChangedAtMs: null,
   setPage: (page) => set({ page }),
   setInView: (inView) =>
-    set((state) => ({
-      inView,
-      recentBehavior: keepRecent([...state.recentBehavior, withTimestamp({ type: "scroll-section", target: inView.sectionId })]),
-    })),
+    set((state) => {
+      if (state.inView?.sectionId === inView.sectionId) {
+        return { inView };
+      }
+
+      const event = withTimestamp({ type: "scroll-section", target: inView.sectionId });
+
+      return {
+        inView,
+        lastEvent: event,
+        lastSectionEnteredAtMs: event.timestampMs,
+        recentBehavior: keepRecent([...state.recentBehavior, event]),
+      };
+    }),
   setThroughLine: (throughLine) =>
-    set((state) => ({
-      throughLine,
-      recentBehavior: keepRecent([...state.recentBehavior, withTimestamp({ type: "click", target: `through-line:${throughLine}` })]),
-    })),
+    set((state) => {
+      const event = withTimestamp({ type: "click", target: `through-line:${throughLine}` });
+
+      return {
+        throughLine,
+        lastEvent: event,
+        lastEngagementAtMs: event.timestampMs,
+        lastThroughLineChangedAtMs: event.timestampMs,
+        recentBehavior: keepRecent([...state.recentBehavior, event]),
+      };
+    }),
   recordHover: (hover) =>
-    set((state) => ({
-      lastHover: {
-        ...hover,
-        timestampMs: Date.now(),
-      },
-      recentBehavior: keepRecent([...state.recentBehavior, withTimestamp({ type: "hover", target: `${hover.tag}:${hover.phrase}` })]),
-    })),
-  recordEvent: (event) =>
-    set((state) => ({
-      recentBehavior: keepRecent([...state.recentBehavior, withTimestamp(event)]),
-    })),
+    set((state) => {
+      const event = withTimestamp({ type: "hover", target: `${hover.tag}:${hover.phrase}` });
+
+      return {
+        lastHover: {
+          ...hover,
+          timestampMs: Date.now(),
+        },
+        lastEvent: event,
+        recentBehavior: keepRecent([...state.recentBehavior, event]),
+      };
+    }),
+  recordEvent: (eventInput) =>
+    set((state) => {
+      const event = withTimestamp(eventInput);
+
+      return {
+        lastEvent: event,
+        lastEngagementAtMs: isEngagementEvent(event) ? event.timestampMs : state.lastEngagementAtMs,
+        recentBehavior: keepRecent([...state.recentBehavior, event]),
+      };
+    }),
   getPageContext: () => {
     const state = get();
 

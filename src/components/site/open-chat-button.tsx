@@ -2,6 +2,7 @@
 
 import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
 import { AppButton } from "@/components/ui";
+import { useLlamitaBehaviorStore } from "@/stores/llamita-behavior-store";
 import { useSignalStore } from "@/stores/signal-store";
 
 type OpenChatButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> & {
@@ -11,6 +12,7 @@ type OpenChatButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"
 
 export function OpenChatButton({ prompt, children, onClick, className = "", ...props }: OpenChatButtonProps) {
   const recordEvent = useSignalStore((state) => state.recordEvent);
+  const openChat = useLlamitaBehaviorStore((state) => state.openChat);
 
   return (
     <AppButton
@@ -21,7 +23,7 @@ export function OpenChatButton({ prompt, children, onClick, className = "", ...p
       className={className}
       onClick={(event: MouseEvent<HTMLButtonElement>) => {
         recordEvent({ type: "click", target: prompt ? `open-chat:${prompt}` : "open-chat" });
-        console.info("open chat", { prompt });
+        openChat({ prompt, source: "button" });
         onClick?.(event);
       }}
     >
