@@ -26,7 +26,6 @@ export function LlamitaBehaviorController({ idleObservations }: LlamitaBehaviorC
   const recentBehavior = useSignalStore((state) => state.recentBehavior);
   const lastEngagementAtMs = useSignalStore((state) => state.lastEngagementAtMs);
   const lastSectionEnteredAtMs = useSignalStore((state) => state.lastSectionEnteredAtMs);
-  const lastThroughLineChangedAtMs = useSignalStore((state) => state.lastThroughLineChangedAtMs);
   const llamitaState = useLlamitaBehaviorStore((state) => state.state);
   const chatOpen = useLlamitaBehaviorStore((state) => state.chatOpen);
   const currentObservation = useLlamitaBehaviorStore((state) => state.currentObservation);
@@ -45,10 +44,9 @@ export function LlamitaBehaviorController({ idleObservations }: LlamitaBehaviorC
         pageSlug: page.slug,
         sectionId: inView?.sectionId,
         lastSectionEnteredAtMs,
-        lastThroughLineChangedAtMs,
         recentBehavior,
       }),
-    [inView?.sectionId, lastSectionEnteredAtMs, lastThroughLineChangedAtMs, page.slug, recentBehavior],
+    [inView?.sectionId, lastSectionEnteredAtMs, page.slug, recentBehavior],
   );
 
   useEffect(() => {
@@ -73,7 +71,6 @@ export function LlamitaBehaviorController({ idleObservations }: LlamitaBehaviorC
         pageSlug: signalState.page.slug,
         sectionId: signalState.inView?.sectionId,
         lastSectionEnteredAtMs: signalState.lastSectionEnteredAtMs,
-        lastThroughLineChangedAtMs: signalState.lastThroughLineChangedAtMs,
         recentBehavior: signalState.recentBehavior,
       });
 

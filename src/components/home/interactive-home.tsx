@@ -1,10 +1,10 @@
 "use client";
 
 // First-pass interactive home prototype. The page becomes a product surface before case-study pages inherit the direction.
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, Download, FileText, Mail, MessageSquare, PanelRightOpen, type LucideIcon } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import { SignalAnchor } from "@/components/signals/signal-anchor";
 import { TrackedSection } from "@/components/signals/tracked-section";
 import { OpenChatButton } from "@/components/site/open-chat-button";
@@ -13,50 +13,11 @@ import { curateTraces } from "@/data/curate-traces";
 import type { CaseStudy, CaseStudySlug } from "@/data/case-studies";
 import { LLAMITA_STATE_LABELS } from "@/lib/llamita-behavior";
 import { useLlamitaBehaviorStore } from "@/stores/llamita-behavior-store";
-import type { ThroughLine } from "@/stores/signal-store";
 import { useSignalStore } from "@/stores/signal-store";
-
-const throughLineStorageKey = "maicol-through-line";
-
-const framings: Record<
-  ThroughLine,
-  {
-    label: string;
-    eyebrow: string;
-    display: string;
-    subhead: string;
-    llamaNote: string;
-  }
-> = {
-  designer: {
-    label: "Product Designer",
-    eyebrow: "DESIGN FUNCTION",
-    display: "I have been a Product Designer for 24 years. I am working on what that becomes in the age of AI.",
-    subhead: "Curate Mind is one piece of the answer. The rest is how product judgment changes when the material starts talking back.",
-    llamaNote: "This frame asks what survives when screens stop being the center of the work.",
-  },
-  "ai-product-lead": {
-    label: "AI Product Lead",
-    eyebrow: "DEFAULT READ",
-    display: "I work in the gap between AI capability and human adoption.",
-    subhead: "Discovery, validation, prototyping, alignment. All in one person.",
-    llamaNote: "This is the spine: moving AI capability into human use.",
-  },
-  "end-to-end-product": {
-    label: "End-to-end Product",
-    eyebrow: "OPERATING MODEL",
-    display: "Twenty-four years of product work, converged on one function.",
-    subhead: "Find where AI creates value. Prove it before the build. Scale what works.",
-    llamaNote: "This frame answers the title problem: the function came before the label.",
-  },
-};
-
-const framingOrder = Object.keys(framings) as ThroughLine[];
 
 const recruiterProof = [
   { label: "STATUS", value: "OPEN TO SENIOR PM AND AI PRODUCT LEAD ROLES" },
   { label: "LOCATION", value: "LOS ANGELES" },
-  { label: "RANGE", value: "$170K TO $190K" },
   { label: "SIGNAL", value: "RESUME AND CONTACT ABOVE THE FOLD" },
 ];
 
@@ -65,37 +26,16 @@ type InteractiveHomeProps = {
 };
 
 export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
-  const [activeThroughLine, setActiveThroughLine] = useState<ThroughLine>("ai-product-lead");
-  const [previewThroughLine, setPreviewThroughLine] = useState<ThroughLine | null>(null);
   const [activeCaseSlug, setActiveCaseSlug] = useState<CaseStudySlug>("capital-group");
   const [expandedTraceIndex, setExpandedTraceIndex] = useState(0);
-  const setThroughLine = useSignalStore((state) => state.setThroughLine);
   const recordEvent = useSignalStore((state) => state.recordEvent);
   const llamitaState = useLlamitaBehaviorStore((state) => state.state);
 
-  const currentFraming = framings[previewThroughLine ?? activeThroughLine];
-  const currentFramingKey = previewThroughLine ?? activeThroughLine;
   const activeCase = useMemo(
     () => caseStudies.find((caseStudy) => caseStudy.slug === activeCaseSlug) ?? caseStudies[0]!,
     [activeCaseSlug, caseStudies],
   );
   const expandedTrace = curateTraces[expandedTraceIndex] ?? curateTraces[0];
-
-  useEffect(() => {
-    const stored = window.sessionStorage.getItem(throughLineStorageKey) as ThroughLine | null;
-
-    if (stored && stored in framings) {
-      setActiveThroughLine(stored);
-      setThroughLine(stored);
-    }
-  }, [setThroughLine]);
-
-  const commitThroughLine = (value: ThroughLine) => {
-    setActiveThroughLine(value);
-    setPreviewThroughLine(null);
-    setThroughLine(value);
-    window.sessionStorage.setItem(throughLineStorageKey, value);
-  };
 
   const chooseCase = (caseStudy: CaseStudy) => {
     setActiveCaseSlug(caseStudy.slug);
@@ -112,39 +52,6 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
         <aside className="flex flex-col justify-between gap-8 border-r border-hairline pr-5">
           <div>
             <p className="text-mono text-muted">01 /// INTENT COCKPIT</p>
-            <div className="mt-8 grid gap-3" role="tablist" aria-label="Career framing">
-              {framingOrder.map((value) => {
-                const isActive = value === activeThroughLine;
-
-                return (
-                  <AppTabButton
-                    key={value}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    className={`w-full border px-4 py-3 text-left transition ${
-                      isActive ? "border-ink bg-ink text-paper" : "border-hairline bg-transparent text-ink hover:border-ink"
-                    }`}
-                    onMouseEnter={() => {
-                      if (!isActive) {
-                        setPreviewThroughLine(value);
-                      }
-                    }}
-                    onMouseLeave={() => setPreviewThroughLine(null)}
-                    onFocus={() => {
-                      if (!isActive) {
-                        setPreviewThroughLine(value);
-                      }
-                    }}
-                    onBlur={() => setPreviewThroughLine(null)}
-                    onClick={() => commitThroughLine(value)}
-                  >
-                    <span className="block text-mono-sm opacity-70">{framings[value].eyebrow}</span>
-                    <span className="mt-2 block text-h4">{framings[value].label}</span>
-                  </AppTabButton>
-                );
-              })}
-            </div>
           </div>
 
           <div className="border-t border-hairline pt-5">
@@ -162,11 +69,14 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
 
         <div className="relative flex min-h-[620px] flex-col justify-between border-x border-hairline px-7 py-7">
           <div className="flex items-center justify-between gap-6">
-            <p className="text-mono text-muted">ACTIVE FRAME /// {currentFraming.eyebrow}</p>
+            <p className="text-mono text-muted">01 /// POSITIONING</p>
             <p className="hidden text-mono-sm text-muted xl:block">SIGNAL STATE: SESSION ONLY</p>
           </div>
 
-          <ThroughLineCopy frameKey={currentFramingKey} framing={currentFraming} />
+          <div className="relative z-10 mt-7 min-h-[450px]">
+            <h1 className="max-w-none text-h1">I work in the gap between AI capability and human adoption.</h1>
+            <p className="mt-6 max-w-[48ch] text-body-lg italic">Discovery, validation, prototyping, alignment, all in one person.</p>
+          </div>
           <AboutAffordance />
 
           <div className="relative mt-8 min-h-[220px] overflow-hidden border border-hairline bg-paper">
@@ -190,7 +100,6 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="text-llamita-meta text-muted">{LLAMITA_STATE_LABELS[llamitaState]}</p>
-                <p className="mt-4 text-llamita-body">{currentFraming.llamaNote}</p>
               </div>
             </div>
             <div className="mt-5 grid gap-2">
@@ -238,43 +147,6 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
       <TraceLab expandedTraceIndex={expandedTraceIndex} setExpandedTraceIndex={setExpandedTraceIndex} expandedTrace={expandedTrace} />
       <EarnestlyPreview />
     </>
-  );
-}
-
-function ThroughLineCopy({
-  frameKey,
-  framing,
-}: {
-  frameKey: ThroughLine;
-  framing: (typeof framings)[ThroughLine];
-}) {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return (
-      <div className="relative z-10 mt-7 min-h-[450px]">
-        <h1 className="max-w-none text-h1">{framing.display}</h1>
-        <p className="mt-6 max-w-[48ch] text-body-lg italic">{framing.subhead}</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative z-10 mt-7 min-h-[450px]">
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={frameKey}
-          className="absolute inset-x-0 top-0"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 0 }}
-          transition={{ duration: 0.2, ease: [0, 0, 0.2, 1] }}
-        >
-          <h1 className="max-w-none text-h1">{framing.display}</h1>
-          <p className="mt-6 max-w-[48ch] text-body-lg italic">{framing.subhead}</p>
-        </motion.div>
-      </AnimatePresence>
-    </div>
   );
 }
 

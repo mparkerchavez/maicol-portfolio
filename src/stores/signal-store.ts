@@ -2,7 +2,6 @@
 
 import { create } from "zustand";
 
-export type ThroughLine = "designer" | "ai-product-lead" | "end-to-end-product";
 export type IntentTrack = "for-anyone" | "recruiters" | "ai-strategist" | "product-managers" | "product-designers";
 export type SignalEventType = "hover" | "click" | "scroll-section" | "chip-click";
 
@@ -29,7 +28,6 @@ type SignalState = {
     sectionTitle: string;
   } | null;
   lastHover: HoverSignal | null;
-  throughLine: ThroughLine;
   inferredTrack: {
     track: IntentTrack;
     confidence: number;
@@ -38,16 +36,14 @@ type SignalState = {
   lastEvent: SignalEvent | null;
   lastEngagementAtMs: number | null;
   lastSectionEnteredAtMs: number | null;
-  lastThroughLineChangedAtMs: number | null;
   setPage: (page: SignalState["page"]) => void;
   setInView: (inView: NonNullable<SignalState["inView"]>) => void;
-  setThroughLine: (throughLine: ThroughLine) => void;
   recordHover: (hover: Omit<HoverSignal, "timestampMs">) => void;
   recordEvent: (event: Omit<SignalEvent, "timestampMs">) => void;
   getPageContext: () => PageContext;
 };
 
-export type PageContext = Pick<SignalState, "page" | "inView" | "lastHover" | "throughLine" | "inferredTrack" | "recentBehavior">;
+export type PageContext = Pick<SignalState, "page" | "inView" | "lastHover" | "inferredTrack" | "recentBehavior">;
 
 const withTimestamp = (event: Omit<SignalEvent, "timestampMs">): SignalEvent => ({
   ...event,
@@ -64,7 +60,6 @@ export const useSignalStore = create<SignalState>((set, get) => ({
   },
   inView: null,
   lastHover: null,
-  throughLine: "ai-product-lead",
   inferredTrack: {
     track: "for-anyone",
     confidence: 0,
@@ -73,7 +68,6 @@ export const useSignalStore = create<SignalState>((set, get) => ({
   lastEvent: null,
   lastEngagementAtMs: null,
   lastSectionEnteredAtMs: null,
-  lastThroughLineChangedAtMs: null,
   setPage: (page) => set({ page }),
   setInView: (inView) =>
     set((state) => {
@@ -87,18 +81,6 @@ export const useSignalStore = create<SignalState>((set, get) => ({
         inView,
         lastEvent: event,
         lastSectionEnteredAtMs: event.timestampMs,
-        recentBehavior: keepRecent([...state.recentBehavior, event]),
-      };
-    }),
-  setThroughLine: (throughLine) =>
-    set((state) => {
-      const event = withTimestamp({ type: "click", target: `through-line:${throughLine}` });
-
-      return {
-        throughLine,
-        lastEvent: event,
-        lastEngagementAtMs: event.timestampMs,
-        lastThroughLineChangedAtMs: event.timestampMs,
         recentBehavior: keepRecent([...state.recentBehavior, event]),
       };
     }),
@@ -132,7 +114,6 @@ export const useSignalStore = create<SignalState>((set, get) => ({
       page: state.page,
       inView: state.inView,
       lastHover: state.lastHover,
-      throughLine: state.throughLine,
       inferredTrack: state.inferredTrack,
       recentBehavior: state.recentBehavior,
     };

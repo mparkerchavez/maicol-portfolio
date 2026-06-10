@@ -45,7 +45,6 @@ export const LLAMITA_STATE_LABELS: Record<LlamitaState, string> = {
 
 export const LLAMITA_DWELL_WINDOWS_MS = {
   homeHero: 12_000,
-  postToggle: 10_000,
   caseStudySection: 15_000,
   traceCard: 12_000,
 } as const;
@@ -62,7 +61,6 @@ type SurfaceInput = {
   pageSlug: string;
   sectionId?: string | null;
   lastSectionEnteredAtMs: number | null;
-  lastThroughLineChangedAtMs: number | null;
   recentBehavior: SignalEvent[];
 };
 
@@ -122,7 +120,6 @@ export function getIdleObservationSurface({
   pageSlug,
   sectionId,
   lastSectionEnteredAtMs,
-  lastThroughLineChangedAtMs,
   recentBehavior,
 }: SurfaceInput): IdleObservationSurface | null {
   if (!sectionId) {
@@ -134,19 +131,11 @@ export function getIdleObservationSurface({
 
   if (pageSlug === "home") {
     if (sectionId === "intent-cockpit") {
-      const hasFreshToggle = Boolean(lastThroughLineChangedAtMs && lastThroughLineChangedAtMs >= sectionStartedAt);
-
-      return hasFreshToggle
-        ? {
-            id: "home.post-toggle",
-            contentKey: "home.post-toggle",
-            dwellMs: LLAMITA_DWELL_WINDOWS_MS.postToggle,
-          }
-        : {
-            id: "home.hero",
-            contentKey: "home.hero",
-            dwellMs: LLAMITA_DWELL_WINDOWS_MS.homeHero,
-          };
+      return {
+        id: "home.hero",
+        contentKey: "home.hero",
+        dwellMs: LLAMITA_DWELL_WINDOWS_MS.homeHero,
+      };
     }
 
     if (sectionId === "proof-board") {

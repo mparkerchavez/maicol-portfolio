@@ -5,7 +5,6 @@ export function buildPageContext(context: PageContext) {
     page: context.page,
     inView: context.inView,
     lastHover: context.lastHover,
-    throughLine: context.throughLine,
     inferredTrack: context.inferredTrack,
     recentBehavior: context.recentBehavior,
   };
