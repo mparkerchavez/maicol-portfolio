@@ -33,7 +33,7 @@ Five primary intent tracks, listed by frequency-weighted importance. The site do
 
 **Who they are.** Agency recruiters, in-house sourcers, ATS-driven hiring teams. They are scanning, not reading.
 
-**What they need.** Role status (open to senior PM / AI Product Lead roles), target titles, location (Los Angeles), compensation anchor ($170-190K), a downloadable resume, a scheduling link, LinkedIn. Short session, low patience for narrative.
+**What they need.** Role status (open to senior PM / AI Product Lead roles), target titles, location (Los Angeles), a downloadable resume, a scheduling link, LinkedIn. Short session, low patience for narrative. Compensation is deliberately not published anywhere on the site (Maicol decision, 2026-06-10).
 
 ### 2.3 AI Strategist
 
@@ -76,15 +76,16 @@ This thesis solves Maicol's central positioning challenge. He has been told to "
 
 - **Llamita character.** Pixel-illustration character living top-right. Six expression states (idle, observing, talking, thinking, wrong, sleeping). Expands into a chat panel on the right edge when invoked.
 - **Content-aware chat.** Llamita as conversational interface. Page-aware (knows what section the visitor is reading). Grounded in a curated knowledge base of Maicol's evidence, positioning, and bio. Can invoke Curate Mind as a tool when relevant. Refuses off-topic questions in voice.
-- **Through-line toggle.** Top of the home page. Three framings of Maicol's career the visitor can switch between (Product Designer / AI Product Lead / End-to-end Product). Same evidence reframed for each. The choice is a high-quality intent signal.
+- **Persona nav.** Top of the home page. Four visible visitor personas (For anyone / Recruiters / AI Product Leaders / Product Managers), each reframing the hero for that audience, always leading with proof. A click is a declared, high-confidence intent signal. The through-line argument lives in the copy, especially the Product Managers framing. See ADR 0009.
 - **Three case studies.** Capital Group (AI Enablement), Tech Trends (Strategy and Research), Innovation Sprints (Methodology). Each refactored to be punchier than the current versions, with two to three pre-written Llamita chips per case study to invite expansion.
 - **Curate Mind on-site mini-app.** Modeled on the mini-app on curatemind.io. Three example traces from Themes → Positions → Evidence → Sources, interactive enough to demonstrate the trust architecture in action. The full experience lives at curatemind.io and the mini-app links there for visitors who want to go deeper.
 - **Earnestly card with email signup.** Coming-soon framing. One email field, optional context field ("what would you most want from this?"). Confirmation in Llamita's voice. Captures interest and produces a builder-track signal.
-- **Intent inference.** Multi-layered signal scoring designed to resist the "click everything" failure mode. Passive behavior (hover dwell, section reading patterns, scroll velocity, return visits) is weighted higher than explicit clicks. The chat itself is the highest signal surface (questions reveal intent more than any toggle). Composite patterns are scored across active and passive surfaces. The full taxonomy and weighting rules live in `docs/specs/08-intent-inference.md` once written. Persona inference fires when a composite pattern crosses a threshold.
+- **Intent calibration.** V1 calibrates on three inputs only: the declared persona from the nav, page context (current page and section in view), and the visitor's own chat messages. Behavioral signal events are still recorded but nothing scores them and no visitor-facing behavior changes based on them. The full behavioral inference engine (Spec 08) is deferred post-launch and gated on watch-session evidence. See ADR 0010.
 - **Next best action panel.** Four-beat flow inside the chat surface: observation, hypothesis, clarifying question, calibrated next step. The character earns the right to suggest by being useful first.
 - **Resume download.** Visible in the Recruiter-calibrated path and accessible from the chat.
 - **Email contact link.** Standard mailto, visible in nav and accessible from the chat.
 - **About content via Llamita.** No static About page or section. "Who is Maicol" is answered by Llamita on demand, calibrated to the inferred track. A small visible affordance on the home page points visitors at this ("To learn about Maicol, ask Llamita →"). See ADR 0007.
+- **Agent Experience layer.** The site ships a human version and an agent version of itself. Pattern reference: Every's Agent Mode (human/agent toggle on the page, agent version is a terminal-styled markdown surface with a copyable setup prompt). Pieces: markdown mirrors of every page at stable URLs, an `llms.txt` index, a small Human/Agent mode toggle, and a single `/agent` page containing a setup prompt that points the visitor's own AI at the source material plus a short set of starter prompts. One starter prompt is hiring-specific: paste a job description alongside the setup prompt and ask the agent to evaluate fit against the evidence. The same markdown corpus grounds Llamita and feeds this surface: one content layer, three consumers (human readers, the on-site character, the visitor's agent). No MCP server in v1; a primed prompt pointing at sources is the right weight. This layer is itself a positioning statement: Maicol designs for agent experience, not only user experience.
 
 ### 4.2 Out of Scope (V1)
 
@@ -107,6 +108,7 @@ This thesis solves Maicol's central positioning challenge. He has been told to "
 - Earnestly case study, once the product ships.
 - Additional case studies as new work lands.
 - Visit-history-based personalization for return visitors.
+- Portfolio MCP server: expose the same content layer as tools an agent can call ("add this portfolio to your agent"). Coherent with the Curate Mind MCP story. Post-v1.
 
 ---
 
@@ -115,9 +117,9 @@ This thesis solves Maicol's central positioning challenge. He has been told to "
 The site is done when the following are true.
 
 1. **A recruiter can find role status, target titles, resume download, and contact email within 15 seconds.** Llamita does not get in the way of this path.
-2. **A hiring manager can identify within 60 seconds whether Maicol fits the role they are hiring for.** The through-line toggle and the calibrated NBA panel are the primary surfaces for this.
+2. **A hiring manager can identify within 60 seconds whether Maicol fits the role they are hiring for.** The persona nav and the calibrated NBA panel are the primary surfaces for this.
 3. **A peer can ask Llamita a substantive question about AI adoption and receive a sourced answer that traces to Curate Mind.** The tool invocation is visible in the chat.
-4. **A first-time visitor experiences at least one observation from Llamita that feels disarmingly accurate.** This is the moment the site earns its thesis.
+4. **A first-time visitor experiences at least one observation from Llamita that demonstrates the system knows what they are reading.** Page-aware, not mind-reading. See ADR 0010.
 5. **A visitor who triggers the NBA panel receives a clarifying question before any prescription.** Validation-first instinct is visible.
 6. **Every factual claim on the site traces to a source in the Evidence Bank.** No invented facts. No drift.
 
@@ -176,7 +178,7 @@ Maicol's central positioning challenge is that he has done the function of an AI
 
 The site solves this argument three ways.
 
-1. **The through-line toggle.** Three framings of the same career, switchable. Same evidence, reframed. The visitor sees the function survive the relabeling.
+1. **The persona-calibrated hero.** The persona nav reframes the hero per audience, and the Product Managers framing states the argument directly: the function, done for twenty-four years under three different titles. See ADR 0009.
 2. **Llamita's calibrated framing.** When the inferred track is Product Manager, Llamita opens with: "He has not held a PM title. He has done the function under three different titles. Here are the receipts."
 3. **The case studies themselves.** Punchier rewrites that lead with the function (discovery, validation, prototyping, adoption) rather than the role title.
 
@@ -220,3 +222,4 @@ A living list. Updated as decisions land.
 
 - 2026-05-25: Initial draft. Authored by Claude with Maicol. Status: Active.
 - 2026-05-25: Revised V1 scope. Curate Mind reduced to mini-app pattern. Scheduling link moved to backlog. Desktop-only confirmed (ADR 0006). Signal surface section expanded. About content locked to Llamita Q&A pattern (ADR 0007).
+- 2026-06-10: Persona nav replaces the through-line toggle (ADR 0009). Behavioral inference deferred; v1 calibrates on declared persona, page context, and chat (ADR 0010). Success criterion 4 reworded to a page-aware standard. Compensation removed from all site copy (Maicol decision). Agent Experience layer added to v1 scope; portfolio MCP server backlogged.

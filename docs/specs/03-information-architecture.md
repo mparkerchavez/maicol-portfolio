@@ -3,8 +3,8 @@
 **Purpose:** Define the sitemap, page structures, global elements, signal surfaces, and page-context contract for the site.
 **Owner:** Claude
 **Status:** Active
-**Last updated:** 2026-05-25
-**Related ADRs:** 0005 (Five intent tracks), 0006 (Desktop-only v1), 0007 (About via Llamita)
+**Last updated:** 2026-05-29
+**Related ADRs:** 0005 (Five intent tracks), 0006 (Desktop-only v1), 0007 (About via Llamita), 0009 (Persona nav replaces self-framing toggle)
 **Related specs:** 00 (PRD), 01 (Typography), 06 (Knowledge Base)
 
 ---
@@ -33,7 +33,7 @@ For a citizen developer, this spec answers the questions: *What pages am I build
 - Affordance copy (the small text bits that invite engagement)
 - The page-context contract sent to the chat backend
 - Navigation patterns between pages
-- The through-line toggle behavior
+- The persona nav behavior
 
 ### Out of scope
 - Visual layout details (grid columns, exact pixel positions). Those live in component specs.
@@ -84,7 +84,7 @@ Vertical sections, top to bottom, in reading order.
 | 1 | Status strip | A thin, persistent context bar at the very top. Replaces the ticker on the current site. |
 | 2 | Header | Name, minimal nav, contact email. |
 | 3 | Llamita (global, top-right) | Character. Always visible. |
-| 4 | Hero with through-line toggle | The single message, switchable across three framings. Includes the about-affordance. |
+| 4 | Hero with persona nav | The single message, reframed across four visitor personas. Includes the about-affordance. |
 | 5 | Case study triptych | Three cards, one per case study. The entry points. |
 | 6 | Curate Mind mini-app | Three example traces from theme to source. Link out to curatemind.io. |
 | 7 | Earnestly card | Coming-soon framing with email signup capture. |
@@ -121,9 +121,11 @@ This overlay behavior is a deliberate choice for narrow desktop screens (see Sec
 
 Llamita's behavior states, animation, and chat surface are specified in Spec 05 (Llamita Behavior) and Spec 07 (Chat Architecture). For IA purposes, what matters is: Llamita is global, always present, accessible from every page, and her chat overlays rather than reshapes the page.
 
-### Section 4: Hero with through-line toggle
+### Section 4: Hero with persona nav
 
 The strategic centerpiece of the home page. Three subsections vertically stacked.
+
+The pattern is drawn from billysweeney.com, which puts a visible audience-persona nav at the top and reframes the hero per persona. We adopt the structure (visitor self-selects, hero reframes) but invert the content model: every framing leads with the AI-adoption proof, never with a soft role claim. See ADR 0009 for the full rationale and for why this replaces the earlier self-framing toggle (Designer / AI Product Lead / End-to-end).
 
 #### 4a. Section marker
 
@@ -131,47 +133,80 @@ The strategic centerpiece of the home page. Three subsections vertically stacked
 
 Aligned left.
 
-#### 4b. The through-line toggle
+#### 4b. The persona nav
 
-A row of three switchable labels. Style: `text-h3` Inter, with the active option in `text-h3` Playfair italic.
+A row of four switchable labels, each answering "who are you, the visitor?". Style: `text-h3` Inter, with the active option in `text-h3` Playfair italic.
 
 ```
-[ Product Designer ]   [ AI Product Lead ]   [ End-to-end Product ]
+[ For anyone ]   [ Recruiters ]   [ AI Product Leaders ]   [ Product Managers ]
 ```
 
 Behavior:
-- Default state: "AI Product Lead" is active (this is the strongest fit per the identity guide).
-- Clicking any label switches the active framing.
-- Hovering a non-active label previews the framing in the hero copy below (preview disappears on mouse-out).
-- The active framing's hero copy renders below.
-- The active framing is remembered in `sessionStorage` for the duration of the visit and passed as signal to the chat.
+- Default state: "For anyone" is active. This is also the default inferred track until signal accumulates (per ADR 0005).
+- Clicking any label switches the active persona and its hero copy.
+- Hovering a non-active label previews that persona's hero copy below (preview disappears on mouse-out).
+- The active persona's hero copy renders below.
+- The active persona is remembered in `sessionStorage` for the duration of the visit and passed to the chat as a **declared** persona signal. A click is high-confidence intent and weights inference heavily toward the matching track (see Section 4e and Spec 08).
 
 #### 4c. The hero copy
 
-Three versions, one per framing. Each is one display-1 sentence plus one body-lg subhead.
+Four versions, one per persona. Each is one display-1 sentence plus one body-lg subhead. Each leads with proof, not claim.
 
-**Product Designer framing:**
-```
-[display-1: "I have been a Product Designer for 24 years. I am working on what that becomes in the age of AI."]
-
-[body-lg italic Playfair: "Curate Mind is one piece of the answer. Read the work, or ask Llamita."]
-```
-
-**AI Product Lead framing (default):**
+**For anyone (default):**
 ```
 [display-1: "I work in the gap between AI capability and human adoption."]
 
-[body-lg italic Playfair: "Discovery, validation, prototyping, alignment. All in one person."]
+[body-lg italic Playfair: "Discovery, validation, prototyping, alignment, all in one person."]
 ```
 
-**End-to-end Product framing:**
+**Recruiters:**
 ```
-[display-1: "Twenty-four years of product work, converged on one function."]
+[display-1: "Open to Senior PM, Principal PM, and AI Product Lead roles, in Los Angeles."]
 
-[body-lg italic Playfair: "Find where AI creates value. Prove it before the build. Scale what works."]
+[body-lg italic Playfair: "The resume is in the header and the footer. Start there. Email and LinkedIn are one click away."]
+```
+
+**AI Product Leaders:**
+```
+[display-1: "I run the front half of the AI product loop, the part most teams skip."]
+
+[body-lg italic Playfair: "Discovery, validation, the de-scope call. That discipline took a GenAI tool from a 12-person pilot to 300+ users."]
+```
+
+**Product Managers:**
+```
+[display-1: "I have done the product management function for twenty-four years, under three different titles."]
+
+[body-lg italic Playfair: "Not the title, the function. Discovery, validation, prioritization, alignment. The receipts are on this site."]
 ```
 
 The display-1 line is the strategic hook. The body-lg italic line is the subhead. Together they take roughly half the viewport on a standard desktop.
+
+The through-line argument (one function, many titles) is no longer carried by a self-framing toggle. It now lives inside the copy: the Product Managers persona states it directly, the case study rewrites lead with the function, and Llamita reinforces it per Spec 04. See ADR 0009.
+
+#### 4e. Persona nav vs inferred tracks
+
+These are two different lists. Do not conflate them (this distinction is load-bearing and has caused confusion before).
+
+| | Persona nav (this section) | Inferred tracks (ADR 0005, Spec 08) |
+|---|---|---|
+| Question it answers | "Who are you, the visitor?" | "Who does the system think you are?" |
+| Visibility | Visible, clickable | Invisible, never labeled to the visitor |
+| Count | 4 | 5 |
+| Members | For anyone, Recruiters, AI Product Leaders, Product Managers | For Anyone, Recruiters, AI Strategist, Product Managers, Product Designers |
+
+The persona nav is a deliberately curated **subset** that surfaces only the framings Maicol most wants to project. The one inferred track with no visible label is **Product Designers**, which remains **inference-only**: the system still calibrates for it when behavior reveals it, but it gets no button. The Product Designer point of view surfaces through Curate Mind and Llamita instead. The decision to keep Product Designers visible-out is in ADR 0009 (it would reinforce the "he is a designer" read the site exists to dispel).
+
+Label-to-track mapping (note the intentional naming difference on AI Product Leaders):
+
+| Persona nav label (visible) | Inferred track key (internal) |
+|---|---|
+| For anyone | `for-anyone` |
+| Recruiters | `recruiters` |
+| AI Product Leaders | `ai-strategist` |
+| Product Managers | `product-managers` |
+
+"AI Product Leaders" is the audience-facing label; `ai-strategist` is the internal taxonomy key from ADR 0005. They name the same audience (the substance-hungry AI and product leaders). Keeping the visible label as "AI Product Leaders" was Maicol's call. Whether to also rename the internal key for consistency is an open question (see ADR 0009).
 
 #### 4d. The about affordance
 
@@ -391,7 +426,7 @@ The inference scoring logic itself (weighting, thresholds, composites) lives in 
 
 | Surface | Location | Action | Signal |
 |---|---|---|---|
-| Through-line toggle | Home, Section 4b | Click to switch framing | Strongly suggests track: Designer / Strategist / PM |
+| Persona nav | Home, Section 4b | Click to switch persona | Declared persona. Strongly weights track: Recruiters / AI Strategist (AI Product Leaders label) / Product Managers |
 | Llamita chips | Case study main column | Click | Track + specific topic interest |
 | Llamita first chat question | Chat panel | Type and submit | Highest single-message signal on the site |
 | Resume download | Header, Footer | Click | Recruiter or hiring evaluation |
@@ -411,7 +446,7 @@ The inference scoring logic itself (weighting, thresholds, composites) lives in 
 | Curate Mind trace card | Home Section 6 | Click to expand | Research/build curiosity |
 | Specific phrase hover dwell | Anywhere in copy | Hover >2s on tagged phrase | Per-phrase calibrated signal (see below) |
 | Section dwell within case study | Case study right column | Scroll to and dwell | Strategy section = methodology curious, Outcome section = hiring evaluation, etc. |
-| Through-line toggle hover (no click) | Home Section 4b | Hover a non-active label | Curiosity about that framing |
+| Persona nav hover (no click) | Home Section 4b | Hover a non-active label | Curiosity about that persona's framing |
 | Next case study click | Case study footer nav | Click | Deep exploration |
 
 ### Tagged phrase hover surfaces
@@ -498,10 +533,13 @@ type PageContext = {
     timestampMs: number;    // when it happened
   } | null;
   
-  // The current through-line framing (default or visitor-selected)
-  throughLine: "designer" | "ai-product-lead" | "end-to-end-product";
+  // The persona the visitor selected in the home page nav (default or clicked).
+  // This is a DECLARED signal, distinct from the inferred track below.
+  // "for-anyone" until the visitor clicks. Maps to a track per Spec 03 Section 4e.
+  selectedPersona: "for-anyone" | "recruiters" | "ai-product-leaders" | "product-managers";
   
-  // The current inferred track (set by Spec 08 logic)
+  // The current inferred track (set by Spec 08 logic). Five values: the declared
+  // persona above is only a 3-label subset, but inference can still land here.
   inferredTrack: {
     track: "for-anyone" | "recruiters" | "ai-strategist" | "product-managers" | "product-designers";
     confidence: number;     // 0 to 1
@@ -561,7 +599,7 @@ How visitors move between pages.
 
 ---
 
-## 9. The through-line toggle: behavior detail
+## 9. The persona nav: behavior detail
 
 This is the most complex interactive on the home page. Documenting it carefully here.
 
@@ -569,26 +607,28 @@ This is the most complex interactive on the home page. Documenting it carefully 
 
 | State | What's shown | What's stored |
 |---|---|---|
-| Default (no interaction) | "AI Product Lead" framing active | `throughLine = "ai-product-lead"` |
-| Hover on a non-active label | Preview the framing in the hero copy (no commit) | No store change |
-| Mouse-out from hover | Revert to active framing's copy | No store change |
-| Click a non-active label | Lock in the new framing | `throughLine` updates, persists in sessionStorage |
-| Re-visit within same session | Resume the last-locked framing | Read from sessionStorage |
-| Llamita reads the value | (Receives it as signal) | Feeds Spec 08 inference |
+| Default (no interaction) | "For anyone" framing active | `selectedPersona = "for-anyone"` |
+| Hover on a non-active label | Preview that persona's hero copy (no commit) | No store change |
+| Mouse-out from hover | Revert to active persona's copy | No store change |
+| Click a non-active label | Lock in the new persona | `selectedPersona` updates, persists in sessionStorage |
+| Re-visit within same session | Resume the last-locked persona | Read from sessionStorage |
+| Llamita reads the value | (Receives it as a declared signal) | Feeds Spec 08 inference, weighted high |
 
 ### Animation rules
 
-Switching the framing should not feel like a hard cut. The display-1 text and the body-lg italic subhead both crossfade over ~200ms when the framing changes. Specific easing and motion are defined in Spec 05.
+Switching the persona should not feel like a hard cut. The display-1 text and the body-lg italic subhead both crossfade over ~200ms when the persona changes. Specific easing and motion are defined in Spec 05.
 
-### Why the toggle exists
+### Why the persona nav exists
 
 Two jobs:
-1. The visitor self-selects a framing that fits them, demonstrating the through-line argument (function travels across role titles).
-2. The choice is high-quality intent signal that feeds the inference system.
+1. The visitor self-selects the persona that fits them and reads the framing written for them. The default ("For anyone") still leads with the single message, so a visitor who never clicks loses nothing.
+2. A click is a declared, high-quality intent signal that strongly weights the inference system (Spec 08) toward the matching track.
+
+The through-line argument (one function, many titles) is carried by the copy now, not by the act of toggling. See Section 4c and ADR 0009.
 
 ### What it does NOT do in v1
 
-It does not propagate to the case study pages. Case studies have one fixed version in v1. Reframing case studies per toggle is a future enhancement, backlogged.
+It does not propagate to the case study pages. Case studies have one fixed version in v1. Reframing case studies per persona is a future enhancement, backlogged.
 
 ---
 
@@ -632,7 +672,7 @@ The site should scale gracefully on wider monitors but never feel "stretched emp
 
 ### Mobile
 
-Per ADR 0006, mobile is out of scope for v1. The site renders on mobile (no errors, basic readability), but interactions like hover dwell, the chat panel, and the through-line toggle are not optimized for it.
+Per ADR 0006, mobile is out of scope for v1. The site renders on mobile (no errors, basic readability), but interactions like hover dwell, the chat panel, and the persona nav are not optimized for it.
 
 ---
 
@@ -655,3 +695,6 @@ Codex can begin home page layout and case study page layout from this spec and S
 
 - 2026-05-25: Initial draft.
 - 2026-05-25: Added viewport constraints (Section 11) anchored to 13-inch MacBook Air. Updated Llamita chat panel to overlay behavior at 380px width. Confirmed contact lives in footer (no standalone page) since About is via Llamita per ADR 0007.
+- 2026-05-29: Replaced the self-framing through-line toggle (Designer / AI Product Lead / End-to-end) with a visible three-label visitor persona nav (For anyone / AI Product Leaders / Product Managers). Rewrote hero copy (Section 4c), added the persona-nav-vs-inferred-tracks distinction (Section 4e), updated the signal inventory, the page-context contract (`throughLine` → `selectedPersona`), and the behavior detail (Section 9). Product Designers dropped from the visible nav; remains inference-only. See ADR 0009. PRD Section 8 and Specs 04/06/08 reference the old toggle and need a follow-up pass.
+- 2026-06-10: Removed the compensation band from the Recruiters hero copy. Maicol's decision: compensation is not published anywhere on the site. Note: this spec's typography references (Inter, Playfair) predate ADR 0008 and need a reconciliation pass to Uncut Sans.
+- 2026-05-29: Added Recruiters as the fourth visible persona label (For anyone / Recruiters / AI Product Leaders / Product Managers), reconciling a contradiction between Maicol's two earlier answers. Added the Recruiters hero copy (role status, target titles, LA, comp band, resume pointer), updated Section 4e (four-label subset; only Product Designers is now inference-only), the mapping table, the contract enum, and the signal inventory. ADR 0009 updated to match.
