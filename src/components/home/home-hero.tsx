@@ -103,7 +103,7 @@ function AboutAffordance() {
   return (
     <span
       ref={ref}
-      className="mt-10 hidden md:inline-flex"
+      className="mt-10 hidden md:inline-flex md:items-center"
       onPointerEnter={beginLook}
       onPointerLeave={endLook}
       onMouseEnter={beginLook}

@@ -1,71 +1,34 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { AppButton, AppCard, AppInput, AppTextArea } from "@/components/ui";
-import { useSignalStore } from "@/stores/signal-store";
+// Coming-soon surface only. The email signup from Spec 03 Section 7 is deferred
+// past Milestone A (handoff 0009, Section 1); restore the form from git history
+// when the scope decision lands.
+import { FileText } from "lucide-react";
+import { OpenChatButton } from "@/components/site/open-chat-button";
+import { AppCard } from "@/components/ui";
 
 export function EarnestlyCard() {
-  const [email, setEmail] = useState("");
-  const [context, setContext] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const recordEvent = useSignalStore((state) => state.recordEvent);
-
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!email.includes("@")) {
-      return;
-    }
-
-    recordEvent({ type: "click", target: "earnestly-signup-submit" });
-    console.info("earnestly signup stub", { email, context });
-    setSubmitted(true);
-  };
-
   return (
-    <AppCard padding="lg" className="max-w-5xl">
-      <h2>Earnestly.</h2>
-      <p className="mt-6 text-body-lg">
-        UX coaching for builders shipping web apps with AI tools. The product is still forming, so this card only captures early interest.
-      </p>
-      <p className="mt-5 text-body italic text-muted">Make the thing usable before the demo becomes the product.</p>
-
-      {submitted ? (
-        <div className="mt-8 border border-hairline bg-surface p-5 text-llamita-body">
-          Noted. Tiny clipboard, serious intent. Maicol will have the useful context when this is ready.
+    <AppCard padding="lg" className="grid max-w-5xl gap-8 lg:grid-cols-[1fr_0.75fr]">
+      <div>
+        <h2>Earnestly.</h2>
+        <p className="mt-6 text-body-lg">
+          UX coaching for builders shipping web apps with AI tools. The product is still forming, so this stays smaller than the proof surfaces.
+        </p>
+        <p className="mt-5 text-body italic text-muted">A future product for people building before they feel ready.</p>
+      </div>
+      <div className="grid content-between gap-6 border-t border-hairline pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+        <div>
+          <p className="text-mono-sm text-muted">STATUS</p>
+          <p className="mt-2 text-body-sm">Coming soon. Interest capture lands in a later pass.</p>
         </div>
-      ) : (
-        <form className="mt-8 grid gap-4" onSubmit={submit}>
-          <label className="grid gap-2">
-            <span className="text-mono-sm text-muted">EMAIL</span>
-            <AppInput
-              isRequired
-              aria-label="Email"
-              type="email"
-              value={email}
-              onChange={setEmail}
-              placeholder="you@example.com"
-            />
-          </label>
-          <label className="grid gap-2">
-            <span className="text-mono-sm text-muted">WHAT WOULD YOU MOST WANT FROM THIS?</span>
-            <AppTextArea
-              aria-label="What would you most want from this?"
-              value={context}
-              onChange={setContext}
-              rows={4}
-            />
-          </label>
-          <AppButton
-            type="submit"
-            intent="primary"
-            size="md"
-            className="w-fit px-5 py-3"
-          >
-            BE THE FIRST TO TRY IT
-          </AppButton>
-        </form>
-      )}
+        <span className="hidden md:inline-flex">
+          <OpenChatButton prompt="what is Earnestly?" className="inline-flex items-center gap-2 text-mono">
+            ASK WHAT THIS IS
+            <FileText aria-hidden="true" className="size-4" strokeWidth={1.5} />
+          </OpenChatButton>
+        </span>
+      </div>
     </AppCard>
   );
 }

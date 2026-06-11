@@ -130,7 +130,7 @@ export function getIdleObservationSurface({
   const lastTraceClick = findLatestEvent(recentBehavior, (event) => event.type === "click" && event.target.startsWith("curate-trace:"));
 
   if (pageSlug === "home") {
-    if (sectionId === "intent-cockpit") {
+    if (sectionId === "hero") {
       return {
         id: "home.hero",
         contentKey: "home.hero",
@@ -138,7 +138,7 @@ export function getIdleObservationSurface({
       };
     }
 
-    if (sectionId === "proof-board") {
+    if (sectionId === "case-studies") {
       return {
         id: "home.case-studies",
         contentKey: "home.case-studies",
@@ -146,13 +146,27 @@ export function getIdleObservationSurface({
       };
     }
 
-    if (sectionId === "trace-lab") {
-      const traceId = lastTraceClick && lastTraceClick.timestampMs >= sectionStartedAt ? lastTraceClick.target : "trace-lab";
+    if (sectionId === "curate-mind") {
+      const recentTraceClick = lastTraceClick && lastTraceClick.timestampMs >= sectionStartedAt ? lastTraceClick.target : null;
 
+      return recentTraceClick
+        ? {
+            id: `home.trace-card:${recentTraceClick}`,
+            contentKey: "home.trace-card",
+            dwellMs: LLAMITA_DWELL_WINDOWS_MS.traceCard,
+          }
+        : {
+            id: "home.curate-mind",
+            contentKey: "home.curate-mind",
+            dwellMs: LLAMITA_DWELL_WINDOWS_MS.traceCard,
+          };
+    }
+
+    if (sectionId === "earnestly") {
       return {
-        id: `home.trace-card:${traceId}`,
-        contentKey: "home.trace-card",
-        dwellMs: LLAMITA_DWELL_WINDOWS_MS.traceCard,
+        id: "home.earnestly",
+        contentKey: "home.earnestly",
+        dwellMs: LLAMITA_DWELL_WINDOWS_MS.caseStudySection,
       };
     }
   }

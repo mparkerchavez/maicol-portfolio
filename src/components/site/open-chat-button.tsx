@@ -27,7 +27,8 @@ export function OpenChatButton({ prompt, children, onClick, className = "", ...p
         onClick?.(event);
       }}
     >
-      {children}
+      {/* Inline-flex keeps icon children on the text line; preflight sets svg to display block. */}
+      <span className="inline-flex items-center gap-2">{children}</span>
     </AppButton>
   );
 }
