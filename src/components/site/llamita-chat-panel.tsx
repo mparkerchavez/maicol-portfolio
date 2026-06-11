@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Send, X } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { AppButton } from "@/components/ui";
+import { AppButton, AppInput } from "@/components/ui";
 import { LLAMITA_STATE_LABELS } from "@/lib/llamita-behavior";
 import { useLlamitaBehaviorStore } from "@/stores/llamita-behavior-store";
 
@@ -61,16 +61,16 @@ export function LlamitaChatPanel() {
           </div>
 
           <form className="border-t border-hairline p-5" onSubmit={handleSubmit}>
-            <label className="text-mono-sm text-muted" htmlFor="llamita-chat-input">
-              MESSAGE
-            </label>
+            <span className="text-mono-sm text-muted">MESSAGE</span>
             <div className="mt-3 flex items-stretch gap-2">
-              <input
-                id="llamita-chat-input"
+              <AppInput
+                aria-label="Message"
+                size="sm"
                 value={draft}
-                onChange={(event) => setDraft(event.target.value)}
+                onChange={setDraft}
                 placeholder="Ask Llamita"
-                className="min-w-0 flex-1 border border-hairline bg-surface px-3 py-2 text-body-sm outline-none transition focus:border-ink"
+                className="min-w-0 flex-1"
+                inputClassName="text-body-sm"
               />
               <AppButton type="submit" intent="primary" aria-label="Send message" className="grid size-11 place-items-center p-0">
                 <Send aria-hidden="true" className="size-4" strokeWidth={1.5} />
