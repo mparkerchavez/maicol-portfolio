@@ -54,7 +54,7 @@ function HeroCopy({ personaKey, display, subhead }: { personaKey: SelectedPerson
   if (shouldReduceMotion) {
     return (
       <div className="mt-10 min-h-[380px] md:mt-12 md:min-h-[460px]">
-        <h1 className="max-w-[13ch] text-display-1">{display}</h1>
+        <h1 className="max-w-[13ch] text-display-1 max-md:text-[clamp(40px,12vw,64px)]">{display}</h1>
         <p className="mt-8 max-w-[42ch] text-body-lg italic">{subhead}</p>
       </div>
     );
@@ -70,7 +70,7 @@ function HeroCopy({ personaKey, display, subhead }: { personaKey: SelectedPerson
           exit={{ opacity: 0 }}
           transition={{ duration: 0.1, ease: [0, 0, 0.2, 1] }}
         >
-          <h1 className="max-w-[13ch] text-display-1">{display}</h1>
+          <h1 className="max-w-[13ch] text-display-1 max-md:text-[clamp(40px,12vw,64px)]">{display}</h1>
           <p className="mt-8 max-w-[42ch] text-body-lg italic">{subhead}</p>
         </motion.div>
       </AnimatePresence>

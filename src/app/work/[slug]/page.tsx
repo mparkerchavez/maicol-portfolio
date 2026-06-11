@@ -80,7 +80,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   ))}
                 </div>
                 {section.chips ? (
-                  <div className="mt-8 flex flex-wrap gap-3">
+                  // Chips open the chat panel, which stays desktop-only until the mobile chat ADR lands.
+                  <div className="mt-8 hidden flex-wrap gap-3 md:flex">
                     {section.chips.map((chip) => (
                       <LlamitaChip key={chip} prompt={chip} />
                     ))}

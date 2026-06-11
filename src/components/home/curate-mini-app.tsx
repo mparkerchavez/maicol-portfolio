@@ -13,7 +13,7 @@ export function CurateMiniApp() {
 
   return (
     <div>
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 min-[800px]:grid-cols-2 min-[1100px]:grid-cols-3">
         {curateTraces.map((trace, index) => {
           const expanded = expandedIndex === index;
 
@@ -35,9 +35,11 @@ export function CurateMiniApp() {
                 <div className="mt-6 border-t border-hairline pt-6">
                   <p className="text-mono-sm text-muted">SOURCE</p>
                   <p className="mt-2 text-body-sm">{trace.source}</p>
-                  <OpenChatButton prompt={`explain this Curate Mind trace: ${trace.position}`} className="mt-6 text-mono">
-                    ASK LLAMITA TO EXPLAIN →
-                  </OpenChatButton>
+                  <span className="mt-6 hidden md:inline-flex">
+                    <OpenChatButton prompt={`explain this Curate Mind trace: ${trace.position}`} className="text-mono">
+                      ASK LLAMITA TO EXPLAIN →
+                    </OpenChatButton>
+                  </span>
                 </div>
               ) : (
                 <p className="mt-8 text-body-sm text-muted">Expand to see the source placeholder and chat handoff.</p>
