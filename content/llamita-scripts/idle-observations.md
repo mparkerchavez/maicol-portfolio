@@ -4,11 +4,7 @@ Source: `docs/specs/04-llamita-voice.md`, Section 6.
 
 ## home.hero
 
-The toggle up top reframes the same career three ways: designer, AI product lead, end-to-end. Same evidence, different lens. Want me to point you at where to start?
-
-## home.post-toggle
-
-That framing has a case study that matches it most cleanly. Want the pointer?
+The nav up top asks who you are, not who Maicol is. Pick one and the page reframes for you. Same evidence, different lens. Want me to point you at where to start?
 
 ## home.case-studies
 

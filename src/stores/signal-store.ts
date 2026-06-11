@@ -3,6 +3,10 @@
 import { create } from "zustand";
 
 export type IntentTrack = "for-anyone" | "recruiters" | "ai-strategist" | "product-managers" | "product-designers";
+// Declared persona from the home page persona nav (ADR 0009). A 4-value subset of the
+// 5 inferred tracks; the visible "AI Product Leaders" label maps to the internal
+// "ai-strategist" track key per Spec 03 Section 4e.
+export type SelectedPersona = "for-anyone" | "recruiters" | "ai-product-leaders" | "product-managers";
 export type SignalEventType = "hover" | "click" | "scroll-section" | "chip-click";
 
 export type HoverSignal = {
@@ -28,6 +32,7 @@ type SignalState = {
     sectionTitle: string;
   } | null;
   lastHover: HoverSignal | null;
+  selectedPersona: SelectedPersona;
   inferredTrack: {
     track: IntentTrack;
     confidence: number;
@@ -38,12 +43,14 @@ type SignalState = {
   lastSectionEnteredAtMs: number | null;
   setPage: (page: SignalState["page"]) => void;
   setInView: (inView: NonNullable<SignalState["inView"]>) => void;
+  declareSelectedPersona: (persona: SelectedPersona) => void;
+  hydrateSelectedPersona: (persona: SelectedPersona) => void;
   recordHover: (hover: Omit<HoverSignal, "timestampMs">) => void;
   recordEvent: (event: Omit<SignalEvent, "timestampMs">) => void;
   getPageContext: () => PageContext;
 };
 
-export type PageContext = Pick<SignalState, "page" | "inView" | "lastHover" | "inferredTrack" | "recentBehavior">;
+export type PageContext = Pick<SignalState, "page" | "inView" | "lastHover" | "selectedPersona" | "inferredTrack" | "recentBehavior">;
 
 const withTimestamp = (event: Omit<SignalEvent, "timestampMs">): SignalEvent => ({
   ...event,
@@ -60,6 +67,8 @@ export const useSignalStore = create<SignalState>((set, get) => ({
   },
   inView: null,
   lastHover: null,
+  selectedPersona: "for-anyone",
+  // Permanently confidence 0 until Spec 08 lands post-launch (ADR 0010).
   inferredTrack: {
     track: "for-anyone",
     confidence: 0,
@@ -84,6 +93,19 @@ export const useSignalStore = create<SignalState>((set, get) => ({
         recentBehavior: keepRecent([...state.recentBehavior, event]),
       };
     }),
+  declareSelectedPersona: (persona) =>
+    set((state) => {
+      const event = withTimestamp({ type: "click", target: `persona-nav:${persona}` });
+
+      return {
+        selectedPersona: persona,
+        lastEvent: event,
+        lastEngagementAtMs: event.timestampMs,
+        recentBehavior: keepRecent([...state.recentBehavior, event]),
+      };
+    }),
+  // Restores a persona persisted earlier in the session without recording a new declared signal.
+  hydrateSelectedPersona: (persona) => set({ selectedPersona: persona }),
   recordHover: (hover) =>
     set((state) => {
       const event = withTimestamp({ type: "hover", target: `${hover.tag}:${hover.phrase}` });
@@ -114,6 +136,7 @@ export const useSignalStore = create<SignalState>((set, get) => ({
       page: state.page,
       inView: state.inView,
       lastHover: state.lastHover,
+      selectedPersona: state.selectedPersona,
       inferredTrack: state.inferredTrack,
       recentBehavior: state.recentBehavior,
     };

@@ -3,8 +3,8 @@
 // First-pass interactive home prototype. The page becomes a product surface before case-study pages inherit the direction.
 import Image from "next/image";
 import { ArrowUpRight, Download, FileText, Mail, MessageSquare, PanelRightOpen, type LucideIcon } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { HomeHero } from "@/components/home/home-hero";
 import { SignalAnchor } from "@/components/signals/signal-anchor";
 import { TrackedSection } from "@/components/signals/tracked-section";
 import { OpenChatButton } from "@/components/site/open-chat-button";
@@ -68,16 +68,7 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
         </aside>
 
         <div className="relative flex min-h-[620px] flex-col justify-between border-x border-hairline px-7 py-7">
-          <div className="flex items-center justify-between gap-6">
-            <p className="text-mono text-muted">01 /// POSITIONING</p>
-            <p className="hidden text-mono-sm text-muted xl:block">SIGNAL STATE: SESSION ONLY</p>
-          </div>
-
-          <div className="relative z-10 mt-7 min-h-[450px]">
-            <h1 className="max-w-none text-h1">I work in the gap between AI capability and human adoption.</h1>
-            <p className="mt-6 max-w-[48ch] text-body-lg italic">Discovery, validation, prototyping, alignment, all in one person.</p>
-          </div>
-          <AboutAffordance />
+          <HomeHero />
 
           <div className="relative mt-8 min-h-[220px] overflow-hidden border border-hairline bg-paper">
             <Image
@@ -147,48 +138,6 @@ export function InteractiveHome({ caseStudies }: InteractiveHomeProps) {
       <TraceLab expandedTraceIndex={expandedTraceIndex} setExpandedTraceIndex={setExpandedTraceIndex} expandedTrace={expandedTrace} />
       <EarnestlyPreview />
     </>
-  );
-}
-
-function AboutAffordance() {
-  const ref = useRef<HTMLSpanElement | null>(null);
-  const shouldReduceMotion = useReducedMotion();
-  const setHoverLookTarget = useLlamitaBehaviorStore((state) => state.setHoverLookTarget);
-  const clearHoverLookTarget = useLlamitaBehaviorStore((state) => state.clearHoverLookTarget);
-
-  const beginLook = () => {
-    if (shouldReduceMotion || !ref.current) {
-      return;
-    }
-
-    const rect = ref.current.getBoundingClientRect();
-    setHoverLookTarget({
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
-    });
-  };
-
-  const endLook = () => {
-    clearHoverLookTarget();
-  };
-
-  return (
-    <span
-      ref={ref}
-      className="relative z-10 mt-6 inline-flex"
-      onPointerEnter={beginLook}
-      onPointerLeave={endLook}
-      onMouseEnter={beginLook}
-      onMouseLeave={endLook}
-      onFocus={beginLook}
-      onBlur={endLook}
-    >
-      <OpenChatButton prompt="tell me about Maicol" className="inline-flex items-center gap-2 text-mono">
-        TO LEARN ABOUT MAICOL
-        <ArrowUpRight aria-hidden="true" className="size-4" strokeWidth={1.5} />
-        ASK LLAMITA
-      </OpenChatButton>
-    </span>
   );
 }
 
