@@ -32,18 +32,44 @@ export const directions = [
         name: "The readout",
         thesis: "The page is a stakeholder readout: one idea per slide, the format that earns leaders' confidence to commit.",
     },
+    {
+        n: 6,
+        name: "Feature story",
+        thesis: "The home page is laid out like a magazine feature. Scale and typeface contrast do the work that cards, badges, and outlines did before.",
+    },
+    {
+        n: 7,
+        name: "The index",
+        thesis: "Type only. No cards and no images on the home page. One highlighter marks the phrases that matter, the way you would mark up a readout.",
+    },
+    {
+        n: 8,
+        name: "Color fields",
+        thesis: "Each part of the page is its own sheet of color. Bright, flat, and loud about where one thing ends and the next begins.",
+    },
+    {
+        n: 9,
+        name: "Alignment field",
+        thesis: "A field of small marks that turn toward your cursor. Scattered at rest, aligned around a point. It is texture, and it claims nothing.",
+    },
+    {
+        n: 10,
+        name: "The rail",
+        thesis: "Name, navigation, and contact stay fixed in a left rail. The right side is one long, calm reading column.",
+    },
 ];
 
 /** Thin comparison bar above each direction. Plain UUI defaults so it stays out of the way of the direction itself. */
 export const ExploreBar = ({ n }: { n: number }) => {
     const d = directions[n - 1];
-    const prev = n > 1 ? n - 1 : 5;
-    const next = n < 5 ? n + 1 : 1;
+    const total = directions.length;
+    const prev = n > 1 ? n - 1 : total;
+    const next = n < total ? n + 1 : 1;
     return (
         <div className="border-b border-secondary bg-secondary text-sm text-secondary">
             <div className="mx-auto flex max-w-container items-center justify-between gap-3 px-4 py-2 md:px-8">
                 <Link href="/explore" className="rounded-sm font-semibold text-primary underline-offset-4 outline-focus-ring hover:underline focus-visible:outline-2">
-                    Direction {n} of 5: {d.name}
+                    Direction {n} of {total}: {d.name}
                 </Link>
                 <nav aria-label="Directions" className="flex items-center gap-1">
                     <Link

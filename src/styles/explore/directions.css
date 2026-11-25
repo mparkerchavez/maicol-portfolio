@@ -36,7 +36,7 @@
         --color-brand-950: color-mix(in oklab, var(--ex-brand) 35%, black);
 
         --font-body: var(--ex-font), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-        --font-display: var(--ex-font), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        --font-display: var(--ex-display, var(--ex-font)), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
         font-family: var(--font-body);
         color: var(--color-text-primary);
         background-color: var(--color-bg-primary);
@@ -105,6 +105,79 @@
         --radius-xl: 12px;
         --radius-2xl: 16px;
         --radius-3xl: 22px;
+    }
+
+    /* ---- Round two (6 to 10): type-led, no purple, display and body faces paired ---- */
+
+    /* 6. Feature story: newsprint, ink, vermilion */
+    .ex.ex-6 {
+        --ex-ink: #16130f;
+        --ex-paper: #f6f2ea;
+        --ex-brand: #c2311d;
+        --ex-font: var(--font-ex6);
+        --ex-display: var(--font-ex6d);
+        --radius-lg: 4px;
+        --radius-xl: 6px;
+        --radius-2xl: 8px;
+        --radius-3xl: 10px;
+    }
+
+    /* 7. The index: black on white, one highlighter */
+    .ex.ex-7 {
+        --ex-ink: #0c0c0c;
+        --ex-paper: #ffffff;
+        --ex-brand: #141414;
+        --ex-mark: #d8f24a;
+        --ex-font: var(--font-ex7);
+        --ex-display: var(--font-ex7d);
+        --radius-lg: 2px;
+        --radius-xl: 2px;
+        --radius-2xl: 4px;
+        --radius-3xl: 4px;
+    }
+
+    /* 8. Color fields: one color per sheet */
+    .ex.ex-8 {
+        --ex-ink: #141414;
+        --ex-paper: #fffdf7;
+        --ex-brand: #141414;
+        --ex-tomato: #ff6542;
+        --ex-sun: #ffcb3d;
+        --ex-mint: #86e0ae;
+        --ex-sky: #9bdcf5;
+        --ex-pink: #ffb5cf;
+        --ex-font: var(--font-ex8);
+        --ex-display: var(--font-ex8d);
+        --radius-lg: 999px;
+        --radius-xl: 20px;
+        --radius-2xl: 28px;
+        --radius-3xl: 36px;
+    }
+
+    /* 9. Alignment field: green-black, bone, burnt orange */
+    .ex.ex-9 {
+        --ex-ink: #101915;
+        --ex-paper: #f4f2ec;
+        --ex-brand: #b8440c;
+        --ex-font: var(--font-ex9);
+        --ex-display: var(--font-ex9d);
+        --radius-lg: 8px;
+        --radius-xl: 10px;
+        --radius-2xl: 14px;
+        --radius-3xl: 20px;
+    }
+
+    /* 10. The rail: warm white, charcoal, deep teal */
+    .ex.ex-10 {
+        --ex-ink: #1a1a18;
+        --ex-paper: #fafaf7;
+        --ex-brand: #0b5f6b;
+        --ex-font: var(--font-ex10);
+        --ex-display: var(--font-ex10d);
+        --radius-lg: 8px;
+        --radius-xl: 10px;
+        --radius-2xl: 12px;
+        --radius-3xl: 16px;
     }
 
     /* Grid children may shrink below their content width (SVGs, long badges) */
@@ -310,5 +383,70 @@
     .ex5-slide {
         min-height: calc(100svh - 4.5rem);
         scroll-snap-align: start;
+    }
+}
+
+/* ---------- 7. The index ---------- */
+.ex7-mark {
+    background-image: linear-gradient(var(--ex-mark), var(--ex-mark));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% 42%;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .ex7-mark {
+            animation: ex7-sweep linear both;
+            animation-timeline: view();
+            animation-range: entry 10% cover 35%;
+        }
+    }
+}
+@keyframes ex7-sweep {
+    from {
+        background-size: 0% 42%;
+    }
+}
+.ex7-rule {
+    border-top: 6px solid var(--color-neutral-950);
+}
+.ex7-biglink {
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.14em;
+}
+.ex7-biglink:hover {
+    text-decoration-thickness: 0.16em;
+}
+
+/* ---------- 8. Color fields ---------- */
+.ex8-sheet {
+    color: var(--ex-ink);
+}
+.ex8-sheet a:not([class*="bg-"]) {
+    color: inherit;
+}
+
+/* ---------- 9. Alignment field ---------- */
+.ex9-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 30%, black 95%);
+    mask-image: linear-gradient(to bottom, transparent 30%, black 95%);
+    opacity: 0.4;
+}
+@media (min-width: 1024px) {
+    .ex9-canvas {
+        opacity: 1;
+        -webkit-mask-image: linear-gradient(to right, transparent 28%, black 78%);
+        mask-image: linear-gradient(to right, transparent 28%, black 78%);
+    }
+    .ex9-canvas[data-mode="target"] {
+        -webkit-mask-image: linear-gradient(to left, transparent 25%, black 80%);
+        mask-image: linear-gradient(to left, transparent 25%, black 80%);
     }
 }
