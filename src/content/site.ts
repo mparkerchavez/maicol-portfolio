@@ -22,6 +22,7 @@ export type CaseSummary = {
     eyebrow: string;
     title: string;
     lead: string;
+    stat: { value: string; label: string };
     image: { src: string; alt: string };
     rows: { label: string; text: string }[];
 };
@@ -31,6 +32,7 @@ export const featuredCase: CaseSummary = {
     eyebrow: "AI Enablement · Capital Group",
     title: "AI meeting prep that sales teams trust",
     lead: "Scaled from a 12-person pilot to 300+ active sales associates within a year.",
+    stat: { value: "300+", label: "sales associates using it within a year" },
     image: { src: "/images/uc1-image-1.png", alt: "AI meeting prep project visual" },
     rows: [
         {
@@ -57,7 +59,8 @@ export const moreCases: CaseSummary[] = [
         slug: "strategy-horizon",
         eyebrow: "Tech Trends · Capital Group",
         title: "An enterprise point of view on generative AI",
-        lead: "Main contributor to the 2024 and 2025 Tech Trends reports, read by 1,300+ unique visitors.",
+        lead: "Main contributor to the 2024 and 2025 Tech Trends reports.",
+        stat: { value: "1,300+", label: "unique visitors across the 2024 and 2025 reports" },
         image: { src: "/images/uc2-image-1.png", alt: "Tech Trends research framework" },
         rows: [
             {
@@ -79,7 +82,8 @@ export const moreCases: CaseSummary[] = [
         slug: "innovation-sprints",
         eyebrow: "AI Discovery · Capital Group",
         title: "From AI curiosity to prioritized opportunities",
-        lead: "20+ innovation sprints across client, investment, and technology teams.",
+        lead: "Including a 40+ person cross-pillar AI discovery workshop.",
+        stat: { value: "20+", label: "innovation sprints across client, investment, and technology teams" },
         image: { src: "/images/uc3-image-1.png", alt: "AI discovery workshop" },
         rows: [
             {

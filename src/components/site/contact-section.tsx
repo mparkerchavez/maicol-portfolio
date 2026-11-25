@@ -4,38 +4,47 @@ import LinkedIn from "@/components/foundations/social-icons/linkedin";
 import { contact } from "@/content/site";
 
 export const ContactSection = () => (
-    <section id="contact" className="bg-primary py-16 md:py-24">
-        <div className="mx-auto max-w-container px-4 md:px-8">
-            <div className="flex flex-col gap-10 rounded-2xl bg-secondary px-6 py-10 md:flex-row md:items-end md:justify-between md:gap-16 md:p-16">
-                <div className="max-w-2xl">
-                    <p className="text-sm font-semibold text-brand-secondary md:text-md">Hiring for a product manager?</p>
-                    <h2 className="mt-3 text-display-sm font-semibold text-primary md:text-display-md">Let's talk.</h2>
-                    <p className="mt-4 text-lg text-tertiary md:text-xl">
-                        If you're here from my application, my resume and LinkedIn are below. If you'd rather start with a conversation, email me
-                        directly.
-                    </p>
-                </div>
-                <div className="flex w-full shrink-0 flex-col gap-6 md:w-auto">
-                    <Button href={contact.mailto} size="xl" iconLeading={<Mail01 data-icon aria-hidden="true" />} className="w-full md:w-auto">
-                        Email me
-                    </Button>
-                    <div>
-                        <p className="mb-3 text-sm font-semibold text-quaternary">Credentials</p>
-                        <div className="flex flex-col gap-3 sm:flex-row">
-                            <Button href={contact.resume} target="_blank" color="secondary" size="lg" iconLeading={<Download01 data-icon aria-hidden="true" />}>
-                                Download resume
-                            </Button>
-                            <Button
-                                href={contact.linkedin}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                color="secondary"
-                                size="lg"
-                                iconLeading={<LinkedIn data-icon className="size-5" />}
-                            >
-                                LinkedIn
-                            </Button>
-                        </div>
+    <section id="contact" className="grain relative overflow-hidden bg-brand-solid py-20 text-white md:py-28">
+        <svg aria-hidden="true" className="pointer-events-none absolute top-1/2 -right-24 hidden h-[140%] -translate-y-1/2 text-white/10 md:block" viewBox="0 0 200 200">
+            {Array.from({ length: 100 }).map((_, i) => (
+                <circle key={i} cx={10 + (i % 10) * 20} cy={10 + Math.floor(i / 10) * 20} r="2" fill="currentColor" />
+            ))}
+        </svg>
+        <div className="relative mx-auto flex max-w-container flex-col gap-12 px-4 md:px-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+                <p className="text-md font-semibold text-white/80">Let's talk</p>
+                <h2 className="mt-3 text-display-md font-semibold tracking-tight md:text-display-lg">Hiring for a product manager?</h2>
+                <p className="mt-5 text-lg text-white/85 md:text-xl">
+                    If you're here from my application, my resume and LinkedIn are right here. If you'd rather start with a conversation, email me
+                    directly.
+                </p>
+            </div>
+            <div className="flex w-full shrink-0 flex-col gap-6 lg:w-auto">
+                <Button href={contact.mailto} size="xl" color="secondary" iconLeading={<Mail01 data-icon aria-hidden="true" />} className="w-full lg:w-auto">
+                    Email me
+                </Button>
+                <div>
+                    <p className="mb-3 text-sm font-semibold text-white/75">Credentials</p>
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                        <Button
+                            href={contact.resume}
+                            target="_blank"
+                            color="secondary"
+                            size="lg"
+                            iconLeading={<Download01 data-icon aria-hidden="true" />}
+                        >
+                            Download resume
+                        </Button>
+                        <Button
+                            href={contact.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            color="secondary"
+                            size="lg"
+                            iconLeading={<LinkedIn data-icon className="size-5" />}
+                        >
+                            LinkedIn
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -44,8 +53,8 @@ export const ContactSection = () => (
 );
 
 export const SiteFooter = () => (
-    <footer className="border-t border-secondary bg-primary py-8">
-        <div className="mx-auto max-w-container px-4 text-sm text-quaternary md:px-8">
+    <footer className="dark-mode bg-primary py-8">
+        <div className="mx-auto flex max-w-container flex-col gap-2 px-4 text-sm text-quaternary md:flex-row md:justify-between md:px-8">
             <p>© 2026 Maicol Parker-Chavez</p>
         </div>
     </footer>

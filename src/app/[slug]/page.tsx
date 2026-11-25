@@ -7,6 +7,7 @@ import { Badge } from "@/components/base/badges/badges";
 import { Button } from "@/components/base/buttons/button";
 import { SummaryRows } from "@/components/site/case-card";
 import { ContactSection, SiteFooter } from "@/components/site/contact-section";
+import { DotField } from "@/components/site/dot-field";
 import { SiteHeader } from "@/components/site/site-header";
 import { type Block, caseStudies, getCaseStudy } from "@/content/case-studies";
 
@@ -79,19 +80,23 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <SiteHeader />
             <main>
                 {/* Intro */}
-                <section className="bg-primary pt-10 pb-12 md:pt-16 md:pb-16">
-                    <div className="mx-auto max-w-container px-4 md:px-8">
+                <section className="dark-mode grain relative overflow-hidden bg-primary pt-10 pb-12 md:pt-16 md:pb-20">
+                    <DotField className="absolute inset-0 size-full opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_70%)] md:[mask-image:linear-gradient(to_right,transparent_35%,black_85%)]" />
+                    <div className="pointer-events-none relative mx-auto max-w-container px-4 md:px-8 [&_a]:pointer-events-auto">
                         <Button href="/#work" color="link-gray" size="md" iconLeading={<ArrowLeft data-icon aria-hidden="true" />}>
                             All work
                         </Button>
-                        <p className="mt-8 text-sm font-semibold text-brand-secondary md:text-md">{study.eyebrow}</p>
-                        <h1 className="mt-3 max-w-4xl text-display-sm font-semibold tracking-tight text-primary md:text-display-lg">{study.title}</h1>
-                        <p className="mt-6 max-w-3xl text-lg text-tertiary md:text-xl">{study.intro}</p>
+                        <p className="mt-8 flex items-center gap-2 text-sm font-semibold text-brand-secondary md:text-md">
+                            <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-solid" />
+                            {study.eyebrow}
+                        </p>
+                        <h1 className="mt-4 max-w-4xl animate-rise text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-primary">{study.title}</h1>
+                        <p className="mt-6 max-w-3xl animate-rise text-lg text-tertiary [animation-delay:200ms] md:text-xl">{study.intro}</p>
                         <dl className="mt-10 grid gap-8 border-t border-secondary pt-8 md:grid-cols-3">
                             {study.metrics.map((m) => (
                                 <div key={m.value} className="flex flex-col gap-2">
                                     <dt className="text-md text-tertiary">{m.label}</dt>
-                                    <dd className="order-first text-display-xs font-semibold text-brand-tertiary_alt md:text-display-sm">{m.value}</dd>
+                                    <dd className="tabular order-first text-display-xs font-semibold tracking-tight text-brand-tertiary_alt md:text-display-sm">{m.value}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -101,7 +106,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 {/* At a glance */}
                 <section className="bg-secondary py-12 md:py-16">
                     <div className="mx-auto max-w-container px-4 md:px-8">
-                        <div className="rounded-2xl bg-primary p-6 shadow-xs ring-1 ring-secondary ring-inset md:p-10">
+                        <div className="rounded-3xl bg-primary p-6 shadow-xs ring-1 ring-secondary ring-inset md:p-10">
                             <h2 className="text-xl font-semibold text-primary md:text-display-xs">At a glance</h2>
                             <div className="mt-6">
                                 <SummaryRows rows={study.summary.rows} />
@@ -117,7 +122,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                             {study.sections.map((section) => (
                                 <article key={section.label}>
                                     <p className="text-sm font-semibold text-brand-secondary">{section.label}</p>
-                                    <h2 className="mt-2 text-display-xs font-semibold text-primary md:text-display-sm">{section.title}</h2>
+                                    <h2 className="mt-2 text-display-xs font-semibold tracking-tight text-primary md:text-display-sm">{section.title}</h2>
                                     <div className="mt-6 flex flex-col gap-5 text-lg text-tertiary">
                                         {section.blocks.map((block, i) => (
                                             <BlockView key={i} block={block} />
@@ -127,7 +132,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                             ))}
                         </div>
                         <aside className="flex flex-col gap-8">
-                            <div className="rounded-xl bg-secondary p-6">
+                            <div className="rounded-3xl bg-secondary p-6 ring-1 ring-secondary ring-inset">
                                 <h2 className="text-sm font-semibold text-quaternary">My role</h2>
                                 <p className="mt-2 text-lg font-semibold text-primary">{study.role.func}</p>
                                 <p className="mt-1 text-sm text-tertiary">Official title: {study.role.official}</p>
@@ -166,7 +171,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     <div className="mx-auto max-w-container px-4 md:px-8">
                         <Link
                             href={`/${next.slug}`}
-                            className="group flex flex-col gap-4 rounded-2xl bg-primary p-6 shadow-xs ring-1 ring-secondary transition duration-100 ease-linear ring-inset outline-focus-ring hover:ring-primary focus-visible:outline-2 md:flex-row md:items-center md:justify-between md:p-10"
+                            className="group flex flex-col gap-4 rounded-3xl bg-primary p-6 shadow-xs ring-1 ring-secondary transition duration-300 ease-out ring-inset outline-focus-ring hover:-translate-y-1 hover:shadow-xl hover:ring-brand focus-visible:outline-2 md:flex-row md:items-center md:justify-between md:p-10"
                         >
                             <div>
                                 <p className="text-sm font-semibold text-brand-secondary">Next case study</p>

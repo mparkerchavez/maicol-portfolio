@@ -1,13 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { RouteProvider } from "@/providers/router-provider";
 import "@/styles/globals.css";
 import { cx } from "@/utils/cx";
 
-const inter = Inter({
-    subsets: ["latin"],
+const uncut = localFont({
+    src: [
+        { path: "./fonts/UncutSans-Light.woff2", weight: "300", style: "normal" },
+        { path: "./fonts/UncutSans-Regular.woff2", weight: "400", style: "normal" },
+        { path: "./fonts/UncutSans-Bold.woff2", weight: "600 700", style: "normal" },
+    ],
     display: "swap",
-    variable: "--font-inter",
+    variable: "--font-uncut",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    themeColor: "#ffffff",
+    themeColor: "#131210",
     colorScheme: "light",
 };
 
@@ -34,8 +38,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="light-mode">
-            <body className={cx(inter.variable, "bg-primary antialiased")}>
+        <html lang="en" className={cx(uncut.variable, "light-mode")}>
+            <body className="bg-primary antialiased">
                 <RouteProvider>
                     {children}
                 </RouteProvider>
