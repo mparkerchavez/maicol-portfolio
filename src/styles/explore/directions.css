@@ -1,0 +1,314 @@
+/*
+ * Five explorations, each scoped to its own wrapper class (.ex-1 ... .ex-5).
+ * Every direction sets three seeds (ink, paper, brand) plus fonts and radius.
+ * The ramps below turn the seeds into UUI's neutral and brand scales, and scope.css
+ * re-resolves UUI's semantic tokens against them, so UUI components restyle without forking.
+ */
+
+@layer base {
+    .ex {
+        /* Neutral ramp: paper to ink */
+        --color-neutral-25: var(--ex-paper);
+        --color-neutral-50: color-mix(in oklab, var(--ex-ink) 3%, var(--ex-paper));
+        --color-neutral-100: color-mix(in oklab, var(--ex-ink) 7%, var(--ex-paper));
+        --color-neutral-200: color-mix(in oklab, var(--ex-ink) 13%, var(--ex-paper));
+        --color-neutral-300: color-mix(in oklab, var(--ex-ink) 22%, var(--ex-paper));
+        --color-neutral-400: color-mix(in oklab, var(--ex-ink) 40%, var(--ex-paper));
+        --color-neutral-500: color-mix(in oklab, var(--ex-ink) 62%, var(--ex-paper));
+        --color-neutral-600: color-mix(in oklab, var(--ex-ink) 70%, var(--ex-paper));
+        --color-neutral-700: color-mix(in oklab, var(--ex-ink) 80%, var(--ex-paper));
+        --color-neutral-800: color-mix(in oklab, var(--ex-ink) 88%, var(--ex-paper));
+        --color-neutral-900: color-mix(in oklab, var(--ex-ink) 94%, var(--ex-paper));
+        --color-neutral-950: var(--ex-ink);
+
+        /* Brand ramp: 600 is the seed */
+        --color-brand-25: color-mix(in oklab, var(--ex-brand) 3%, white);
+        --color-brand-50: color-mix(in oklab, var(--ex-brand) 7%, white);
+        --color-brand-100: color-mix(in oklab, var(--ex-brand) 15%, white);
+        --color-brand-200: color-mix(in oklab, var(--ex-brand) 30%, white);
+        --color-brand-300: color-mix(in oklab, var(--ex-brand) 48%, white);
+        --color-brand-400: color-mix(in oklab, var(--ex-brand) 70%, white);
+        --color-brand-500: color-mix(in oklab, var(--ex-brand) 87%, white);
+        --color-brand-600: var(--ex-brand);
+        --color-brand-700: color-mix(in oklab, var(--ex-brand) 85%, black);
+        --color-brand-800: color-mix(in oklab, var(--ex-brand) 70%, black);
+        --color-brand-900: color-mix(in oklab, var(--ex-brand) 55%, black);
+        --color-brand-950: color-mix(in oklab, var(--ex-brand) 35%, black);
+
+        --font-body: var(--ex-font), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        --font-display: var(--ex-font), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        font-family: var(--font-body);
+        color: var(--color-text-primary);
+        background-color: var(--color-bg-primary);
+    }
+
+    /* 1. Through line: cobalt route on cool white */
+    .ex.ex-1 {
+        --ex-ink: #121826;
+        --ex-paper: #f6f7f9;
+        --ex-brand: #2741c9;
+        --ex-font: var(--font-ex1);
+        --radius-lg: 6px;
+        --radius-xl: 8px;
+        --radius-2xl: 10px;
+        --radius-3xl: 14px;
+    }
+
+    /* 2. Adoption curve: evergreen line, amber annotations */
+    .ex.ex-2 {
+        --ex-ink: #0f231c;
+        --ex-paper: #f4f7f5;
+        --ex-brand: #0b6b4f;
+        --ex-amber: #b45309;
+        --ex-amber-soft: #fbe7c2;
+        --ex-font: var(--font-ex2);
+        --radius-lg: 4px;
+        --radius-xl: 6px;
+        --radius-2xl: 8px;
+        --radius-3xl: 10px;
+    }
+
+    /* 3. Three voices: tri-color Venn on clean white */
+    .ex.ex-3 {
+        --ex-ink: #17171f;
+        --ex-paper: #ffffff;
+        --ex-brand: #2f55e0;
+        --ex-sun: #f2b705;
+        --ex-rose: #e0457b;
+        --ex-font: var(--font-ex3);
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+        --radius-2xl: 20px;
+        --radius-3xl: 28px;
+    }
+
+    /* 4. Fog to focus: violet ink on lavender mist */
+    .ex.ex-4 {
+        --ex-ink: #1b1838;
+        --ex-paper: #f7f7fb;
+        --ex-brand: #5434d4;
+        --ex-font: var(--font-ex4);
+        --radius-lg: 10px;
+        --radius-xl: 14px;
+        --radius-2xl: 18px;
+        --radius-3xl: 24px;
+    }
+
+    /* 5. The readout: a deck on aubergine, raspberry action, apricot figures */
+    .ex.ex-5 {
+        --ex-ink: #1f1428;
+        --ex-paper: #fbf7f4;
+        --ex-brand: #b8245f;
+        --ex-apricot: #ffb38a;
+        --ex-font: var(--font-ex5);
+        --radius-lg: 8px;
+        --radius-xl: 12px;
+        --radius-2xl: 16px;
+        --radius-3xl: 22px;
+    }
+
+    /* Grid children may shrink below their content width (SVGs, long badges) */
+    .ex .grid > * {
+        min-width: 0;
+    }
+
+    /* Keep brand text in color inside dark sections of any direction */
+    .ex .dark-mode {
+        --color-text-brand-secondary: var(--color-brand-300);
+        --color-text-brand-tertiary: var(--color-brand-300);
+        --color-text-brand-tertiary_alt: var(--color-brand-300);
+        color: var(--color-text-primary);
+    }
+}
+
+/* ---------- 1. Through line ---------- */
+.ex-1 {
+    --route-x: 1.25rem;
+}
+@media (min-width: 768px) {
+    .ex-1 {
+        --route-x: 3.5rem;
+    }
+}
+.ex1-track {
+    position: absolute;
+    top: 5rem;
+    bottom: 9rem;
+    left: var(--route-x);
+    width: 3px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: var(--color-neutral-200);
+    overflow: hidden;
+}
+.ex1-fill {
+    height: 100%;
+    background: var(--color-brand-600);
+    transform: scaleY(0);
+    transform-origin: top;
+}
+.ex1-station {
+    position: absolute;
+    left: var(--route-x);
+    top: calc(var(--st-top, 0px) + 0.55rem);
+    z-index: 1;
+    width: 1.25rem;
+    height: 1.25rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    border: 3px solid var(--color-brand-600);
+    background: var(--color-neutral-25);
+    transition:
+        background-color 250ms ease-out,
+        box-shadow 250ms ease-out;
+}
+.ex1-station[data-reached="true"] {
+    background: var(--color-brand-600);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-brand-600) 14%, transparent);
+}
+.ex1-station-lg {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-width: 4px;
+    top: calc(var(--st-top, 0px) + 0.25rem);
+}
+@media (prefers-reduced-motion: reduce) {
+    .ex1-station {
+        transition: none;
+    }
+}
+
+/* ---------- 2. Adoption curve ---------- */
+.ex2-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    animation: ex2-draw 1.6s cubic-bezier(0.45, 0, 0.2, 1) 0.3s both;
+}
+.ex2-area {
+    animation: ex2-fade 0.8s ease-out 1.5s both;
+}
+.ex2-point {
+    animation: ex2-fade 0.5s ease-out both;
+}
+.ex2-note {
+    background: var(--ex-amber-soft);
+    color: #6e3405;
+}
+@keyframes ex2-draw {
+    from {
+        stroke-dashoffset: 1;
+    }
+}
+@keyframes ex2-fade {
+    from {
+        opacity: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ex2-line,
+    .ex2-area,
+    .ex2-point {
+        animation: none;
+    }
+}
+
+/* ---------- 3. Three voices ---------- */
+.ex3-circle {
+    transform-box: fill-box;
+    animation: ex3-converge 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+.ex3-label {
+    animation: ex3-fade 0.6s ease-out 1.3s both;
+}
+@keyframes ex3-converge {
+    from {
+        transform: translate(var(--from));
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+@keyframes ex3-fade {
+    from {
+        opacity: 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ex3-circle,
+    .ex3-label {
+        animation: none;
+    }
+}
+
+/* ---------- 4. Fog to focus ---------- */
+.ex4-mist {
+    background:
+        radial-gradient(40rem 26rem at 18% 20%, color-mix(in oklab, var(--color-brand-600) 16%, transparent), transparent 70%),
+        radial-gradient(36rem 24rem at 85% 30%, color-mix(in oklab, #6aa6ff 22%, transparent), transparent 70%),
+        radial-gradient(44rem 30rem at 50% 105%, color-mix(in oklab, #f2a7d8 22%, transparent), transparent 70%),
+        var(--color-bg-primary);
+}
+.ex4-mist-soft {
+    background:
+        radial-gradient(50rem 30rem at 80% 0%, color-mix(in oklab, var(--color-brand-600) 9%, transparent), transparent 70%),
+        radial-gradient(40rem 26rem at 10% 100%, color-mix(in oklab, #6aa6ff 12%, transparent), transparent 70%),
+        var(--color-neutral-50);
+}
+.ex4-word {
+    display: inline;
+    animation: ex4-focus 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.ex4-after {
+    animation: ex4-clear 0.8s ease-out 1s both;
+}
+.ex4-panel[data-focus-visible] {
+    outline-offset: 6px;
+}
+.ex4-panel > article {
+    animation: ex4-focus 0.45s ease-out both;
+}
+@keyframes ex4-focus {
+    from {
+        filter: blur(14px);
+        opacity: 0.15;
+    }
+}
+@keyframes ex4-clear {
+    from {
+        opacity: 0;
+        filter: blur(6px);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ex4-word,
+    .ex4-after,
+    .ex4-panel > article {
+        animation: none;
+    }
+}
+
+/* ---------- 5. The readout ---------- */
+.ex5-slide {
+    display: flex;
+    position: relative;
+}
+.ex5-slide + .ex5-slide {
+    border-top: 1px solid var(--color-border-secondary);
+}
+.ex5-figure {
+    color: var(--ex-apricot);
+}
+.ex5-title,
+.ex5-close {
+    background: radial-gradient(60rem 36rem at 90% 10%, color-mix(in oklab, var(--color-brand-600) 28%, transparent), transparent 70%);
+}
+@media (min-width: 1024px) {
+    html:has(.ex-5) {
+        scroll-snap-type: y proximity;
+    }
+    .ex5-slide {
+        min-height: calc(100svh - 4.5rem);
+        scroll-snap-align: start;
+    }
+}
