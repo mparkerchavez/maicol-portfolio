@@ -57,6 +57,31 @@ export const directions = [
         name: "The rail",
         thesis: "Name, navigation, and contact stay fixed in a left rail. The right side is one long, calm reading column.",
     },
+    {
+        n: 11,
+        name: "Front page",
+        thesis: "Round three. Sharp black and white with one blue. A lead story, then four full-width entries. News grotesque titles over a serif body.",
+    },
+    {
+        n: 12,
+        name: "Two-tone blocks",
+        thesis: "Round three. The color blocks from direction 8 cut down to tomato, cream, and ink. Four equal blocks in a two by two grid.",
+    },
+    {
+        n: 13,
+        name: "Oxblood and blush",
+        thesis: "Round three. One deep color and its tint. Softer corners, a grotesque over a bookish serif.",
+    },
+    {
+        n: 14,
+        name: "Ivory press",
+        thesis: "Round three. Serif headlines over a sans body on warm ivory, with ochre for the close. An offset grid.",
+    },
+    {
+        n: 15,
+        name: "One hue",
+        thesis: "Round three. Petrol and its lighter tints only. All sans, the plainest type of the five.",
+    },
 ];
 
 /** Thin comparison bar above each direction. Plain UUI defaults so it stays out of the way of the direction itself. */

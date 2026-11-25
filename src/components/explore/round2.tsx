@@ -29,7 +29,17 @@ const nav = [
 ];
 
 /** Name only, no mark. One universal action. */
-export const SiteHeader = ({ className, nameClassName, sticky = true }: { className?: string; nameClassName?: string; sticky?: boolean }) => (
+export const SiteHeader = ({
+    className,
+    nameClassName,
+    sticky = true,
+    items = nav,
+}: {
+    className?: string;
+    nameClassName?: string;
+    sticky?: boolean;
+    items?: { label: string; href: string }[];
+}) => (
     <header className={cx(sticky && "sticky top-0", "z-30", className)}>
         <div className="mx-auto flex h-16 max-w-container items-center justify-between gap-4 px-4 md:h-18 md:px-8">
             <a href="#top" className={cx("rounded-md text-md font-semibold text-primary outline-focus-ring focus-visible:outline-2 md:text-lg", nameClassName)}>
@@ -37,7 +47,7 @@ export const SiteHeader = ({ className, nameClassName, sticky = true }: { classN
             </a>
             <div className="flex items-center gap-7">
                 <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
-                    {nav.map((item) => (
+                    {items.map((item) => (
                         <a
                             key={item.href}
                             href={item.href}

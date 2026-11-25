@@ -180,6 +180,90 @@
         --radius-3xl: 16px;
     }
 
+    /* ---------- Round three: 11 to 15 share one structure ---------- */
+    .ex.ex-11 {
+        --ex-ink: #0a0a0a;
+        --ex-paper: #ffffff;
+        --ex-brand: #0a0a0a;
+        --ex-font: var(--font-ex11);
+        --ex-display: var(--font-ex11d);
+        --r3-radius: 0px;
+        --radius-md: 0px;
+        --radius-lg: 0px;
+        --radius-xl: 0px;
+        --r3-accent: #1f44e0;
+        --r3-card: #efeeea;
+        --r3-lead: #0a0a0a;
+        --r3-lead-fg: #ffffff;
+        --r3-lead-accent: #8fa6ff;
+        --r3-close: #1f44e0;
+        --r3-close-fg: #ffffff;
+    }
+    .ex.ex-12 {
+        --ex-ink: #1a1412;
+        --ex-paper: #fbf6ee;
+        --ex-brand: #1a1412;
+        --ex-font: var(--font-ex12);
+        --ex-display: var(--font-ex12d);
+        --r3-radius: 32px;
+        --radius-lg: 999px;
+        --r3-accent: #1a1412;
+        --r3-card: #efe3d0;
+        --r3-lead: #1a1412;
+        --r3-lead-fg: #fbf6ee;
+        --r3-lead-accent: #ff6542;
+        --r3-close: #ff6542;
+        --r3-close-fg: #1a1412;
+    }
+    .ex.ex-13 {
+        --ex-ink: #2a0d14;
+        --ex-paper: #fcf5f2;
+        --ex-brand: #6b1226;
+        --ex-font: var(--font-ex13);
+        --ex-display: var(--font-ex13d);
+        --r3-radius: 16px;
+        --r3-accent: #6b1226;
+        --r3-card: #f3d5cf;
+        --r3-lead: #6b1226;
+        --r3-lead-fg: #fdebe6;
+        --r3-lead-accent: #ffb8a8;
+        --r3-close: #6b1226;
+        --r3-close-fg: #fdebe6;
+    }
+    .ex.ex-14 {
+        --ex-ink: #1c1b18;
+        --ex-paper: #f4f1e9;
+        --ex-brand: #1c1b18;
+        --ex-font: var(--font-ex14);
+        --ex-display: var(--font-ex14d);
+        --r3-radius: 6px;
+        --radius-md: 4px;
+        --radius-lg: 4px;
+        --r3-accent: #1c1b18;
+        --r3-card: #ddd6c3;
+        --r3-lead: #1c1b18;
+        --r3-lead-fg: #f4f1e9;
+        --r3-lead-accent: #e8b84a;
+        --r3-close: #e8b84a;
+        --r3-close-fg: #1c1b18;
+    }
+    .ex.ex-15 {
+        --ex-ink: #0e1a1f;
+        --ex-paper: #f6f9f9;
+        --ex-brand: #0d3b44;
+        --ex-font: var(--font-ex15);
+        --ex-display: var(--font-ex15d);
+        --r3-radius: 24px;
+        --r3-accent: #0d3b44;
+        --r3-card: #cdebef;
+        --r3-lead: #0d3b44;
+        --r3-lead-fg: #e9f8fa;
+        --r3-lead-accent: #7fe3ee;
+        --r3-close: #86dbe6;
+        --r3-close-fg: #0e1a1f;
+    }
+
+
     /* Grid children may shrink below their content width (SVGs, long badges) */
     .ex .grid > * {
         min-width: 0;
@@ -448,5 +532,63 @@
     .ex9-canvas[data-mode="target"] {
         -webkit-mask-image: linear-gradient(to left, transparent 25%, black 80%);
         mask-image: linear-gradient(to left, transparent 25%, black 80%);
+    }
+}
+
+/* ---------- Round three (11 to 15) ---------- */
+.r3-box {
+    background: var(--box);
+    color: var(--box-fg, var(--ex-ink));
+    border-radius: var(--r3-radius);
+    --btn: var(--ex-ink);
+    --btn-fg: var(--ex-paper);
+}
+.r3-box-lead {
+    --box: var(--r3-lead);
+    --box-fg: var(--r3-lead-fg);
+    --fig: var(--r3-lead-accent);
+    --btn: var(--r3-lead-fg);
+    --btn-fg: var(--r3-lead);
+}
+.r3-box-card {
+    --box: var(--r3-card);
+    --fig: var(--r3-accent);
+}
+.r3-box-close {
+    --box: var(--r3-close);
+    --box-fg: var(--r3-close-fg);
+    --btn: var(--r3-close-fg);
+    --btn-fg: var(--r3-close);
+}
+.r3-fig {
+    color: var(--fig, currentColor);
+}
+.r3-muted {
+    color: color-mix(in srgb, currentColor 82%, transparent);
+}
+.ex .r3-btn {
+    background: var(--btn);
+    color: var(--btn-fg);
+}
+.ex .r3-btn:hover {
+    background: color-mix(in srgb, var(--btn) 86%, var(--btn-fg));
+}
+.ex .r3-btn [data-icon] {
+    color: currentColor;
+    opacity: 0.75;
+}
+.r3-biglink {
+    text-decoration: underline transparent;
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.12em;
+    transition: text-decoration-color 100ms linear;
+}
+.r3-biglink:hover,
+.r3-biglink:focus-visible {
+    text-decoration-color: currentColor;
+}
+@media (prefers-reduced-motion: reduce) {
+    .r3-biglink {
+        transition: none;
     }
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { directions } from "@/components/explore/shared";
 
 export const metadata = {
-    title: "Ten directions | Maicol Parker-Chavez",
+    title: "Fifteen directions | Maicol Parker-Chavez",
     robots: { index: false, follow: false },
 };
 
@@ -17,19 +17,25 @@ const swatches: Record<number, string[]> = {
     8: ["#ff6542", "#ffcb3d", "#86e0ae", "#9bdcf5", "#ffb5cf"],
     9: ["#101915", "#f4f2ec", "#b8440c"],
     10: ["#fafaf7", "#1a1a18", "#0b5f6b"],
+    11: ["#ffffff", "#0a0a0a", "#1f44e0", "#efeeea"],
+    12: ["#fbf6ee", "#1a1412", "#ff6542", "#efe3d0"],
+    13: ["#fcf5f2", "#6b1226", "#f3d5cf"],
+    14: ["#f4f1e9", "#1c1b18", "#e8b84a", "#ddd6c3"],
+    15: ["#f6f9f9", "#0d3b44", "#86dbe6", "#cdebef"],
 };
 
 export default function ExploreIndex() {
     return (
         <main className="min-h-svh bg-primary">
             <div className="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
-                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Ten directions for the interim site</h1>
+                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Fifteen directions for the interim site</h1>
                 <p className="mt-4 text-lg text-tertiary">
-                    Same case studies and the same core copy in each. Round two (6 to 10) responds to the feedback on round one: type-led hierarchy, no eyebrows or
-                    badges, no purple, one stat per case, and a universal call to action. All ten are built on Untitled UI v8 with re-pointed tokens.
+                    Same case studies and the same core copy in each. Round three (11 to 15) settles the structure: a split hero, Prep Me as the lead story, the two
+                    products in development beside the other two case studies, About, and a bold close. The five differ in color, type, and grid layout.
                 </p>
                 {[
-                    { title: "Round two: after feedback", list: directions.filter((d) => d.n > 5) },
+                    { title: "Round three: one structure, five treatments", list: directions.filter((d) => d.n > 10) },
+                    { title: "Round two: after feedback", list: directions.filter((d) => d.n > 5 && d.n <= 10) },
                     { title: "Round one", list: directions.filter((d) => d.n <= 5) },
                 ].map((round) => (
                     <section key={round.title} className="mt-12">
