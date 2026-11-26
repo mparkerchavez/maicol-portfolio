@@ -447,6 +447,103 @@
         --r4-close-pop: #c9ff1f;
     }
 
+    /* ---------- Round six: 26 to 30, the colors of 25 with a second sans for body copy ---------- */
+    .ex.ex-26 {
+        --ex-font: var(--font-ex26);
+        --ex-display: var(--font-ex26d);
+        --r4-radius: 12px;
+        --radius-md: 6px;
+        --radius-lg: 6px;
+        --ex-ink: #160b07;
+        --ex-paper: #fdfdff;
+        --ex-brand: #160b07;
+        --r4-gap: #160b07;
+        --r4-accent: #e02b00;
+        --r4-hero: #e02b00;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #c9ff1f;
+        --r4-hero-btn-fg: #160b07;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+        --r4-close-pop: #c9ff1f;
+    }
+    .ex.ex-27 {
+        --ex-font: var(--font-ex27);
+        --ex-display: var(--font-ex27d);
+        --r4-radius: 12px;
+        --radius-md: 6px;
+        --radius-lg: 6px;
+        --ex-ink: #160b07;
+        --ex-paper: #fdfdff;
+        --ex-brand: #160b07;
+        --r4-gap: #160b07;
+        --r4-accent: #e02b00;
+        --r4-hero: #e02b00;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #c9ff1f;
+        --r4-hero-btn-fg: #160b07;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+        --r4-close-pop: #c9ff1f;
+    }
+    .ex.ex-28 {
+        --ex-font: var(--font-ex28);
+        --ex-display: var(--font-ex28d);
+        --r4-radius: 12px;
+        --radius-md: 6px;
+        --radius-lg: 6px;
+        --ex-ink: #160b07;
+        --ex-paper: #fdfdff;
+        --ex-brand: #160b07;
+        --r4-gap: #160b07;
+        --r4-accent: #e02b00;
+        --r4-hero: #e02b00;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #c9ff1f;
+        --r4-hero-btn-fg: #160b07;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+        --r4-close-pop: #c9ff1f;
+    }
+    .ex.ex-29 {
+        --ex-font: var(--font-ex29);
+        --ex-display: var(--font-ex29d);
+        --r4-radius: 12px;
+        --radius-md: 6px;
+        --radius-lg: 6px;
+        --ex-ink: #160b07;
+        --ex-paper: #fdfdff;
+        --ex-brand: #160b07;
+        --r4-gap: #160b07;
+        --r4-accent: #e02b00;
+        --r4-hero: #e02b00;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #c9ff1f;
+        --r4-hero-btn-fg: #160b07;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+        --r4-close-pop: #c9ff1f;
+    }
+    .ex.ex-30 {
+        --ex-font: var(--font-ex30);
+        --ex-display: var(--font-ex30d);
+        --r4-radius: 12px;
+        --radius-md: 6px;
+        --radius-lg: 6px;
+        --ex-ink: #160b07;
+        --ex-paper: #fdfdff;
+        --ex-brand: #160b07;
+        --r4-gap: #160b07;
+        --r4-accent: #e02b00;
+        --r4-hero: #e02b00;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #c9ff1f;
+        --r4-hero-btn-fg: #160b07;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+        --r4-close-pop: #c9ff1f;
+    }
+
     /* Grid children may shrink below their content width (SVGs, long badges) */
     .ex .grid > * {
         min-width: 0;

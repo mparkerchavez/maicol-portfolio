@@ -1,6 +1,7 @@
 import { ArrowRight, LinkExternal01 } from "@untitledui/icons";
 import Image from "next/image";
 import { Button } from "@/components/base/buttons/button";
+import { Halftone, type HalftoneTone } from "@/components/explore/halftone";
 import { mail, projects } from "@/components/explore/round2";
 import { ExploreBar } from "@/components/explore/shared";
 import { type CaseSummary, about, building, contact, featuredCase, hero, moreCases } from "@/content/site";
@@ -22,6 +23,12 @@ export type RoundFiveProps = {
     rows: "two" | "four";
     /** Set body copy in a heavier weight. */
     boldBody?: boolean;
+    /** Classes for an all-caps hero headline. Replaces the default hero size. */
+    heroCaps?: string;
+    /** Set the three footer links in caps too. */
+    capsClose?: boolean;
+    /** Render every photo as a black and white halftone. */
+    tone?: HalftoneTone;
 };
 
 type Project = (typeof building.projects)[number];
@@ -61,11 +68,14 @@ const Figure = ({ text, value }: { text: string; value: string }) => {
     );
 };
 
-const Photo = ({ image, sizes, className }: { image: CaseSummary["image"]; sizes: string; className?: string }) => (
-    <div className={cx("r4-photo relative aspect-video w-full overflow-hidden", className)}>
-        <Image src={image.src} alt={image.alt} fill loading="eager" sizes={sizes} className="object-cover" />
-    </div>
-);
+const Photo = ({ image, sizes, className, tone }: { image: CaseSummary["image"]; sizes: string; className?: string; tone?: HalftoneTone }) =>
+    tone ? (
+        <Halftone src={image.src} alt={image.alt} tone={tone} className={className} />
+    ) : (
+        <div className={cx("r4-photo relative aspect-video w-full overflow-hidden", className)}>
+            <Image src={image.src} alt={image.alt} fill loading="eager" sizes={sizes} className="object-cover" />
+        </div>
+    );
 
 const ReadButton = ({ slug }: { slug: string }) => (
     <Button href={`/${slug}`} size="lg" className="r3-btn font-display" iconTrailing={<ArrowRight data-icon aria-hidden="true" />}>
@@ -85,9 +95,9 @@ const Rows = ({ rows, display, className }: { rows: Row[]; display: string; clas
     </dl>
 );
 
-const CaseCard = ({ item, rows, display, className }: { item: CaseSummary; rows: Row[]; display: string; className?: string }) => (
+const CaseCard = ({ item, rows, display, className, tone }: { item: CaseSummary; rows: Row[]; display: string; className?: string; tone?: HalftoneTone }) => (
     <article className={cx("r4-card flex flex-col", pad, className)}>
-        <Photo image={item.image} sizes="(min-width: 1024px) 50vw, 100vw" />
+        <Photo image={item.image} sizes="(min-width: 1024px) 50vw, 100vw" tone={tone} />
         <h3 className={cx("mt-12 font-display", display, size.title)}>{item.title}</h3>
         <p className={cx("mt-4 max-w-[24ch] font-display text-balance", display, size.medium)}>
             <span className="r3-fig tabular-nums">{item.stat.value}</span> {item.stat.label}
@@ -132,8 +142,11 @@ const BuildCard = ({ project, display, className }: { project: Project; display:
     </article>
 );
 
-export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody }: RoundFiveProps) => {
-    const spans = grid === "offset" ? ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"] : ["lg:col-span-6", "lg:col-span-6", "lg:col-span-6", "lg:col-span-6"];
+export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroCaps, capsClose, tone }: RoundFiveProps) => {
+    const spans =
+        grid === "offset"
+            ? ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"]
+            : ["lg:col-span-6", "lg:col-span-6", "lg:col-span-6", "lg:col-span-6"];
     const item = featuredCase;
     const pick = (all: Row[]) => (rows === "four" ? all : all.filter((r) => r.label === "What I decided" || r.label === "Outcome"));
 
@@ -178,7 +191,14 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody }: Rou
 
                 <main className="r4-stack flex flex-col">
                     <section className={cx("r4-card r4-hero flex min-h-[calc(100svh-7.25rem)] flex-col", pad, "md:py-16 xl:py-20")}>
-                        <h1 className={cx("max-w-[78%] font-display text-balance max-lg:max-w-none", display, size.hero)}>{hero.headline}</h1>
+                        <h1
+                            className={cx(
+                                "font-display text-balance",
+                                heroCaps ? cx("uppercase", heroCaps) : cx("max-w-[78%] max-lg:max-w-none", display, size.hero),
+                            )}
+                        >
+                            {hero.headline}
+                        </h1>
                         <div className="mt-auto pt-16 lg:ml-auto lg:w-[46%]">
                             <p className={cx("r4-hero-copy", size.body, "md:text-xl md:leading-8")}>{hero.supporting}</p>
                             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -202,11 +222,16 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody }: Rou
                             {lead === "side" ? (
                                 <div className="grid items-start gap-x-16 gap-y-12 lg:grid-cols-12 xl:gap-x-24">
                                     <div className="lg:col-span-6">{leadText}</div>
-                                    <Photo image={item.image} sizes="(min-width: 1024px) 50vw, 100vw" className="max-lg:order-first lg:col-span-6" />
+                                    <Photo
+                                        image={item.image}
+                                        sizes="(min-width: 1024px) 50vw, 100vw"
+                                        className="max-lg:order-first lg:col-span-6"
+                                        tone={tone}
+                                    />
                                 </div>
                             ) : (
                                 <>
-                                    <Photo image={item.image} sizes="100vw" className="lg:aspect-[21/9]" />
+                                    <Photo image={item.image} sizes="100vw" className="lg:aspect-[21/9]" tone={tone} />
                                     <div className="mt-12 md:mt-16">{leadText}</div>
                                 </>
                             )}
@@ -221,14 +246,14 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody }: Rou
                                 <BuildCard key={project.name} project={project} display={display} className={spans[i]} />
                             ))}
                             {moreCases.map((c, i) => (
-                                <CaseCard key={c.slug} item={c} rows={pick(c.rows)} display={display} className={spans[i + 2]} />
+                                <CaseCard key={c.slug} item={c} rows={pick(c.rows)} display={display} className={spans[i + 2]} tone={tone} />
                             ))}
                         </div>
                     </section>
 
                     <section id="about" className={cx("r4-card scroll-mt-20", pad)}>
                         <div className="mx-auto max-w-[54rem]">
-                            <Photo image={about.photo} sizes="(min-width: 1024px) 864px, 100vw" className="aspect-[3/2]" />
+                            <Photo image={about.photo} sizes="(min-width: 1024px) 864px, 100vw" className="aspect-[3/2]" tone={tone} />
                             <h2 className={cx("mt-14 font-display md:mt-20", display, size.large)}>Connecting the dots.</h2>
                             <div className={cx("r3-muted mt-8 flex flex-col gap-6", size.body, "md:text-xl md:leading-8")}>
                                 <p>{about.paragraphs[0]}</p>
@@ -260,14 +285,18 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody }: Rou
 
                 <footer id="contact" className={cx("r4-card r4-close flex min-h-[calc(100svh-4.5rem)] flex-col justify-end", pad, "md:py-14 xl:py-16")}>
                     <h2 className={cx("font-display", display, size.medium)}>Get in touch</h2>
-                    <ul className={cx("mt-4 flex flex-col font-display text-[clamp(3.25rem,11.5vw,11rem)] leading-[1.04]", display)}>
+                    <ul className={cx("mt-4 flex flex-col font-display text-[clamp(3.25rem,11.5vw,11rem)] leading-[1.04]", display, capsClose && "uppercase")}>
                         {[
                             { label: "Email", href: mail },
                             { label: "Resume", href: contact.resume, blank: true },
                             { label: "LinkedIn", href: contact.linkedin, blank: true },
                         ].map((l) => (
                             <li key={l.label}>
-                                <a href={l.href} {...(l.blank ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="r3-biglink rounded-sm outline-focus-ring focus-visible:outline-2">
+                                <a
+                                    href={l.href}
+                                    {...(l.blank ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                                    className="r3-biglink rounded-sm outline-focus-ring focus-visible:outline-2"
+                                >
                                     {l.label}
                                 </a>
                             </li>

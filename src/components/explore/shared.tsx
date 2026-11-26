@@ -132,6 +132,31 @@ export const directions = [
         name: "Red with a little lime",
         thesis: "Round five. Red-orange hero and close, white cards. Lime appears only on the hero button and the footer link underline.",
     },
+    {
+        n: 26,
+        name: "Geist body",
+        thesis: "Round six. Libre Franklin titles over Geist. Caps headline at a moderate size, fine hex halftone, two rows on the smaller cases.",
+    },
+    {
+        n: 27,
+        name: "Inter body",
+        thesis: "Round six. Libre Franklin titles over Inter. Larger, heavier caps headline, soft medium halftone, four rows.",
+    },
+    {
+        n: 28,
+        name: "Instrument Sans body",
+        thesis: "Round six. Libre Franklin titles over Instrument Sans. Heavy caps headline, fine square-grid halftone, two rows.",
+    },
+    {
+        n: 29,
+        name: "IBM Plex Sans body",
+        thesis: "Round six. Libre Franklin titles over IBM Plex Sans. Larger caps headline, very fine halftone, four rows.",
+    },
+    {
+        n: 30,
+        name: "DM Sans body",
+        thesis: "Round six. Libre Franklin titles over DM Sans. The largest caps headline, coarse halftone, footer links in caps too.",
+    },
 ];
 
 /** Thin comparison bar above each direction. Plain UUI defaults so it stays out of the way of the direction itself. */

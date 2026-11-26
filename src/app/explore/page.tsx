@@ -32,18 +32,24 @@ const swatches: Record<number, string[]> = {
     23: ["#fafaf8", "#111111", "#e02b00"],
     24: ["#e02b00", "#fafaf8", "#111111"],
     25: ["#e02b00", "#fdfdff", "#c9ff1f"],
+    26: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
+    27: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
+    28: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
+    29: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
+    30: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
 };
 
 export default function ExploreIndex() {
     return (
         <main className="min-h-svh bg-primary">
             <div className="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
-                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Twenty-five directions for the interim site</h1>
+                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Thirty directions for the interim site</h1>
                 <p className="mt-4 text-lg text-tertiary">
-                    Round five (21 to 25) keeps the flush cards with small corners, brings back the fuller copy, and starts every card's text at the top. The five differ in color, body typeface and weight, and how much each case shows. Earlier rounds are kept for comparison.
+                    Round six (26 to 30) merges earlier picks: the colors of 25, the lead case from 24, an all-caps headline, and black and white halftone photos. The five differ in body typeface, headline size, halftone grain, and how much each case shows. Earlier rounds are kept for comparison.
                 </p>
                 {[
-                    { title: "Round five: small corners, fuller copy", list: directions.filter((d) => d.n > 20) },
+                    { title: "Round six: merged picks", list: directions.filter((d) => d.n > 25) },
+                    { title: "Round five: small corners, fuller copy", list: directions.filter((d) => d.n > 20 && d.n <= 25) },
                     { title: "Round four: flush cards, short copy", list: directions.filter((d) => d.n > 15 && d.n <= 20) },
                     { title: "Round three: one structure, five treatments", list: directions.filter((d) => d.n > 10 && d.n <= 15) },
                     { title: "Round two: after feedback", list: directions.filter((d) => d.n > 5 && d.n <= 10) },
