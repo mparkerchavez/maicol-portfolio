@@ -2,9 +2,10 @@ import { ArrowRight, LinkExternal01 } from "@untitledui/icons";
 import Image from "next/image";
 import { Button } from "@/components/base/buttons/button";
 import { Halftone, type HalftoneTone } from "@/components/explore/halftone";
+import { R5Footer, R5Header } from "@/components/explore/r5-chrome";
 import { mail, projects } from "@/components/explore/round2";
 import { ExploreBar } from "@/components/explore/shared";
-import { type CaseSummary, about, building, contact, featuredCase, hero, moreCases } from "@/content/site";
+import { type CaseSummary, about, building, featuredCase, hero, moreCases } from "@/content/site";
 import { cx } from "@/utils/cx";
 
 /**
@@ -29,6 +30,8 @@ export type RoundFiveProps = {
     capsClose?: boolean;
     /** Render every photo as a black and white halftone. */
     tone?: HalftoneTone;
+    /** Path prefix for case study links, for example "/explore/31". */
+    casePath?: string;
 };
 
 type Project = (typeof building.projects)[number];
@@ -38,11 +41,6 @@ const work = {
     heading: "Product decisions, with the evidence behind them.",
     body: "Three AI initiatives from Capital Group, and two products I'm building myself in 2026.",
 };
-
-const navItems = [
-    { label: "Work", href: "#work" },
-    { label: "About", href: "#about" },
-];
 
 /** Five sizes for the whole page: hero, large, medium, title, body. */
 const size = {
@@ -77,8 +75,8 @@ const Photo = ({ image, sizes, className, tone }: { image: CaseSummary["image"];
         </div>
     );
 
-const ReadButton = ({ slug }: { slug: string }) => (
-    <Button href={`/${slug}`} size="lg" className="r3-btn font-display" iconTrailing={<ArrowRight data-icon aria-hidden="true" />}>
+const ReadButton = ({ href }: { href: string }) => (
+    <Button href={href} size="lg" className="r3-btn font-display" iconTrailing={<ArrowRight data-icon aria-hidden="true" />}>
         Read the case study
     </Button>
 );
@@ -95,7 +93,21 @@ const Rows = ({ rows, display, className }: { rows: Row[]; display: string; clas
     </dl>
 );
 
-const CaseCard = ({ item, rows, display, className, tone }: { item: CaseSummary; rows: Row[]; display: string; className?: string; tone?: HalftoneTone }) => (
+const CaseCard = ({
+    item,
+    rows,
+    display,
+    className,
+    tone,
+    casePath,
+}: {
+    item: CaseSummary;
+    rows: Row[];
+    display: string;
+    className?: string;
+    tone?: HalftoneTone;
+    casePath: string;
+}) => (
     <article className={cx("r4-card flex flex-col", pad, className)}>
         <Photo image={item.image} sizes="(min-width: 1024px) 50vw, 100vw" tone={tone} />
         <h3 className={cx("mt-12 font-display", display, size.title)}>{item.title}</h3>
@@ -105,7 +117,7 @@ const CaseCard = ({ item, rows, display, className, tone }: { item: CaseSummary;
         <p className={cx("r3-muted mt-5 max-w-[38rem]", size.body)}>{item.lead}</p>
         <Rows rows={rows} display={display} className="mt-12 flex flex-col gap-8" />
         <div className="mt-auto pt-12">
-            <ReadButton slug={item.slug} />
+            <ReadButton href={`${casePath}/${item.slug}`} />
         </div>
     </article>
 );
@@ -142,7 +154,7 @@ const BuildCard = ({ project, display, className }: { project: Project; display:
     </article>
 );
 
-export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroCaps, capsClose, tone }: RoundFiveProps) => {
+export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroCaps, capsClose, tone, casePath = "" }: RoundFiveProps) => {
     const spans =
         grid === "offset"
             ? ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"]
@@ -163,31 +175,7 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
         <div id="top" className={cx("ex r4 r5 min-h-svh", `ex-${n}`, fonts, boldBody && "r5-bold")}>
             <ExploreBar n={n} />
             <div className="r4-stack flex flex-col">
-                <div className="r5-headwrap sticky top-0 z-30">
-                    <header className="r4-card r5-head">
-                        <div className="flex h-16 items-center justify-between gap-4 px-6 md:h-18 md:px-14 xl:px-20">
-                            <a href="#top" className={cx("rounded-md font-display text-md outline-focus-ring focus-visible:outline-2 md:text-lg", display)}>
-                                Maicol Parker-Chavez
-                            </a>
-                            <div className="flex items-center gap-7">
-                                <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
-                                    {navItems.map((link) => (
-                                        <a
-                                            key={link.href}
-                                            href={link.href}
-                                            className="r4-nav rounded-sm font-display text-md font-medium outline-focus-ring transition duration-100 ease-linear focus-visible:outline-2"
-                                        >
-                                            {link.label}
-                                        </a>
-                                    ))}
-                                </nav>
-                                <Button href={mail} size="md" className="r3-btn font-display">
-                                    Get in touch
-                                </Button>
-                            </div>
-                        </div>
-                    </header>
-                </div>
+                <R5Header display={display} home="" />
 
                 <main className="r4-stack flex flex-col">
                     <section className={cx("r4-card r4-hero flex min-h-[calc(100svh-7.25rem)] flex-col", pad, "md:py-16 xl:py-20")}>
@@ -237,7 +225,7 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                             )}
                             <Rows rows={item.rows} display={display} className="mt-16 grid gap-x-16 gap-y-10 md:grid-cols-2 xl:gap-x-24" />
                             <div className="mt-12">
-                                <ReadButton slug={item.slug} />
+                                <ReadButton href={`${casePath}/${item.slug}`} />
                             </div>
                         </article>
 
@@ -246,7 +234,15 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                                 <BuildCard key={project.name} project={project} display={display} className={spans[i]} />
                             ))}
                             {moreCases.map((c, i) => (
-                                <CaseCard key={c.slug} item={c} rows={pick(c.rows)} display={display} className={spans[i + 2]} tone={tone} />
+                                <CaseCard
+                                    key={c.slug}
+                                    casePath={casePath}
+                                    item={c}
+                                    rows={pick(c.rows)}
+                                    display={display}
+                                    className={spans[i + 2]}
+                                    tone={tone}
+                                />
                             ))}
                         </div>
                     </section>
@@ -283,27 +279,7 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                     </section>
                 </main>
 
-                <footer id="contact" className={cx("r4-card r4-close flex min-h-[calc(100svh-4.5rem)] flex-col justify-end", pad, "md:py-14 xl:py-16")}>
-                    <h2 className={cx("font-display", display, size.medium)}>Get in touch</h2>
-                    <ul className={cx("mt-4 flex flex-col font-display text-[clamp(3.25rem,11.5vw,11rem)] leading-[1.04]", display, capsClose && "uppercase")}>
-                        {[
-                            { label: "Email", href: mail },
-                            { label: "Resume", href: contact.resume, blank: true },
-                            { label: "LinkedIn", href: contact.linkedin, blank: true },
-                        ].map((l) => (
-                            <li key={l.label}>
-                                <a
-                                    href={l.href}
-                                    {...(l.blank ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                                    className="r3-biglink rounded-sm outline-focus-ring focus-visible:outline-2"
-                                >
-                                    {l.label}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="mt-12 font-display text-md font-medium md:mt-16">© 2026 Maicol Parker-Chavez</p>
-                </footer>
+                <R5Footer display={display} caps={capsClose} />
             </div>
         </div>
     );

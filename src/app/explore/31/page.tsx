@@ -21,6 +21,7 @@ export default function Direction() {
             heroCaps="max-w-[80%] max-lg:max-w-none font-black tracking-[-0.025em] leading-[0.88] text-[clamp(2.75rem,8.2vw,9rem)]"
             tone={{ preset: "newspaper", size: 0.01, type: "classic", grid: "square" }}
             capsClose
+            casePath="/explore/31"
         />
     );
 }
