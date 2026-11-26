@@ -22,19 +22,24 @@ const swatches: Record<number, string[]> = {
     13: ["#fcf5f2", "#6b1226", "#f3d5cf"],
     14: ["#f4f1e9", "#1c1b18", "#e8b84a", "#ddd6c3"],
     15: ["#f6f9f9", "#0d3b44", "#86dbe6", "#cdebef"],
+    16: ["#0099ff", "#fdfdfe", "#e02b00", "#d6eeff"],
+    17: ["#e02b00", "#fdfdff", "#c9ff1f"],
+    18: ["#0042ac", "#00d3fb", "#83fd80", "#fbfcff"],
+    19: ["#0d3b44", "#cdebef", "#86dbe6", "#f6f9f9"],
+    20: ["#fafaf8", "#111111", "#e02b00"],
 };
 
 export default function ExploreIndex() {
     return (
         <main className="min-h-svh bg-primary">
             <div className="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
-                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Fifteen directions for the interim site</h1>
+                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Twenty directions for the interim site</h1>
                 <p className="mt-4 text-lg text-tertiary">
-                    Same case studies and the same core copy in each. Round three (11 to 15) settles the structure: a split hero, Prep Me as the lead story, the two
-                    products in development beside the other two case studies, About, and a bold close. The five differ in color, type, and grid layout.
+                    Round four (16 to 20) uses the approved short copy and one structure: every block is a rounded card, and the cards sit flush against each other. The five differ in color, body typeface, and card widths. Earlier rounds are kept for comparison.
                 </p>
                 {[
-                    { title: "Round three: one structure, five treatments", list: directions.filter((d) => d.n > 10) },
+                    { title: "Round four: flush cards, short copy", list: directions.filter((d) => d.n > 15) },
+                    { title: "Round three: one structure, five treatments", list: directions.filter((d) => d.n > 10 && d.n <= 15) },
                     { title: "Round two: after feedback", list: directions.filter((d) => d.n > 5 && d.n <= 10) },
                     { title: "Round one", list: directions.filter((d) => d.n <= 5) },
                 ].map((round) => (

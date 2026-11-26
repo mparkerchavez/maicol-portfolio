@@ -264,6 +264,92 @@
     }
 
 
+    /* ---------- Round four: 16 to 20 share one structure ---------- */
+    .ex.ex-16 {
+        --ex-font: var(--font-ex16d);
+        --ex-display: var(--font-ex16d);
+        --ex-ink: #0a1626;
+        --ex-paper: #fdfdfe;
+        --ex-brand: #0a1626;
+        --r4-gap: #0a1626;
+        --r4-accent: #e02b00;
+        --r4-btn: #e02b00;
+        --r4-hero: #0099ff;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-copy: #04162a;
+        --r4-build: #d6eeff;
+        --r4-build-fig: #0a1626;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+    }
+    .ex.ex-17 {
+        --ex-font: var(--font-ex17);
+        --ex-display: var(--font-ex17d);
+        --ex-ink: #160b07;
+        --ex-paper: #fdfdff;
+        --ex-brand: #160b07;
+        --r4-gap: #160b07;
+        --r4-accent: #e02b00;
+        --r4-hero: #e02b00;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #c9ff1f;
+        --r4-hero-btn-fg: #160b07;
+        --r4-build: #c9ff1f;
+        --r4-build-fig: #160b07;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+    }
+    .ex.ex-18 {
+        --ex-font: var(--font-ex18d);
+        --ex-display: var(--font-ex18d);
+        --ex-ink: #03102e;
+        --ex-paper: #fbfcff;
+        --ex-brand: #03102e;
+        --r4-gap: #03102e;
+        --r4-accent: #0042ac;
+        --r4-btn: #0042ac;
+        --r4-hero: #0042ac;
+        --r4-hero-fg: #ffffff;
+        --r4-hero-btn: #83fd80;
+        --r4-hero-btn-fg: #03102e;
+        --r4-build: #00d3fb;
+        --r4-build-fig: #03102e;
+        --r4-build-btn: #03102e;
+        --r4-close: #83fd80;
+        --r4-close-fg: #03102e;
+    }
+    .ex.ex-19 {
+        --ex-font: var(--font-ex19);
+        --ex-display: var(--font-ex19d);
+        --ex-ink: #0e1a1f;
+        --ex-paper: #f6f9f9;
+        --ex-brand: #0d3b44;
+        --r4-gap: #0e1a1f;
+        --r4-accent: #0d3b44;
+        --r4-btn: #0d3b44;
+        --r4-hero: #0d3b44;
+        --r4-hero-fg: #e9f8fa;
+        --r4-hero-btn: #86dbe6;
+        --r4-hero-btn-fg: #0e1a1f;
+        --r4-lead: #cdebef;
+        --r4-build: #86dbe6;
+        --r4-build-fig: #0e1a1f;
+        --r4-close: #0d3b44;
+        --r4-close-fg: #e9f8fa;
+    }
+    .ex.ex-20 {
+        --ex-font: var(--font-ex20d);
+        --ex-display: var(--font-ex20d);
+        --ex-ink: #111111;
+        --ex-paper: #fafaf8;
+        --ex-brand: #111111;
+        --r4-gap: #111111;
+        --r4-line: 1px;
+        --r4-accent: #e02b00;
+        --r4-close: #e02b00;
+        --r4-close-fg: #ffffff;
+    }
+
     /* Grid children may shrink below their content width (SVGs, long badges) */
     .ex .grid > * {
         min-width: 0;
@@ -589,6 +675,64 @@
 }
 @media (prefers-reduced-motion: reduce) {
     .r3-biglink {
+        transition: none;
+    }
+}
+
+/* ---------- Round four (16 to 20): flush rounded cards ---------- */
+.r4 {
+    background: var(--r4-gap);
+}
+.r4-stack {
+    gap: var(--r4-line, 2px);
+}
+.r4-card {
+    background: var(--box, var(--ex-paper));
+    color: var(--box-fg, var(--ex-ink));
+    border-radius: var(--r4-radius, 28px);
+    --fig: var(--r4-accent, currentColor);
+    --btn: var(--r4-btn, var(--ex-ink));
+    --btn-fg: #ffffff;
+}
+.r4-hero {
+    --box: var(--r4-hero);
+    --box-fg: var(--r4-hero-fg);
+    --btn: var(--r4-hero-btn, var(--r4-btn, var(--ex-ink)));
+    --btn-fg: var(--r4-hero-btn-fg, #ffffff);
+}
+.r4-hero-copy {
+    color: var(--r4-hero-copy, currentColor);
+}
+.r4-lead {
+    --box: var(--r4-lead);
+    --box-fg: var(--r4-lead-fg);
+}
+.r4-build {
+    --box: var(--r4-build);
+    --fig: var(--r4-build-fig, var(--r4-accent, currentColor));
+    --btn: var(--r4-build-btn, var(--ex-ink));
+}
+.r4-close {
+    --box: var(--r4-close);
+    --box-fg: var(--r4-close-fg);
+}
+.r4-photo {
+    border-radius: calc(var(--r4-radius, 28px) * 0.5);
+    background: color-mix(in srgb, currentColor 8%, transparent);
+}
+.r4-nav {
+    color: color-mix(in srgb, currentColor 78%, transparent);
+}
+.r4-nav:hover {
+    color: currentColor;
+}
+@media (max-width: 767px) {
+    .r4-card {
+        border-radius: 20px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .r4-nav {
         transition: none;
     }
 }

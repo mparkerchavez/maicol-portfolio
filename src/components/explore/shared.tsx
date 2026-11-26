@@ -82,6 +82,31 @@ export const directions = [
         name: "One hue",
         thesis: "Round three. Petrol and its lighter tints only. All sans, the plainest type of the five.",
     },
+    {
+        n: 16,
+        name: "Sky and signal",
+        thesis: "Round four. Sky blue hero, white cards, red-orange for buttons, figures, and the close. Libre Franklin throughout.",
+    },
+    {
+        n: 17,
+        name: "Red and lime",
+        thesis: "Round four. Red-orange hero and close, lime for the two products. Libre Franklin titles over a serif body, mixed card widths.",
+    },
+    {
+        n: 18,
+        name: "Sapphire and jade",
+        thesis: "Round four. Sapphire hero, cyan for the two products, jade close. The lead case opens with a wide photo.",
+    },
+    {
+        n: 19,
+        name: "Petrol tiles",
+        thesis: "Round four. The petrol from direction 15 in the new card layout. Serif body, mixed card widths.",
+    },
+    {
+        n: 20,
+        name: "White tiles",
+        thesis: "Round four. Closest to the reference: white cards, centered text, hairline joins, red-orange only for figures and the close.",
+    },
 ];
 
 /** Thin comparison bar above each direction. Plain UUI defaults so it stays out of the way of the direction itself. */
