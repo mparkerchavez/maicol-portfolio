@@ -157,6 +157,11 @@ export const directions = [
         name: "DM Sans body",
         thesis: "Round six. Libre Franklin titles over DM Sans. The largest caps headline, coarse halftone, footer links in caps too.",
     },
+    {
+        n: 31,
+        name: "Working version",
+        thesis: "The version to iterate on. Direction 30 with the headline held to four fifths of the width, newspaper halftone on the case photos, and the About photo left as it is.",
+    },
 ];
 
 /** Thin comparison bar above each direction. Plain UUI defaults so it stays out of the way of the direction itself. */

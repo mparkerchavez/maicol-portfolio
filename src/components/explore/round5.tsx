@@ -253,7 +253,7 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
 
                     <section id="about" className={cx("r4-card scroll-mt-20", pad)}>
                         <div className="mx-auto max-w-[54rem]">
-                            <Photo image={about.photo} sizes="(min-width: 1024px) 864px, 100vw" className="aspect-[3/2]" tone={tone} />
+                            <Photo image={about.photo} sizes="(min-width: 1024px) 864px, 100vw" className="aspect-[3/2]" />
                             <h2 className={cx("mt-14 font-display md:mt-20", display, size.large)}>Connecting the dots.</h2>
                             <div className={cx("r3-muted mt-8 flex flex-col gap-6", size.body, "md:text-xl md:leading-8")}>
                                 <p>{about.paragraphs[0]}</p>

@@ -37,6 +37,7 @@ const swatches: Record<number, string[]> = {
     28: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
     29: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
     30: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
+    31: ["#e02b00", "#fdfdff", "#c9ff1f", "#160b07"],
 };
 
 export default function ExploreIndex() {
@@ -48,7 +49,8 @@ export default function ExploreIndex() {
                     Round six (26 to 30) merges earlier picks: the colors of 25, the lead case from 24, an all-caps headline, and black and white halftone photos. The five differ in body typeface, headline size, halftone grain, and how much each case shows. Earlier rounds are kept for comparison.
                 </p>
                 {[
-                    { title: "Round six: merged picks", list: directions.filter((d) => d.n > 25) },
+                    { title: "Working version", list: directions.filter((d) => d.n > 30) },
+                    { title: "Round six: merged picks", list: directions.filter((d) => d.n > 25 && d.n <= 30) },
                     { title: "Round five: small corners, fuller copy", list: directions.filter((d) => d.n > 20 && d.n <= 25) },
                     { title: "Round four: flush cards, short copy", list: directions.filter((d) => d.n > 15 && d.n <= 20) },
                     { title: "Round three: one structure, five treatments", list: directions.filter((d) => d.n > 10 && d.n <= 15) },

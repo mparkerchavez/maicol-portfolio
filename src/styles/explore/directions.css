@@ -524,6 +524,7 @@
         --r4-close-fg: #ffffff;
         --r4-close-pop: #c9ff1f;
     }
+    .ex.ex-31,
     .ex.ex-30 {
         --ex-font: var(--font-ex30);
         --ex-display: var(--font-ex30d);
@@ -542,6 +543,11 @@
         --r4-close: #e02b00;
         --r4-close-fg: #ffffff;
         --r4-close-pop: #c9ff1f;
+    }
+
+    .ex.ex-31 {
+        --ex-font: var(--font-ex31);
+        --ex-display: var(--font-ex31d);
     }
 
     /* Grid children may shrink below their content width (SVGs, long badges) */
