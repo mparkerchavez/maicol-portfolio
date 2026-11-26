@@ -107,6 +107,31 @@ export const directions = [
         name: "White tiles",
         thesis: "Round four. Closest to the reference: white cards, centered text, hairline joins, red-orange only for figures and the close.",
     },
+    {
+        n: 21,
+        name: "Petrol, serif body",
+        thesis: "Round five. Dark petrol hero and close, pale tint for the two products. Serif body. All four rows on every case.",
+    },
+    {
+        n: 22,
+        name: "Petrol, all bold",
+        thesis: "Round five. Light petrol hero, one typeface, body copy set bold. Wide photo on the lead case. Two rows on the smaller cases.",
+    },
+    {
+        n: 23,
+        name: "White and red-orange",
+        thesis: "Round five. White cards, red-orange for figures and the close. One typeface at regular weight. Two rows on the smaller cases.",
+    },
+    {
+        n: 24,
+        name: "White, all bold",
+        thesis: "Round five. Red-orange hero and close on white cards, body copy set bold. Even card widths, all four rows.",
+    },
+    {
+        n: 25,
+        name: "Red with a little lime",
+        thesis: "Round five. Red-orange hero and close, white cards. Lime appears only on the hero button and the footer link underline.",
+    },
 ];
 
 /** Thin comparison bar above each direction. Plain UUI defaults so it stays out of the way of the direction itself. */

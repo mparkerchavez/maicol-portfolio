@@ -27,18 +27,24 @@ const swatches: Record<number, string[]> = {
     18: ["#0042ac", "#00d3fb", "#83fd80", "#fbfcff"],
     19: ["#0d3b44", "#cdebef", "#86dbe6", "#f6f9f9"],
     20: ["#fafaf8", "#111111", "#e02b00"],
+    21: ["#0d3b44", "#cdebef", "#f6f9f9"],
+    22: ["#86dbe6", "#0d3b44", "#cdebef", "#f6f9f9"],
+    23: ["#fafaf8", "#111111", "#e02b00"],
+    24: ["#e02b00", "#fafaf8", "#111111"],
+    25: ["#e02b00", "#fdfdff", "#c9ff1f"],
 };
 
 export default function ExploreIndex() {
     return (
         <main className="min-h-svh bg-primary">
             <div className="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
-                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Twenty directions for the interim site</h1>
+                <h1 className="text-display-sm font-semibold tracking-tight text-primary md:text-display-md">Twenty-five directions for the interim site</h1>
                 <p className="mt-4 text-lg text-tertiary">
-                    Round four (16 to 20) uses the approved short copy and one structure: every block is a rounded card, and the cards sit flush against each other. The five differ in color, body typeface, and card widths. Earlier rounds are kept for comparison.
+                    Round five (21 to 25) keeps the flush cards with small corners, brings back the fuller copy, and starts every card's text at the top. The five differ in color, body typeface and weight, and how much each case shows. Earlier rounds are kept for comparison.
                 </p>
                 {[
-                    { title: "Round four: flush cards, short copy", list: directions.filter((d) => d.n > 15) },
+                    { title: "Round five: small corners, fuller copy", list: directions.filter((d) => d.n > 20) },
+                    { title: "Round four: flush cards, short copy", list: directions.filter((d) => d.n > 15 && d.n <= 20) },
                     { title: "Round three: one structure, five treatments", list: directions.filter((d) => d.n > 10 && d.n <= 15) },
                     { title: "Round two: after feedback", list: directions.filter((d) => d.n > 5 && d.n <= 10) },
                     { title: "Round one", list: directions.filter((d) => d.n <= 5) },
