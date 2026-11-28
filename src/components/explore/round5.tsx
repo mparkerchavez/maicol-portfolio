@@ -36,6 +36,13 @@ export type RoundFiveProps = {
     casesFirst?: boolean;
     /** Set each smaller case stat as a full sentence with the figure inline. */
     inlineStat?: boolean;
+    /** Set case titles as the headline and the proof sentence as a smaller deck line under it. */
+    titleFirst?: boolean;
+    /**
+     * Use the unified type scale: hero, large, medium, lede, deck, title, body.
+     * Lede leads a whole section, deck leads a card, body carries everything else.
+     */
+    unifiedType?: boolean;
 };
 
 type Project = (typeof building.projects)[number];
@@ -46,14 +53,32 @@ const work = {
     body: "Three AI initiatives from Capital Group, and two products I'm building myself in 2026.",
 };
 
-/** Five sizes for the whole page: hero, large, medium, title, body. */
+/**
+ * The type scale. Display sizes (hero, large, medium) and title are set in the display face, bold.
+ * Deck and body are set in the body face, regular.
+ * - hero: the page headline
+ * - large: section headings, the lead case title, project names
+ * - medium: the smaller case titles
+ * - lede: the line that opens a section (hero copy, Work intro, lead case proof line)
+ * - deck: the line that opens a card or block (smaller case proof lines, project descriptions, About opener)
+ * - title: row labels and small headings ("My role", "In development")
+ * - body: row text and running prose
+ * `intro` is the older lede size, kept for directions that do not use the unified scale.
+ */
 const size = {
     hero: "text-[clamp(2.75rem,6.1vw,6.5rem)] leading-[0.98]",
     large: "text-[clamp(2.25rem,4.4vw,4.5rem)] leading-[1.02]",
     medium: "text-[clamp(1.75rem,2.5vw,2.5rem)] leading-[1.1]",
+    lede: "text-xl leading-8 md:text-[1.625rem] md:leading-10",
+    deck: "text-xl leading-8 md:text-2xl md:leading-9",
     title: "text-xl leading-7 md:text-2xl md:leading-8",
     body: "text-lg leading-8",
+    intro: "text-lg leading-8 md:text-xl md:leading-8",
 };
+
+/** Proof lines sit in the body face at regular weight; an inline figure is set a step heavier. */
+const proof = "font-normal text-pretty [&_.r3-fig]:font-semibold";
+const deck = cx(size.deck, proof);
 
 const pad = "px-6 py-14 md:px-14 md:py-20 xl:px-20 xl:py-24";
 
@@ -106,6 +131,7 @@ const CaseCard = ({
     casePath,
     hideLead,
     inlineStat,
+    titleFirst,
 }: {
     item: CaseSummary;
     rows: Row[];
@@ -115,11 +141,17 @@ const CaseCard = ({
     casePath: string;
     hideLead?: boolean;
     inlineStat?: boolean;
+    titleFirst?: boolean;
 }) => (
     <article className={cx("r4-card flex flex-col", pad, className)}>
         <Photo image={item.image} sizes="(min-width: 1024px) 50vw, 100vw" tone={tone} />
-        <h3 className={cx("mt-12 font-display", display, size.title)}>{item.title}</h3>
-        <p className={cx("mt-4 font-display text-balance", inlineStat ? "max-w-[34ch]" : "max-w-[24ch]", display, size.medium)}>
+        <h3 className={cx("mt-12 font-display", display, titleFirst ? cx("max-w-[20ch] text-balance", size.medium) : size.title)}>{item.title}</h3>
+        <p
+            className={cx(
+                "text-balance",
+                titleFirst ? cx("mt-5 max-w-[38rem]", deck) : cx("mt-4 font-display", inlineStat ? "max-w-[34ch]" : "max-w-[24ch]", display, size.medium),
+            )}
+        >
             {inlineStat ? (
                 <Figure text={item.statSentence ?? `${item.stat.value} ${item.stat.label}`} value={item.stat.value} />
             ) : (
@@ -136,11 +168,23 @@ const CaseCard = ({
     </article>
 );
 
-const BuildCard = ({ project, display, className, id }: { project: Project; display: string; className?: string; id?: string }) => (
+const BuildCard = ({
+    project,
+    display,
+    className,
+    id,
+    unifiedType,
+}: {
+    project: Project;
+    display: string;
+    className?: string;
+    id?: string;
+    unifiedType?: boolean;
+}) => (
     <article id={id} className={cx("r4-card r4-build flex flex-col", id && "scroll-mt-20", pad, className)}>
         <h3 className={cx("r3-fig font-display", display, size.large)}>{project.name}</h3>
         <p className={cx("mt-4 font-display", display, size.title)}>{project.status}</p>
-        <p className={cx("r3-muted mt-5 max-w-[38rem]", size.body)}>{project.what}</p>
+        <p className={cx("mt-5 max-w-[38rem]", unifiedType ? deck : cx("r3-muted", size.body))}>{project.what}</p>
         <Rows
             rows={[
                 { label: "Why I built it", text: project.why },
@@ -168,7 +212,24 @@ const BuildCard = ({ project, display, className, id }: { project: Project; disp
     </article>
 );
 
-export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroCaps, capsClose, tone, casePath = "", casesFirst, inlineStat }: RoundFiveProps) => {
+export const RoundFive = ({
+    n,
+    fonts,
+    display,
+    grid,
+    lead,
+    rows,
+    boldBody,
+    heroCaps,
+    capsClose,
+    tone,
+    casePath = "",
+    casesFirst,
+    inlineStat,
+    titleFirst,
+    unifiedType,
+}: RoundFiveProps) => {
+    const lede = unifiedType ? cx(size.lede, "text-pretty") : size.intro;
     const spans =
         grid === "offset"
             ? ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"]
@@ -197,13 +258,19 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
             tone={tone}
             hideLead={rows === "three"}
             inlineStat={inlineStat}
+            titleFirst={titleFirst}
         />
     ));
 
     const leadText = (
         <>
-            <h3 className={cx("font-display", display, size.title)}>{item.title}</h3>
-            <p className={cx("mt-5 max-w-[20ch] font-display text-balance", display, size.large)}>
+            <h3 className={cx("font-display", display, titleFirst ? cx("max-w-[20ch] text-balance", size.large) : size.title)}>{item.title}</h3>
+            <p
+                className={cx(
+                    "text-balance",
+                    titleFirst ? cx("mt-6 max-w-[38rem]", size.lede, proof) : cx("mt-5 max-w-[20ch] font-display", display, size.large),
+                )}
+            >
                 <Figure text={item.lead} value={item.stat.value} />
             </p>
         </>
@@ -225,8 +292,8 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                         >
                             {hero.headline}
                         </h1>
-                        <div className="mt-auto pt-16 lg:ml-auto lg:w-[46%]">
-                            <p className={cx("r4-hero-copy", size.body, "md:text-xl md:leading-8")}>{hero.supporting}</p>
+                        <div className={cx("mt-auto pt-16 lg:ml-auto", unifiedType ? "lg:w-[52%]" : "lg:w-[46%]")}>
+                            <p className={cx("r4-hero-copy", lede)}>{hero.supporting}</p>
                             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                                 <Button href="#work" size="lg" className="r3-btn font-display">
                                     See the work
@@ -241,13 +308,13 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                     <section id="work" className="r4-stack flex scroll-mt-20 flex-col">
                         <div className={cx("r4-card", pad)}>
                             <h2 className={cx("max-w-[20ch] font-display text-balance", display, size.large)}>{work.heading}</h2>
-                            <p className={cx("r3-muted mt-6", size.body, "md:text-xl md:leading-8")}>
+                            <p className={cx("r3-muted mt-6", lede, unifiedType && "max-w-[38rem]")}>
                                 {casesFirst ? (
                                     <>
                                         Three AI initiatives from Capital Group, and{" "}
                                         <a
                                             href="#building"
-                                            className="rounded-xs text-current underline decoration-1 underline-offset-[0.18em] transition-[text-decoration-thickness] outline-focus-ring hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+                                            className="rounded-xs text-current underline decoration-1 underline-offset-[0.18em] outline-focus-ring transition-[text-decoration-thickness] hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
                                         >
                                             two products I am building end to end in 2026
                                         </a>
@@ -290,6 +357,7 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                                     id={casesFirst && i === 0 ? "building" : undefined}
                                     project={project}
                                     display={display}
+                                    unifiedType={unifiedType}
                                     className={spans[i + buildOffset]}
                                 />
                             ))}
@@ -301,18 +369,38 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                         <div className="mx-auto max-w-[54rem]">
                             <Photo image={about.photo} sizes="(min-width: 1024px) 864px, 100vw" className="aspect-[3/2]" />
                             <h2 className={cx("mt-14 font-display md:mt-20", display, size.large)}>Connecting the dots.</h2>
-                            <div className={cx("r3-muted mt-8 flex flex-col gap-6", size.body, "md:text-xl md:leading-8")}>
-                                <p>{about.paragraphs[0]}</p>
-                                <p>{building.intro}</p>
-                                {about.paragraphs.slice(1).map((p) => (
-                                    <p key={p.slice(0, 24)}>{p}</p>
-                                ))}
-                                <p>
-                                    {about.dubplate.before}
-                                    {about.dubplate.name}
-                                    {about.dubplate.after}
-                                </p>
-                            </div>
+                            {unifiedType ? (
+                                <>
+                                    <div className="r3-muted mt-8 flex flex-col gap-6">
+                                        <p className={cx(size.deck, "text-pretty")}>{about.paragraphs[0]}</p>
+                                        <p className={cx(size.deck, "text-pretty")}>{building.intro}</p>
+                                    </div>
+                                    <h3 className={cx("mt-14 font-display md:mt-16", display, size.title)}>About me</h3>
+                                    <div className={cx("r3-muted mt-4 flex max-w-[38rem] flex-col gap-6", size.body)}>
+                                        {about.paragraphs.slice(1).map((p) => (
+                                            <p key={p.slice(0, 24)}>{p}</p>
+                                        ))}
+                                        <p>
+                                            {about.dubplate.before}
+                                            {about.dubplate.name}
+                                            {about.dubplate.after}
+                                        </p>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className={cx("r3-muted mt-8 flex flex-col gap-6", unifiedType ? size.body : lede)}>
+                                    <p className={cx(unifiedType && cx(size.deck, "text-pretty"))}>{about.paragraphs[0]}</p>
+                                    <p>{building.intro}</p>
+                                    {about.paragraphs.slice(1).map((p) => (
+                                        <p key={p.slice(0, 24)}>{p}</p>
+                                    ))}
+                                    <p>
+                                        {about.dubplate.before}
+                                        {about.dubplate.name}
+                                        {about.dubplate.after}
+                                    </p>
+                                </div>
+                            )}
                             <div className="mt-10">
                                 <Button
                                     href={about.dubplate.href}
