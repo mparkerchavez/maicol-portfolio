@@ -16,7 +16,7 @@ const HOME = "/explore/31";
 const display = "font-extrabold tracking-[-0.02em]";
 /** The landing page measure for 18px running text. */
 const prose = "max-w-[38rem]";
-const newspaper = { preset: "newspaper", size: 0.01, type: "classic", grid: "square" } as const;
+const newspaper = { preset: "newspaper" } as const;
 
 export const dynamicParams = false;
 
@@ -115,14 +115,14 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     </section>
 
                     <section className={cx("r4-card", r5Pad)}>
-                        <Halftone src={leadImage.src} alt={leadImage.alt} tone={newspaper} className="lg:aspect-[21/9]" />
-                        <dl className="mt-12 grid gap-x-16 gap-y-10 md:mt-16 md:grid-cols-3">
+                        <Halftone src={leadImage.src} alt={leadImage.alt} tone={newspaper} className="lg:aspect-[21/10]" />
+                        <dl className="mt-12 grid gap-x-10 gap-y-10 md:mt-16 md:grid-cols-3 xl:gap-x-14">
                             {study.metrics.map((m) => (
-                                <div key={m.value}>
-                                    <dt className="sr-only">{m.label}</dt>
-                                    <dd className={cx(r5Size.deck, r5Proof)}>
-                                        <span className="r3-fig tabular-nums">{m.value}</span> {m.label}
-                                    </dd>
+                                <div key={m.value} className="border-t-2 border-[var(--ex-ink)] pt-5 md:pt-6">
+                                    <dt className="r3-fig font-display text-[clamp(1.85rem,2.75vw,3rem)] leading-[1.04] font-black tracking-[-0.025em] text-balance tabular-nums">
+                                        {m.value}
+                                    </dt>
+                                    <dd className={cx("r3-muted mt-3 text-pretty", r5Size.body, "md:text-xl md:leading-7")}>{m.label}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -174,7 +174,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     <Split label="Next case study">
                         <p className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{study.next.title}</p>
                         <p className={cx("mt-6", prose, r5Size.deck, r5Proof)}>
-                            <Figure text={next.summary.lead} value={next.summary.stat.value} />
+                            <Figure text={next.summary.statSentence ?? next.summary.lead} value={next.summary.stat.value} />
                         </p>
                         <div className="mt-10">
                             <Button

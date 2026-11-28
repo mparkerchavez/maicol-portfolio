@@ -1,15 +1,22 @@
 import { ArrowLeft, ArrowRight } from "@untitledui/icons";
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { DM_Sans, Libre_Franklin } from "next/font/google";
 import { notFound } from "next/navigation";
-import { Badge } from "@/components/base/badges/badges";
 import { Button } from "@/components/base/buttons/button";
-import { SummaryRows } from "@/components/site/case-card";
-import { ContactSection, SiteFooter } from "@/components/site/contact-section";
-import { DotField } from "@/components/site/dot-field";
-import { SiteHeader } from "@/components/site/site-header";
+import { Halftone } from "@/components/explore/halftone";
+import { R5Footer, R5Header, r5Pad, r5Proof, r5Size } from "@/components/explore/r5-chrome";
+import { Figure } from "@/components/explore/round5";
 import { type Block, caseStudies, getCaseStudy } from "@/content/case-studies";
+import { cx } from "@/utils/cx";
+
+const displayFont = Libre_Franklin({ subsets: ["latin"], variable: "--font-ex31d", display: "swap" });
+const bodyFont = DM_Sans({ subsets: ["latin"], variable: "--font-ex31", display: "swap" });
+
+const HOME = "/";
+const display = "font-extrabold tracking-[-0.02em]";
+/** The landing page measure for 18px running text. */
+const prose = "max-w-[38rem]";
+const newspaper = { preset: "newspaper" } as const;
 
 export const dynamicParams = false;
 
@@ -24,42 +31,41 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return { title: `${study.summary.title} | Maicol Parker-Chavez`, description: study.summary.lead };
 }
 
+/** "01 · The challenge" becomes "The challenge". */
+const plainLabel = (label: string) => label.replace(/^\d+\s*·\s*/, "");
+
+const List = ({ items }: { items: string[] }) => (
+    <ul className={cx("flex list-disc flex-col gap-3 pl-6", prose)}>
+        {items.map((item) => (
+            <li key={item.slice(0, 32)}>{item}</li>
+        ))}
+    </ul>
+);
+
 const BlockView = ({ block }: { block: Block }) => {
     switch (block.type) {
         case "p":
-            return <p>{block.text}</p>;
+            return <p className={prose}>{block.text}</p>;
         case "h3":
-            return <h3 className="pt-4 text-xl font-semibold text-primary">{block.text}</h3>;
+            return <h3 className={cx("pt-8 font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.text}</h3>;
         case "ul":
-            return (
-                <ul className="flex list-disc flex-col gap-2 pl-6 marker:text-fg-quaternary">
-                    {block.items.map((item) => (
-                        <li key={item.slice(0, 32)}>{item}</li>
-                    ))}
-                </ul>
-            );
+            return <List items={block.items} />;
         case "callout":
             return (
-                <div className="rounded-xl bg-brand-primary p-6 ring-1 ring-brand ring-inset dark:bg-secondary dark:ring-secondary">
-                    <p className="text-md font-semibold text-brand-primary">{block.title}</p>
-                    <ul className="mt-3 flex list-disc flex-col gap-2 pl-6 text-secondary marker:text-fg-brand-secondary">
-                        {block.items.map((item) => (
-                            <li key={item.slice(0, 32)}>{item}</li>
-                        ))}
-                    </ul>
+                <div className="r5-note my-4 max-w-[44rem] px-6 py-8 md:px-10 md:py-10">
+                    <h3 className={cx("font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.title}</h3>
+                    <div className="mt-4">
+                        <List items={block.items} />
+                    </div>
                 </div>
             );
         case "image":
-            return (
-                <div className="relative my-2 aspect-video overflow-hidden rounded-xl bg-tertiary">
-                    <Image src={block.src} alt={block.alt} fill sizes="(min-width: 1024px) 800px, 100vw" className="object-cover" />
-                </div>
-            );
+            return <Halftone src={block.src} alt={block.alt} tone={newspaper} className="my-6" />;
         case "item":
             return (
-                <div className="rounded-xl bg-primary p-6 ring-1 ring-secondary ring-inset">
-                    <h3 className="text-lg font-semibold text-primary">{block.title}</h3>
-                    <div className="mt-3 flex flex-col gap-3">
+                <div className="pt-8">
+                    <h3 className={cx("font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.title}</h3>
+                    <div className={cx("mt-3 flex flex-col gap-4", prose)}>
                         {block.text.map((t) => (
                             <p key={t.slice(0, 32)}>{t}</p>
                         ))}
@@ -69,123 +75,122 @@ const BlockView = ({ block }: { block: Block }) => {
     }
 };
 
+/** A label in the left column, content on the right. Stacks on small screens. */
+const Split = ({ label, children, className }: { label: string; children: React.ReactNode; className?: string }) => (
+    <section className={cx("r4-card grid gap-x-16 gap-y-8 lg:grid-cols-12", r5Pad, className)}>
+        <h2 className={cx("font-display lg:col-span-3", display, r5Size.title)}>{label}</h2>
+        <div className="lg:col-span-9">{children}</div>
+    </section>
+);
+
 export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const study = getCaseStudy(slug);
     if (!study) notFound();
     const next = getCaseStudy(study.next.slug)!;
+    const leadImage = study.summary.image;
 
     return (
-        <>
-            <SiteHeader />
-            <main>
-                {/* Intro */}
-                <section className="dark-mode grain relative overflow-hidden bg-primary pt-10 pb-12 md:pt-16 md:pb-20">
-                    <DotField className="absolute inset-0 size-full opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_70%)] md:[mask-image:linear-gradient(to_right,transparent_35%,black_85%)]" />
-                    <div className="pointer-events-none relative mx-auto max-w-container px-4 md:px-8 [&_a]:pointer-events-auto">
-                        <Button href="/#work" color="link-gray" size="md" iconLeading={<ArrowLeft data-icon aria-hidden="true" />}>
-                            All work
-                        </Button>
-                        <p className="mt-8 flex items-center gap-2 text-sm font-semibold text-brand-secondary md:text-md">
-                            <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-solid" />
-                            {study.eyebrow}
-                        </p>
-                        <h1 className="mt-4 max-w-4xl animate-rise text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-primary">{study.title}</h1>
-                        <p className="mt-6 max-w-3xl animate-rise text-lg text-tertiary [animation-delay:200ms] md:text-xl">{study.intro}</p>
-                        <dl className="mt-10 grid gap-8 border-t border-secondary pt-8 md:grid-cols-3">
+        <div id="top" className={cx("ex r4 r5 ex-31 min-h-svh", displayFont.variable, bodyFont.variable)}>
+            <div className="r4-stack flex flex-col">
+                <R5Header display={display} home={HOME} scrollTone strongNav />
+
+                <main className="r4-stack flex flex-col">
+                    <section className={cx("r4-card r4-hero flex min-h-[calc(90svh-4.75rem)] flex-col", r5Pad, "md:py-16 xl:py-20")}>
+                        <div>
+                            <Button
+                                href="/#work"
+                                color="secondary"
+                                size="md"
+                                className="font-display"
+                                iconLeading={<ArrowLeft data-icon aria-hidden="true" />}
+                            >
+                                All work
+                            </Button>
+                        </div>
+                        <h1 className="mt-10 max-w-[80%] font-display text-[clamp(2.5rem,6.2vw,7rem)] leading-[0.92] font-black tracking-[-0.025em] text-balance uppercase max-lg:max-w-none">
+                            {study.title}
+                        </h1>
+                        <p className={cx("r4-hero-copy mt-auto pt-16 text-pretty lg:ml-auto lg:w-[52%]", r5Size.lede)}>{study.intro}</p>
+                    </section>
+
+                    <section className={cx("r4-card", r5Pad)}>
+                        <Halftone src={leadImage.src} alt={leadImage.alt} tone={newspaper} className="lg:aspect-[21/10]" />
+                        <dl className="mt-12 grid gap-x-10 gap-y-10 md:mt-16 md:grid-cols-3 xl:gap-x-14">
                             {study.metrics.map((m) => (
-                                <div key={m.value} className="flex flex-col gap-2">
-                                    <dt className="text-md text-tertiary">{m.label}</dt>
-                                    <dd className="tabular order-first text-display-xs font-semibold tracking-tight text-brand-tertiary_alt md:text-display-sm">{m.value}</dd>
+                                <div key={m.value} className="border-t-2 border-[var(--ex-ink)] pt-5 md:pt-6">
+                                    <dt className="r3-fig font-display text-[clamp(1.85rem,2.75vw,3rem)] leading-[1.04] font-black tracking-[-0.025em] text-balance tabular-nums">
+                                        {m.value}
+                                    </dt>
+                                    <dd className={cx("r3-muted mt-3 text-pretty", r5Size.body, "md:text-xl md:leading-7")}>{m.label}</dd>
                                 </div>
                             ))}
                         </dl>
-                    </div>
-                </section>
+                    </section>
 
-                {/* At a glance */}
-                <section className="bg-secondary py-12 md:py-16">
-                    <div className="mx-auto max-w-container px-4 md:px-8">
-                        <div className="rounded-3xl bg-primary p-6 shadow-xs ring-1 ring-secondary ring-inset md:p-10">
-                            <h2 className="text-xl font-semibold text-primary md:text-display-xs">At a glance</h2>
-                            <div className="mt-6">
-                                <SummaryRows rows={study.summary.rows} />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Body */}
-                <section className="bg-primary py-12 md:py-20">
-                    <div className="mx-auto grid max-w-container gap-12 px-4 md:px-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-16">
-                        <div className="flex min-w-0 flex-col gap-16">
-                            {study.sections.map((section) => (
-                                <article key={section.label}>
-                                    <p className="text-sm font-semibold text-brand-secondary">{section.label}</p>
-                                    <h2 className="mt-2 text-display-xs font-semibold tracking-tight text-primary md:text-display-sm">{section.title}</h2>
-                                    <div className="mt-6 flex flex-col gap-5 text-lg text-tertiary">
-                                        {section.blocks.map((block, i) => (
-                                            <BlockView key={i} block={block} />
-                                        ))}
-                                    </div>
-                                </article>
+                    <Split label="At a glance">
+                        <dl className="grid gap-x-16 gap-y-10 md:grid-cols-2 xl:gap-x-24">
+                            {study.summary.rows.map((row) => (
+                                <div key={row.label}>
+                                    <dt className={cx("font-display", display, r5Size.title)}>{row.label}</dt>
+                                    <dd className={cx("r3-muted mt-2", prose, r5Size.body)}>{row.text}</dd>
+                                </div>
                             ))}
+                        </dl>
+                    </Split>
+
+                    {study.sections.map((section) => (
+                        <Split key={section.label} label={plainLabel(section.label)}>
+                            <h3 className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{section.title}</h3>
+                            <div className={cx("r3-muted mt-10 flex flex-col gap-5", r5Size.body)}>
+                                {section.blocks
+                                    .filter((b) => !(b.type === "image" && b.src === leadImage.src))
+                                    .map((block, i) => (
+                                        <BlockView key={i} block={block} />
+                                    ))}
+                            </div>
+                        </Split>
+                    ))}
+
+                    <Split label="My role">
+                        <p className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{study.role.func}</p>
+                        <p className={cx("r3-muted mt-4", r5Size.body)}>Official title: {study.role.official}</p>
+                        <div className={cx("r3-muted mt-10", r5Size.body)}>
+                            <List items={study.role.bullets} />
                         </div>
-                        <aside className="flex flex-col gap-8">
-                            <div className="rounded-3xl bg-secondary p-6 ring-1 ring-secondary ring-inset">
-                                <h2 className="text-sm font-semibold text-quaternary">My role</h2>
-                                <p className="mt-2 text-lg font-semibold text-primary">{study.role.func}</p>
-                                <p className="mt-1 text-sm text-tertiary">Official title: {study.role.official}</p>
-                                <ul className="mt-4 flex list-disc flex-col gap-2 pl-5 text-sm text-tertiary marker:text-fg-quaternary">
-                                    {study.role.bullets.map((b) => (
-                                        <li key={b.slice(0, 32)}>{b}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div>
-                                <h2 className="text-sm font-semibold text-quaternary">Collaborators</h2>
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                    {study.collaborators.map((c) => (
-                                        <Badge key={c} type="modern" color="gray" size="md">
-                                            {c}
-                                        </Badge>
-                                    ))}
+                        <dl className="mt-14 grid gap-x-16 gap-y-10 md:grid-cols-2 xl:gap-x-24">
+                            {[
+                                { label: "Collaborators", items: study.collaborators },
+                                { label: "Methods", items: study.methods },
+                            ].map((group) => (
+                                <div key={group.label}>
+                                    <dt className={cx("font-display", display, r5Size.title)}>{group.label}</dt>
+                                    <dd className={cx("r3-muted mt-2", prose, r5Size.body)}>{group.items.join(", ")}</dd>
                                 </div>
-                            </div>
-                            <div>
-                                <h2 className="text-sm font-semibold text-quaternary">Methods</h2>
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                    {study.methods.map((m) => (
-                                        <Badge key={m} type="modern" color="gray" size="md">
-                                            {m}
-                                        </Badge>
-                                    ))}
-                                </div>
-                            </div>
-                        </aside>
-                    </div>
-                </section>
+                            ))}
+                        </dl>
+                    </Split>
 
-                {/* Next */}
-                <section className="bg-secondary py-12 md:py-16">
-                    <div className="mx-auto max-w-container px-4 md:px-8">
-                        <Link
-                            href={`/${next.slug}`}
-                            className="group flex flex-col gap-4 rounded-3xl bg-primary p-6 shadow-xs ring-1 ring-secondary transition duration-300 ease-out ring-inset outline-focus-ring hover:-translate-y-1 hover:shadow-xl hover:ring-brand focus-visible:outline-2 md:flex-row md:items-center md:justify-between md:p-10"
-                        >
-                            <div>
-                                <p className="text-sm font-semibold text-brand-secondary">Next case study</p>
-                                <p className="mt-2 text-xl font-semibold text-primary md:text-display-xs">{study.next.title}</p>
-                                <p className="mt-1 text-md text-tertiary">{next.summary.lead}</p>
-                            </div>
-                            <ArrowRight className="size-6 shrink-0 text-fg-brand-secondary transition duration-100 ease-linear group-hover:translate-x-1" aria-hidden="true" />
-                        </Link>
-                    </div>
-                </section>
+                    <Split label="Next case study">
+                        <p className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{study.next.title}</p>
+                        <p className={cx("mt-6", prose, r5Size.deck, r5Proof)}>
+                            <Figure text={next.summary.statSentence ?? next.summary.lead} value={next.summary.stat.value} />
+                        </p>
+                        <div className="mt-10">
+                            <Button
+                                href={`/${next.slug}`}
+                                size="lg"
+                                className="r3-btn font-display"
+                                iconTrailing={<ArrowRight data-icon aria-hidden="true" />}
+                            >
+                                Read the case study
+                            </Button>
+                        </div>
+                    </Split>
+                </main>
 
-                <ContactSection />
-            </main>
-            <SiteFooter />
-        </>
+                <R5Footer display={display} caps />
+            </div>
+        </div>
     );
 }

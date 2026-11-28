@@ -11,9 +11,9 @@ export const hero = {
     supporting:
         "I am a product builder focused on enterprise AI. Over six years with Capital Group, including nearly four as Lead Venture Architect, I proved what users needed before engineering committed. Now I pair that enterprise track record with building my own AI products end to end.",
     stats: [
-        { value: "300+", label: "sales associates adopted an AI meeting-prep tool I validated" },
-        { value: "2–3 hrs → 10–15 min", label: "weekly prep time, per client meeting" },
-        { value: "3–4 weeks", label: "from idea to validated evidence that unlocked funding" },
+        { value: "300+ users", label: "Active sales associates adopted an AI meeting prep tool I validated" },
+        { value: "2 to 3 hrs → 1 hr", label: "Weekly prep cut to roughly 1 hour across 6 to 8 client meetings" },
+        { value: "3 to 4 weeks", label: "From idea to validated evidence that unlocked funding" },
     ],
 };
 
@@ -51,7 +51,7 @@ export const featuredCase: CaseSummary = {
         },
         {
             label: "Outcome",
-            text: "In 3 to 4 weeks, our team delivered validated evidence and a Figma handoff package. The Data Science lead used that readout to secure funding and engineering capacity. Downstream teams integrated it into the sales platform, cutting weekly prep from 2 to 3 hours to roughly 1 hour.",
+            text: "In 3 to 4 weeks, our team delivered validated evidence and a Figma handoff. That readout unlocked funding and engineering capacity, making this the first of four active AI initiatives funded past experimentation. Downstream teams integrated it into the sales platform, cutting weekly prep to roughly 1 hour or less.",
         },
     ],
 };
@@ -61,7 +61,7 @@ export const moreCases: CaseSummary[] = [
         slug: "strategy-horizon",
         eyebrow: "Tech Trends · Capital Group",
         title: "An enterprise point of view on generative AI",
-        lead: "Main AI contributor for company-wide Tech Trends reports across all business units.",
+        lead: "At Capital Group, I served as main AI contributor for the Tech Trends reports, helping business leaders and partner technology teams evaluate generative AI.",
         stat: { value: "1,300+", label: "unique visitors within 3 months of each release, including the CEO and C-suite" },
         statSentence:
             "Capital Group's 2024 and 2025 Tech Trends reports reached 1,300+ unique visitors within 3 months of each release, including the CEO and C-suite.",
@@ -69,19 +69,19 @@ export const moreCases: CaseSummary[] = [
         rows: [
             {
                 label: "Problem",
-                text: "AI was moving faster than leaders could separate hype from what would matter in 3 to 5 years.",
+                text: "AI was moving faster than business leaders and their partner technology teams could separate hype from what would matter in 3 to 5 years.",
             },
             {
                 label: "My role",
-                text: "Main AI contributor for company-wide Tech Trends reports across all business units. Advised The Investment Group and The Information Technology Group on AI orchestration and platform readiness.",
+                text: "AI strategy and architecture advisor, serving as main AI contributor for Capital Group's 2024 and 2025 Tech Trends reports.",
             },
             {
                 label: "What I decided",
-                text: "Turned emerging AI research into concrete platform calls. Evaluated orchestration vendors for The Investment Group, recommending LangChain for fast prototyping before surfacing production limits that led to custom orchestration. Partnered with platform owners and InfoSec to segment Copilot Studio environments by risk level.",
+                text: "Standardized AI coverage around maturity stage and action (Act Now, Inform Strategy, or Watch Closely) for business and technology leaders. Built a human-validated Copilot Studio prototype so a 5-person team could synthesize 250+ documents and evaluate the platform firsthand.",
             },
             {
                 label: "Outcome",
-                text: "C-suite and senior leaders across the company gained a shared view of where generative AI fit. Business units used the reports to shape roadmaps, while The Investment Group and The Information Technology Group gained clear orchestration and risk-governance direction.",
+                text: "C-suite and senior leaders gained a shared view of generative AI, and business units used the reports to inform roadmaps. Follow-up advisory work drove custom AI orchestration for Investment Technology Group and a dedicated Copilot Studio engineering team in Information Technology Group.",
             },
         ],
     },
@@ -89,18 +89,18 @@ export const moreCases: CaseSummary[] = [
         slug: "innovation-sprints",
         eyebrow: "AI Discovery · Capital Group",
         title: "From AI curiosity to prioritized opportunities",
-        lead: "AI discovery and prioritization lead for a 40+ person Client Group effort.",
+        lead: "At Capital Group, I led a 40+ person AI discovery effort with Client Group and Client Experience Technology, turning competing proposals into prioritized bets.",
         stat: {
             value: "40+",
-            label: "person AI discovery effort where Sales, Marketing, and Client Experience teams left with their own top three priorities",
+            label: "people across Client Group and Client Experience Technology aligned on one prioritized AI bet per team",
         },
         statSentence:
-            "Sales, Marketing, and Client Experience teams left a 40+ person AI discovery effort with their own top three priorities ranked by readiness.",
+            "Marketing, Sales, and Client Experience each left a 40+ person AI discovery effort with one prioritized use case and a concrete next step.",
         image: { src: "/images/uc3-image-1.png", alt: "AI discovery workshop" },
         rows: [
             {
                 label: "Problem",
-                text: "Teams had plenty of AI ideas and no shared way to decide what to pursue, defer, or drop.",
+                text: "Marketing, Sales, and Client Experience had competing AI ideas and no shared bar for readiness.",
             },
             {
                 label: "My role",
@@ -108,18 +108,18 @@ export const moreCases: CaseSummary[] = [
             },
             {
                 label: "What I decided",
-                text: "Scored every opportunity on customer need, AI fit, and implementation constraints, filtering out low-lift AI ideas. Data readiness emerged as the primary constraint, which changed what teams sequenced first.",
+                text: "Grounded every proposal in customer pain points before scoring AI fit and feasibility. Exposing data readiness as the primary blocker changed what teams sequenced first.",
             },
             {
                 label: "Outcome",
-                text: "Each team used the readiness scores to validate active initiatives and re-sequence existing roadmaps where data constraints made earlier ideas less viable.",
+                text: "Shared readiness scoring kept teams from funding AI features on unready data, while Sales and Client Experience left with concrete next steps. Marketing's specialized compliance AI vendor was later evaluated and implemented. In a follow-up session, 7 senior leaders aligned team long-term plans back to corporate strategy.",
             },
         ],
     },
 ];
 
 export const building = {
-    intro: "I've always loved building products. In 2026, AI tools made it possible for me to build them myself, end to end. I used the year to sharpen my product skills and to learn firsthand how AI is changing the way PMs, engineers, and designers work together. Two of those products are live, and both are still in development.",
+    intro: "I've always loved building products. In 2026, AI tools made it possible for me to build them myself, end to end. I used the year to sharpen my product skills and to learn firsthand how AI is changing the way PMs, engineers, and designers work together. Two of those products are online, and both are still in development.",
     projects: [
         {
             name: "Curate Mind",
@@ -146,9 +146,9 @@ export const building = {
 export const about = {
     photo: { src: "/images/maicol-workshop.jpg", alt: "Maicol leading a workshop in a room full of people from different teams" },
     paragraphs: [
-        "Most of my work starts with conversations. I talk with the people who use the product, the people who build it, and the people who fund it, and I give each of them the same weight, whatever their title or discipline. In large organizations those perspectives tend to live in separate silos. Connecting the dots between them is where the useful product decisions come from.",
+        "Most of my work starts with conversations. I talk with the people who use, build, and fund the product. I give each perspective equal weight, whatever their title or discipline. In large organizations those perspectives tend to live in separate silos. Connecting the dots between them is where the useful product decisions come from.",
         "I've been riding BMX bikes since I was a kid, and I still do. In my early 20s I started AbsoluteBMX, an online magazine, because PDFs were cheap to distribute. Three issues and 2,000+ downloads later, I'd had my first lesson in building something people actually want.",
-        "Guitar and photography keep me creative. Hockey keeps me humble: I learned to skate and started playing in my early 40s, and it's a regular reminder of what being a beginner feels like.",
+        "Guitar and photography keep me creative. Hockey keeps me humble. I learned to skate and started playing in my early 40s. It is a regular reminder of what being a beginner feels like.",
     ],
     dubplate: {
         before: "Music is almost always on while I work, usually a DJ set or anything energetic enough to keep me moving. I wanted something visual running on the side while I worked, so I built ",

@@ -50,6 +50,8 @@ export type RoundFiveProps = {
     scrollTone?: boolean;
     /** Hide the "Direction n of 31" bar above the nav. */
     hideBar?: boolean;
+    /** Lead photo shape at desktop widths when `lead` is "top". Defaults to "lg:aspect-[21/9]". */
+    leadAspect?: string;
 };
 
 type Project = (typeof building.projects)[number];
@@ -238,6 +240,7 @@ export const RoundFive = ({
     heroVh = 100,
     scrollTone,
     hideBar,
+    leadAspect = "lg:aspect-[21/9]",
 }: RoundFiveProps) => {
     const lede = unifiedType ? cx(size.lede, "text-pretty") : size.intro;
     const spans =
@@ -352,7 +355,7 @@ export const RoundFive = ({
                                 </div>
                             ) : (
                                 <>
-                                    <Photo image={item.image} sizes="100vw" className="lg:aspect-[21/9]" tone={tone} />
+                                    <Photo image={item.image} sizes="100vw" className={leadAspect} tone={tone} />
                                     <div className="mt-12 md:mt-16">{leadText}</div>
                                 </>
                             )}
@@ -388,7 +391,7 @@ export const RoundFive = ({
                                         <p className={cx(size.deck, "text-pretty")}>{about.paragraphs[0]}</p>
                                         <p className={cx(size.deck, "text-pretty")}>{building.intro}</p>
                                     </div>
-                                    <h3 className={cx("mt-14 font-display md:mt-16", display, size.title)}>About me</h3>
+                                    <h3 className={cx("mt-14 font-display md:mt-16", display, size.title)}>More about me</h3>
                                     <div className={cx("r3-muted mt-4 flex max-w-[38rem] flex-col gap-6", size.body)}>
                                         {about.paragraphs.slice(1).map((p) => (
                                             <p key={p.slice(0, 24)}>{p}</p>
