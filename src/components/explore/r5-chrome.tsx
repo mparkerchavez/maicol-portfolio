@@ -9,7 +9,14 @@ export const r5Size = {
     medium: "text-[clamp(1.75rem,2.5vw,2.5rem)] leading-[1.1]",
     title: "text-xl leading-7 md:text-2xl md:leading-8",
     body: "text-lg leading-8",
+    /** Opens a section, in the body face. Used by the direction 31 case pages. */
+    lede: "text-xl leading-8 md:text-[1.625rem] md:leading-10",
+    /** Opens a card or block, in the body face. Used by the direction 31 case pages. */
+    deck: "text-xl leading-8 md:text-2xl md:leading-9",
 };
+
+/** Proof lines: body face at regular weight, with an inline figure a step heavier. */
+export const r5Proof = "font-normal text-pretty [&_.r3-fig]:font-semibold";
 
 export const r5Pad = "px-6 py-14 md:px-14 md:py-20 xl:px-20 xl:py-24";
 

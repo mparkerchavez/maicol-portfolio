@@ -48,6 +48,8 @@ export type RoundFiveProps = {
     heroVh?: number;
     /** Turn the nav to the hero colors once the hero scrolls away, and back at the footer. */
     scrollTone?: boolean;
+    /** Hide the "Direction n of 31" bar above the nav. */
+    hideBar?: boolean;
 };
 
 type Project = (typeof building.projects)[number];
@@ -88,7 +90,7 @@ const deck = cx(size.deck, proof);
 const pad = "px-6 py-14 md:px-14 md:py-20 xl:px-20 xl:py-24";
 
 /** "300+" inside a sentence takes the figure color, so the figure and its context stay one thought. */
-const Figure = ({ text, value }: { text: string; value: string }) => {
+export const Figure = ({ text, value }: { text: string; value: string }) => {
     const at = text.indexOf(value);
     if (at < 0) return <>{text}</>;
     return (
@@ -235,6 +237,7 @@ export const RoundFive = ({
     unifiedType,
     heroVh = 100,
     scrollTone,
+    hideBar,
 }: RoundFiveProps) => {
     const lede = unifiedType ? cx(size.lede, "text-pretty") : size.intro;
     const spans =
@@ -285,13 +288,13 @@ export const RoundFive = ({
 
     return (
         <div id="top" className={cx("ex r4 r5 min-h-svh", `ex-${n}`, fonts, boldBody && "r5-bold")}>
-            <ExploreBar n={n} />
+            {!hideBar && <ExploreBar n={n} />}
             <div className="r4-stack flex flex-col">
                 <R5Header display={display} home="" scrollTone={scrollTone} strongNav={scrollTone} />
 
                 <main className="r4-stack flex flex-col">
                     <section
-                        className={cx("r4-card r4-hero flex min-h-[calc(var(--hero-vh)-7.25rem)] flex-col", pad, "md:py-16 xl:py-20")}
+                        className={cx("r4-card r4-hero flex flex-col", hideBar ? "min-h-[calc(var(--hero-vh)-4.75rem)]" : "min-h-[calc(var(--hero-vh)-7.25rem)]", pad, "md:py-16 xl:py-20")}
                         style={{ "--hero-vh": `${heroVh}svh` } as CSSProperties}
                     >
                         <h1

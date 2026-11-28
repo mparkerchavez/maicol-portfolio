@@ -4,7 +4,8 @@ import { DM_Sans, Libre_Franklin } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/base/buttons/button";
 import { Halftone } from "@/components/explore/halftone";
-import { R5Footer, R5Header, r5Pad, r5Size } from "@/components/explore/r5-chrome";
+import { R5Footer, R5Header, r5Pad, r5Proof, r5Size } from "@/components/explore/r5-chrome";
+import { Figure } from "@/components/explore/round5";
 import { type Block, caseStudies, getCaseStudy } from "@/content/case-studies";
 import { cx } from "@/utils/cx";
 
@@ -13,7 +14,8 @@ const bodyFont = DM_Sans({ subsets: ["latin"], variable: "--font-ex31", display:
 
 const HOME = "/explore/31";
 const display = "font-extrabold tracking-[-0.02em]";
-const prose = "max-w-[44rem]";
+/** The landing page measure for 18px running text. */
+const prose = "max-w-[38rem]";
 const newspaper = { preset: "newspaper", size: 0.01, type: "classic", grid: "square" } as const;
 
 export const dynamicParams = false;
@@ -45,12 +47,12 @@ const BlockView = ({ block }: { block: Block }) => {
         case "p":
             return <p className={prose}>{block.text}</p>;
         case "h3":
-            return <h3 className={cx("pt-6 font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.text}</h3>;
+            return <h3 className={cx("pt-8 font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.text}</h3>;
         case "ul":
             return <List items={block.items} />;
         case "callout":
             return (
-                <div className="r5-note my-4 px-6 py-8 md:px-10 md:py-10">
+                <div className="r5-note my-4 max-w-[44rem] px-6 py-8 md:px-10 md:py-10">
                     <h3 className={cx("font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.title}</h3>
                     <div className="mt-4">
                         <List items={block.items} />
@@ -61,7 +63,7 @@ const BlockView = ({ block }: { block: Block }) => {
             return <Halftone src={block.src} alt={block.alt} tone={newspaper} className="my-6" />;
         case "item":
             return (
-                <div className="pt-6">
+                <div className="pt-8">
                     <h3 className={cx("font-display text-[var(--ex-ink)]", display, r5Size.title)}>{block.title}</h3>
                     <div className={cx("mt-3 flex flex-col gap-4", prose)}>
                         {block.text.map((t) => (
@@ -91,10 +93,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     return (
         <div id="top" className={cx("ex r4 r5 ex-31 min-h-svh", displayFont.variable, bodyFont.variable)}>
             <div className="r4-stack flex flex-col">
-                <R5Header display={display} home={HOME} strongNav />
+                <R5Header display={display} home={HOME} scrollTone strongNav />
 
                 <main className="r4-stack flex flex-col">
-                    <section className={cx("r4-card r4-hero flex min-h-[calc(100svh-4.75rem)] flex-col", r5Pad, "md:py-16 xl:py-20")}>
+                    <section className={cx("r4-card r4-hero flex min-h-[calc(90svh-4.75rem)] flex-col", r5Pad, "md:py-16 xl:py-20")}>
                         <div>
                             <Button
                                 href={`${HOME}#work`}
@@ -106,10 +108,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                                 All work
                             </Button>
                         </div>
-                        <h1 className="mt-10 max-w-[80%] font-display text-[clamp(2.25rem,5.2vw,5.75rem)] leading-[0.92] font-black tracking-[-0.025em] text-balance uppercase max-lg:max-w-none">
+                        <h1 className="mt-10 max-w-[80%] font-display text-[clamp(2.5rem,6.2vw,7rem)] leading-[0.92] font-black tracking-[-0.025em] text-balance uppercase max-lg:max-w-none">
                             {study.title}
                         </h1>
-                        <p className={cx("r4-hero-copy mt-auto pt-16 lg:ml-auto lg:w-[46%]", r5Size.body, "md:text-xl md:leading-8")}>{study.intro}</p>
+                        <p className={cx("r4-hero-copy mt-auto pt-16 text-pretty lg:ml-auto lg:w-[52%]", r5Size.lede)}>{study.intro}</p>
                     </section>
 
                     <section className={cx("r4-card", r5Pad)}>
@@ -118,7 +120,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                             {study.metrics.map((m) => (
                                 <div key={m.value}>
                                     <dt className="sr-only">{m.label}</dt>
-                                    <dd className={cx("font-display text-balance", display, r5Size.medium)}>
+                                    <dd className={cx(r5Size.deck, r5Proof)}>
                                         <span className="r3-fig tabular-nums">{m.value}</span> {m.label}
                                     </dd>
                                 </div>
@@ -127,11 +129,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     </section>
 
                     <Split label="At a glance">
-                        <dl className="grid gap-x-16 gap-y-10 md:grid-cols-2">
+                        <dl className="grid gap-x-16 gap-y-10 md:grid-cols-2 xl:gap-x-24">
                             {study.summary.rows.map((row) => (
                                 <div key={row.label}>
                                     <dt className={cx("font-display", display, r5Size.title)}>{row.label}</dt>
-                                    <dd className={cx("r3-muted mt-2", r5Size.body)}>{row.text}</dd>
+                                    <dd className={cx("r3-muted mt-2", prose, r5Size.body)}>{row.text}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -140,7 +142,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     {study.sections.map((section) => (
                         <Split key={section.label} label={plainLabel(section.label)}>
                             <h3 className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{section.title}</h3>
-                            <div className={cx("r3-muted mt-10 flex flex-col gap-5", r5Size.body, "md:text-xl md:leading-8")}>
+                            <div className={cx("r3-muted mt-10 flex flex-col gap-5", r5Size.body)}>
                                 {section.blocks
                                     .filter((b) => !(b.type === "image" && b.src === leadImage.src))
                                     .map((block, i) => (
@@ -153,17 +155,17 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     <Split label="My role">
                         <p className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{study.role.func}</p>
                         <p className={cx("r3-muted mt-4", r5Size.body)}>Official title: {study.role.official}</p>
-                        <div className={cx("r3-muted mt-10", r5Size.body, "md:text-xl md:leading-8")}>
+                        <div className={cx("r3-muted mt-10", r5Size.body)}>
                             <List items={study.role.bullets} />
                         </div>
-                        <dl className="mt-14 grid gap-x-16 gap-y-10 md:grid-cols-2">
+                        <dl className="mt-14 grid gap-x-16 gap-y-10 md:grid-cols-2 xl:gap-x-24">
                             {[
                                 { label: "Collaborators", items: study.collaborators },
                                 { label: "Methods", items: study.methods },
                             ].map((group) => (
                                 <div key={group.label}>
                                     <dt className={cx("font-display", display, r5Size.title)}>{group.label}</dt>
-                                    <dd className={cx("r3-muted mt-2", r5Size.body)}>{group.items.join(", ")}</dd>
+                                    <dd className={cx("r3-muted mt-2", prose, r5Size.body)}>{group.items.join(", ")}</dd>
                                 </div>
                             ))}
                         </dl>
@@ -171,7 +173,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
                     <Split label="Next case study">
                         <p className={cx("max-w-[22ch] font-display text-balance", display, r5Size.large)}>{study.next.title}</p>
-                        <p className={cx("r3-muted mt-6", prose, r5Size.body, "md:text-xl md:leading-8")}>{next.summary.lead}</p>
+                        <p className={cx("mt-6", prose, r5Size.deck, r5Proof)}>
+                            <Figure text={next.summary.lead} value={next.summary.stat.value} />
+                        </p>
                         <div className="mt-10">
                             <Button
                                 href={`${HOME}/${next.slug}`}
