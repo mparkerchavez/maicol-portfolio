@@ -1,4 +1,5 @@
 import { Button } from "@/components/base/buttons/button";
+import { R5HeaderTone } from "@/components/explore/r5-header-tone";
 import { mail } from "@/components/explore/round2";
 import { contact } from "@/content/site";
 import { cx } from "@/utils/cx";
@@ -12,9 +13,14 @@ export const r5Size = {
 
 export const r5Pad = "px-6 py-14 md:px-14 md:py-20 xl:px-20 xl:py-24";
 
-/** Sticky nav: square top corners, rounded bottom corners, a line underneath. `home` prefixes the section links. */
-export const R5Header = ({ display, home }: { display: string; home: string }) => (
+/**
+ * Sticky nav: square top corners, rounded bottom corners, a line underneath. `home` prefixes the section links.
+ * `scrollTone` switches the nav to the hero colors between the hero and the footer.
+ * `strongNav` sets the Work and About links semibold, so they hold up in white on the accent color.
+ */
+export const R5Header = ({ display, home, scrollTone, strongNav }: { display: string; home: string; scrollTone?: boolean; strongNav?: boolean }) => (
     <div className="r5-headwrap sticky top-0 z-30">
+        {scrollTone && <R5HeaderTone />}
         <header className="r4-card r5-head">
             <div className="flex h-16 items-center justify-between gap-4 px-6 md:h-18 md:px-14 xl:px-20">
                 <a href={home || "#top"} className={cx("rounded-md font-display text-md outline-focus-ring focus-visible:outline-2 md:text-lg", display)}>
@@ -29,7 +35,10 @@ export const R5Header = ({ display, home }: { display: string; home: string }) =
                             <a
                                 key={link.label}
                                 href={link.href}
-                                className="r4-nav rounded-sm font-display text-md font-medium outline-focus-ring transition duration-100 ease-linear focus-visible:outline-2"
+                                className={cx(
+                                    "r4-nav rounded-sm font-display text-md outline-focus-ring transition duration-100 ease-linear focus-visible:outline-2",
+                                    strongNav ? "font-semibold" : "font-medium",
+                                )}
                             >
                                 {link.label}
                             </a>
@@ -55,7 +64,11 @@ export const R5Footer = ({ display, caps }: { display: string; caps?: boolean })
                 { label: "LinkedIn", href: contact.linkedin, blank: true },
             ].map((l) => (
                 <li key={l.label}>
-                    <a href={l.href} {...(l.blank ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="r3-biglink rounded-sm outline-focus-ring focus-visible:outline-2">
+                    <a
+                        href={l.href}
+                        {...(l.blank ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        className="r3-biglink rounded-sm outline-focus-ring focus-visible:outline-2"
+                    >
                         {l.label}
                     </a>
                 </li>

@@ -91,7 +91,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     return (
         <div id="top" className={cx("ex r4 r5 ex-31 min-h-svh", displayFont.variable, bodyFont.variable)}>
             <div className="r4-stack flex flex-col">
-                <R5Header display={display} home={HOME} />
+                <R5Header display={display} home={HOME} strongNav />
 
                 <main className="r4-stack flex flex-col">
                     <section className={cx("r4-card r4-hero flex min-h-[calc(100svh-4.75rem)] flex-col", r5Pad, "md:py-16 xl:py-20")}>

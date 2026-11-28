@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { ArrowRight, LinkExternal01 } from "@untitledui/icons";
 import Image from "next/image";
 import { Button } from "@/components/base/buttons/button";
@@ -43,6 +44,10 @@ export type RoundFiveProps = {
      * Lede leads a whole section, deck leads a card, body carries everything else.
      */
     unifiedType?: boolean;
+    /** Hero height as a share of the viewport, counting the bars above it, for example 90. Defaults to the full viewport. */
+    heroVh?: number;
+    /** Turn the nav to the hero colors once the hero scrolls away, and back at the footer. */
+    scrollTone?: boolean;
 };
 
 type Project = (typeof building.projects)[number];
@@ -228,6 +233,8 @@ export const RoundFive = ({
     inlineStat,
     titleFirst,
     unifiedType,
+    heroVh = 100,
+    scrollTone,
 }: RoundFiveProps) => {
     const lede = unifiedType ? cx(size.lede, "text-pretty") : size.intro;
     const spans =
@@ -280,10 +287,13 @@ export const RoundFive = ({
         <div id="top" className={cx("ex r4 r5 min-h-svh", `ex-${n}`, fonts, boldBody && "r5-bold")}>
             <ExploreBar n={n} />
             <div className="r4-stack flex flex-col">
-                <R5Header display={display} home="" />
+                <R5Header display={display} home="" scrollTone={scrollTone} strongNav={scrollTone} />
 
                 <main className="r4-stack flex flex-col">
-                    <section className={cx("r4-card r4-hero flex min-h-[calc(100svh-7.25rem)] flex-col", pad, "md:py-16 xl:py-20")}>
+                    <section
+                        className={cx("r4-card r4-hero flex min-h-[calc(var(--hero-vh)-7.25rem)] flex-col", pad, "md:py-16 xl:py-20")}
+                        style={{ "--hero-vh": `${heroVh}svh` } as CSSProperties}
+                    >
                         <h1
                             className={cx(
                                 "font-display text-balance",

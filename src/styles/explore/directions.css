@@ -947,6 +947,25 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+/* Nav tone on scroll: hero colors between the hero and the footer */
+.r5 .r5-head,
+.r5 .r5-head .r3-btn {
+    transition:
+        background-color 200ms ease-out,
+        color 200ms ease-out;
+}
+.r5-headwrap[data-tone="accent"] .r5-head {
+    --box: var(--r4-hero);
+    --box-fg: var(--r4-hero-fg);
+    --btn: var(--r4-hero-btn, var(--r4-btn, var(--ex-ink)));
+    --btn-fg: var(--r4-hero-btn-fg, #ffffff);
+}
+@media (prefers-reduced-motion: reduce) {
+    .r5 .r5-head,
+    .r5 .r5-head .r3-btn {
+        transition: none;
+    }
+}
 .r5 .r4-photo {
     border-radius: 8px;
 }
