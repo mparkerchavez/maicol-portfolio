@@ -20,8 +20,8 @@ export type RoundFiveProps = {
     display: string;
     grid: "even" | "offset";
     lead: "side" | "top";
-    /** Rows on the two smaller case cards. The lead case always shows all four. */
-    rows: "two" | "four";
+    /** Rows on the two smaller case cards. The lead case always shows all four. "three" adds My role and drops the lead line. */
+    rows: "two" | "three" | "four";
     /** Set body copy in a heavier weight. */
     boldBody?: boolean;
     /** Classes for an all-caps hero headline. Replaces the default hero size. */
@@ -32,6 +32,10 @@ export type RoundFiveProps = {
     tone?: HalftoneTone;
     /** Path prefix for case study links, for example "/explore/31". */
     casePath?: string;
+    /** Put the two smaller cases ahead of the build cards, and link to the build cards from the Work intro. */
+    casesFirst?: boolean;
+    /** Set each smaller case stat as a full sentence with the figure inline. */
+    inlineStat?: boolean;
 };
 
 type Project = (typeof building.projects)[number];
@@ -100,6 +104,8 @@ const CaseCard = ({
     className,
     tone,
     casePath,
+    hideLead,
+    inlineStat,
 }: {
     item: CaseSummary;
     rows: Row[];
@@ -107,14 +113,22 @@ const CaseCard = ({
     className?: string;
     tone?: HalftoneTone;
     casePath: string;
+    hideLead?: boolean;
+    inlineStat?: boolean;
 }) => (
     <article className={cx("r4-card flex flex-col", pad, className)}>
         <Photo image={item.image} sizes="(min-width: 1024px) 50vw, 100vw" tone={tone} />
         <h3 className={cx("mt-12 font-display", display, size.title)}>{item.title}</h3>
-        <p className={cx("mt-4 max-w-[24ch] font-display text-balance", display, size.medium)}>
-            <span className="r3-fig tabular-nums">{item.stat.value}</span> {item.stat.label}
+        <p className={cx("mt-4 font-display text-balance", inlineStat ? "max-w-[34ch]" : "max-w-[24ch]", display, size.medium)}>
+            {inlineStat ? (
+                <Figure text={item.statSentence ?? `${item.stat.value} ${item.stat.label}`} value={item.stat.value} />
+            ) : (
+                <>
+                    <span className="r3-fig tabular-nums">{item.stat.value}</span> {item.stat.label}
+                </>
+            )}
         </p>
-        <p className={cx("r3-muted mt-5 max-w-[38rem]", size.body)}>{item.lead}</p>
+        {!hideLead && <p className={cx("r3-muted mt-5 max-w-[38rem]", size.body)}>{item.lead}</p>}
         <Rows rows={rows} display={display} className="mt-12 flex flex-col gap-8" />
         <div className="mt-auto pt-12">
             <ReadButton href={`${casePath}/${item.slug}`} />
@@ -122,8 +136,8 @@ const CaseCard = ({
     </article>
 );
 
-const BuildCard = ({ project, display, className }: { project: Project; display: string; className?: string }) => (
-    <article className={cx("r4-card r4-build flex flex-col", pad, className)}>
+const BuildCard = ({ project, display, className, id }: { project: Project; display: string; className?: string; id?: string }) => (
+    <article id={id} className={cx("r4-card r4-build flex flex-col", id && "scroll-mt-20", pad, className)}>
         <h3 className={cx("r3-fig font-display", display, size.large)}>{project.name}</h3>
         <p className={cx("mt-4 font-display", display, size.title)}>{project.status}</p>
         <p className={cx("r3-muted mt-5 max-w-[38rem]", size.body)}>{project.what}</p>
@@ -154,13 +168,37 @@ const BuildCard = ({ project, display, className }: { project: Project; display:
     </article>
 );
 
-export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroCaps, capsClose, tone, casePath = "" }: RoundFiveProps) => {
+export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroCaps, capsClose, tone, casePath = "", casesFirst, inlineStat }: RoundFiveProps) => {
     const spans =
         grid === "offset"
             ? ["lg:col-span-7", "lg:col-span-5", "lg:col-span-5", "lg:col-span-7"]
             : ["lg:col-span-6", "lg:col-span-6", "lg:col-span-6", "lg:col-span-6"];
     const item = featuredCase;
-    const pick = (all: Row[]) => (rows === "four" ? all : all.filter((r) => r.label === "What I decided" || r.label === "Outcome"));
+    const keep: Record<RoundFiveProps["rows"], string[] | null> = {
+        two: ["What I decided", "Outcome"],
+        three: ["My role", "What I decided", "Outcome"],
+        four: null,
+    };
+    const pick = (all: Row[]) => {
+        const labels = keep[rows];
+        return labels ? all.filter((r) => labels.includes(r.label)) : all;
+    };
+    const caseOffset = casesFirst ? 0 : 2;
+    const buildOffset = casesFirst ? 2 : 0;
+
+    const caseCards = moreCases.map((c, i) => (
+        <CaseCard
+            key={c.slug}
+            casePath={casePath}
+            item={c}
+            rows={pick(c.rows)}
+            display={display}
+            className={spans[i + caseOffset]}
+            tone={tone}
+            hideLead={rows === "three"}
+            inlineStat={inlineStat}
+        />
+    ));
 
     const leadText = (
         <>
@@ -203,7 +241,22 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                     <section id="work" className="r4-stack flex scroll-mt-20 flex-col">
                         <div className={cx("r4-card", pad)}>
                             <h2 className={cx("max-w-[20ch] font-display text-balance", display, size.large)}>{work.heading}</h2>
-                            <p className={cx("r3-muted mt-6", size.body, "md:text-xl md:leading-8")}>{work.body}</p>
+                            <p className={cx("r3-muted mt-6", size.body, "md:text-xl md:leading-8")}>
+                                {casesFirst ? (
+                                    <>
+                                        Three AI initiatives from Capital Group, and{" "}
+                                        <a
+                                            href="#building"
+                                            className="rounded-xs text-current underline decoration-1 underline-offset-[0.18em] transition-[text-decoration-thickness] outline-focus-ring hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 motion-reduce:transition-none"
+                                        >
+                                            two products I am building end to end in 2026
+                                        </a>
+                                        .
+                                    </>
+                                ) : (
+                                    work.body
+                                )}
+                            </p>
                         </div>
 
                         <article className={cx("r4-card r4-lead", pad)}>
@@ -230,20 +283,17 @@ export const RoundFive = ({ n, fonts, display, grid, lead, rows, boldBody, heroC
                         </article>
 
                         <div className="r4-stack grid lg:grid-cols-12">
+                            {casesFirst && caseCards}
                             {projects.map((project, i) => (
-                                <BuildCard key={project.name} project={project} display={display} className={spans[i]} />
-                            ))}
-                            {moreCases.map((c, i) => (
-                                <CaseCard
-                                    key={c.slug}
-                                    casePath={casePath}
-                                    item={c}
-                                    rows={pick(c.rows)}
+                                <BuildCard
+                                    key={project.name}
+                                    id={casesFirst && i === 0 ? "building" : undefined}
+                                    project={project}
                                     display={display}
-                                    className={spans[i + 2]}
-                                    tone={tone}
+                                    className={spans[i + buildOffset]}
                                 />
                             ))}
+                            {!casesFirst && caseCards}
                         </div>
                     </section>
 

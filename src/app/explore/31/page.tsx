@@ -17,7 +17,9 @@ export default function Direction() {
             display="font-extrabold tracking-[-0.02em]"
             grid="offset"
             lead="top"
-            rows="two"
+            rows="three"
+            casesFirst
+            inlineStat
             heroCaps="max-w-[80%] max-lg:max-w-none font-black tracking-[-0.025em] leading-[0.88] text-[clamp(2.75rem,8.2vw,9rem)]"
             tone={{ preset: "newspaper", size: 0.01, type: "classic", grid: "square" }}
             capsClose
